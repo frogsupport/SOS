@@ -1,2 +1,0 @@
-# SOS
-SOS board game
