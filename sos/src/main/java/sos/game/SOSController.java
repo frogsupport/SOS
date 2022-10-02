@@ -1,9 +1,9 @@
-package com.sos.sos;
+package sos.game;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class SOSController {
     @FXML
     private Label welcomeText;
 
