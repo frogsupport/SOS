@@ -3,7 +3,7 @@ package sos.game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class SOSController {
+public class SosController {
     @FXML
     private Label welcomeText;
 
