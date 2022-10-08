@@ -1,10 +1,10 @@
-module sos.sos {
+module com.sos.sos {
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires org.controlsfx.controls;
+    requires com.dlsc.formsfx;
 
-    opens sos.game to javafx.fxml;
-    exports sos.game;
-    exports sos.models;
-    opens sos.models to javafx.fxml;
+    exports com.sos;
+    opens com.sos to javafx.fxml;
 }
