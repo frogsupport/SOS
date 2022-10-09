@@ -1,35 +1,30 @@
 package com.sos;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Ellipse;
 
 public class SosGui extends Application {
 
+    private TextField boardSizeField = new TextField();
     private Cell[][] cells;
-    private Label gameStatus = new Label("X's Turn");
-    static private SosGame sosGame;
+    private Label gameStatus = new Label("Blue's Turn");
+    private SosGame sosGame;
+    private GridPane centerPane;
 
     @Override
     public void start(Stage primaryStage) {
         if (sosGame == null) {
-            sosGame = new SosGame();
+            sosGame = new SosGame(3);
         }
-
-        // center pane
-        GridPane centerPane = new GridPane();
-        cells = new Cell[sosGame.getTotalRows()][sosGame.getTotalColumns()];
-        for (int i = 0; i < sosGame.getTotalRows(); i++)
-            for (int j = 0; j < sosGame.getTotalColumns(); j++)
-                centerPane.add(cells[i][j] = new Cell(i, j), j, i);
-        drawBoard();
+        newGame(sosGame);
 
         // game title label
         Label gameTitle = new Label("SOS");
@@ -47,8 +42,8 @@ public class SosGui extends Application {
 
         // board size text field
         Label boardSizeLabel = new Label("Board Size");
-        TextField boardSizeField = new TextField();
         boardSizeField.setPrefSize(50, 30);
+        boardSizeField.setPromptText("ex. 7");
 
         // top pane
         HBox topPane = new HBox();
@@ -58,12 +53,23 @@ public class SosGui extends Application {
         topPane.getChildren().addAll(gameTitle, generalGameRb, simpleGameRb, boardSizeLabel, boardSizeField);
 
         // left pane
-        Label leftSideLabel = new Label("Left Side");
+        Label leftSideLabel = new Label("Blue PLayer");
+        leftSideLabel.setPadding(new Insets(8));
         VBox leftSide = new VBox(leftSideLabel);
 
         // right pane
-        Label rightSideLabel = new Label("Right Side");
+        Label rightSideLabel = new Label("Red Player");
+        rightSideLabel.setPadding(new Insets(8));
         VBox rightSide = new VBox(rightSideLabel);
+
+        // bottom pane
+        Button newGameButton = new Button("New Game");
+
+        HBox bottomPane = new HBox();
+        bottomPane.setPadding(new Insets(10));
+        bottomPane.setSpacing(30);
+        bottomPane.setAlignment(Pos.CENTER);
+        bottomPane.getChildren().addAll(gameStatus, newGameButton);
 
         // set up borderpane
         BorderPane borderPane = new BorderPane();
@@ -71,26 +77,61 @@ public class SosGui extends Application {
         borderPane.setCenter(centerPane);
         borderPane.setLeft(leftSide);
         borderPane.setRight(rightSide);
-        borderPane.setBottom(gameStatus);
+        borderPane.setBottom(bottomPane);
         borderPane.setPadding(new Insets(10));
 
         // set up scene
-        Scene scene = new Scene(borderPane, 500, 500);
-        primaryStage.setTitle("Tic Tac Toe");
+        Scene scene = new Scene(borderPane, 700, 700);
+        primaryStage.setTitle("SOS: The Game");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        // new game button pressed event handler
+        newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                int boardSize = Integer.parseInt(getBoardSizeField().getText());
+                sosGame = new SosGame(boardSize);
+                centerPane = newGame(sosGame);
+                borderPane.setCenter(centerPane);
+            }
+        });
     }
 
+    // starts a new game with the board size in the board size text field
+    // triggered by clicking the new game button
+    public GridPane newGame(SosGame sosGame) {
+        // center pane
+        centerPane = new GridPane();
+        cells = new Cell[sosGame.getTotalRows()][sosGame.getTotalColumns()];
+        for (int i = 0; i < sosGame.getTotalRows(); i++)
+            for (int j = 0; j < sosGame.getTotalColumns(); j++)
+                centerPane.add(cells[i][j] = new Cell(i, j), j, i);
+        drawBoard();
+
+        return centerPane;
+    }
+
+    // draws the board with what is in the logical grid
     public void drawBoard() {
         for (int row = 0; row < sosGame.getTotalRows(); row++)
             for (int column = 0; column < sosGame.getTotalColumns(); column++) {
                 cells[row][column].getChildren().clear();
-                if (sosGame.getCell(row, column) == SosGame.Cell.CROSS)
-                    cells[row][column].drawCross();
-                else if (sosGame.getCell(row, column) == SosGame.Cell.NOUGHT)
-                    cells[row][column].drawNought();
+                if (sosGame.getCell(row, column) == SosGame.Cell.S)
+                    cells[row][column].drawS();
+                else if (sosGame.getCell(row, column) == SosGame.Cell.O)
+                    cells[row][column].drawO();
             }
+    }
 
+    public TextField getBoardSizeField() { return boardSizeField; }
+
+    private void displayGameStatus() {
+        if (sosGame.getTurn() == SosGame.Turn.Blue) {
+            gameStatus.setText("Blue's Turn");
+        } else {
+            gameStatus.setText("Red's Turn");
+        }
     }
 
     public class Cell extends Pane {
@@ -111,43 +152,29 @@ public class SosGui extends Application {
             displayGameStatus();
         }
 
-        public void drawCross() {
-            Line line1 = new Line(10, 10, this.getWidth() - 10, this.getHeight() - 10);
-            line1.endXProperty().bind(this.widthProperty().subtract(10));
-            line1.endYProperty().bind(this.heightProperty().subtract(10));
-            line1.setStyle("-fx-stroke: red;");
-            line1.setStrokeWidth(5.0);
-            Line line2 = new Line(10, this.getHeight() - 10, this.getWidth() - 10, 10);
-            line2.startYProperty().bind(this.heightProperty().subtract(10));
-            line2.endXProperty().bind(this.widthProperty().subtract(10));
-            line2.setStyle("-fx-stroke: red;");
-            line2.setStrokeWidth(5.0);
-            this.getChildren().addAll(line1, line2);
+        // is a method called on a cell to add an S
+        public void drawS() {
+            Label text = new Label("S");
+            text.setFont(new Font("Arial", 20));
+            text.setPadding(new Insets(10, 10, 10, 15));
+
+            AnchorPane anchorPane = new AnchorPane(text);
+
+            getChildren().add(anchorPane);
         }
 
-        public void drawNought() {
-            Ellipse ellipse = new Ellipse(this.getWidth() / 2, this.getHeight() / 2, this.getWidth() / 2 - 10,
-                    this.getHeight() / 2 - 10);
-            ellipse.centerXProperty().bind(this.widthProperty().divide(2));
-            ellipse.centerYProperty().bind(this.heightProperty().divide(2));
-            ellipse.radiusXProperty().bind(this.widthProperty().divide(2).subtract(10));
-            ellipse.radiusYProperty().bind(this.heightProperty().divide(2).subtract(10));
-            ellipse.setStroke(Color.RED);
-            ellipse.setStrokeWidth(5.0);
-            ellipse.setFill(Color.TRANSPARENT);
+        // is a method called on a cell to add an O
+        public void drawO() {
+            Label text = new Label("O");
+            text.setFont(new Font("Arial", 20));
+            text.setPadding(new Insets(10, 10, 10, 15));
 
-            getChildren().add(ellipse);
+            AnchorPane anchorPane = new AnchorPane(text);
+
+            getChildren().add(anchorPane);
         }
-
-        private void displayGameStatus() {
-            if (sosGame.getTurn() == 'X') {
-                gameStatus.setText("X's Turn");
-            } else {
-                gameStatus.setText("O's Turn");
-            }
-        }
-
     }
+
     public static void main(String[] args) {
         launch(args);
     }

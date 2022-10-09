@@ -1,15 +1,17 @@
 package com.sos;
 
 public class SosGame {
-    public enum Cell {EMPTY, CROSS, NOUGHT}
-
-    private static final int TOTALROWS = 3;
-    private static final int TOTALCOLUMNS = 3;
+    public enum Cell {EMPTY, S, O, INVALID}
+    public enum Turn {Blue, Red}
+    private static int TOTALROWS;
+    private static int TOTALCOLUMNS;
 
     private Cell[][] grid;
-    private char turn;
+    private Turn turn;
 
-    public SosGame() {
+    public SosGame(int boardSize) {
+        TOTALROWS = boardSize;
+        TOTALCOLUMNS = boardSize;
         grid = new Cell[TOTALROWS][TOTALCOLUMNS];
         initBoard();
     }
@@ -20,7 +22,7 @@ public class SosGame {
                 grid[row][column] = Cell.EMPTY;
             }
         }
-        turn = 'X';
+        turn = Turn.Blue;
     }
 
     public int getTotalRows() {
@@ -39,14 +41,14 @@ public class SosGame {
         }
     }
 
-    public char getTurn() {
+    public Turn getTurn() {
         return turn;
     }
 
     public void makeMove(int row, int column) {
         if (row >= 0 && row < TOTALROWS && column >= 0 && column < TOTALCOLUMNS && grid[row][column] == Cell.EMPTY) {
-            grid[row][column] = (turn == 'X') ? Cell.CROSS : Cell.NOUGHT;
-            turn = (turn == 'X') ? 'O' : 'X';
+            grid[row][column] = (turn == Turn.Blue) ? Cell.S : Cell.O;
+            turn = (turn == Turn.Blue) ? Turn.Red : Turn.Blue;
         }
     }
 
