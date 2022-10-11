@@ -18,19 +18,24 @@ public class SosGui extends Application {
     private Label gameStatus = new Label("Blue's Turn");
     private SosGame sosGame;
     private GridPane centerPane;
+    private SosGame.Cell bluePlayerShape = SosGame.Cell.EMPTY;
+    private SosGame.Cell redPlayerShape = SosGame.Cell.EMPTY;
+    private SosGame.GameType selectedGameType = SosGame.GameType.SIMPLE;
+
+    // set up gui ===============================================================================
 
     @Override
     public void start(Stage primaryStage) {
         if (sosGame == null) {
-            sosGame = new SosGame(3);
+            sosGame = new SosGame(3, SosGame.GameType.SIMPLE);
         }
         newGame(sosGame);
 
         // game title label
         Label gameTitle = new Label("SOS");
 
-        // radio buttons
-        RadioMenuItem radioMenuItem = new RadioMenuItem("Game Type: ");
+        // game type radio buttons
+        RadioMenuItem radioMenuItem = new RadioMenuItem();
         ToggleGroup toggleGroup = new ToggleGroup();
         radioMenuItem.setToggleGroup(toggleGroup);
 
@@ -55,12 +60,34 @@ public class SosGui extends Application {
         // left pane
         Label leftSideLabel = new Label("Blue PLayer");
         leftSideLabel.setPadding(new Insets(8));
-        VBox leftSide = new VBox(leftSideLabel);
+
+        RadioMenuItem bluePlayerShapes = new RadioMenuItem();
+        ToggleGroup bluePlayerShapeToggle = new ToggleGroup();
+        bluePlayerShapes.setToggleGroup(bluePlayerShapeToggle);
+
+        RadioButton blueSShapeRadioButton = new RadioButton("S");
+        blueSShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
+
+        RadioButton blueOShapeRadioButton = new RadioButton("O");
+        blueOShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
+
+        VBox leftSide = new VBox(leftSideLabel, blueSShapeRadioButton, blueOShapeRadioButton);
 
         // right pane
         Label rightSideLabel = new Label("Red Player");
         rightSideLabel.setPadding(new Insets(8));
-        VBox rightSide = new VBox(rightSideLabel);
+
+        RadioMenuItem redPlayerShapes = new RadioMenuItem();
+        ToggleGroup redPlayerShapeToggle = new ToggleGroup();
+        redPlayerShapes.setToggleGroup(redPlayerShapeToggle);
+
+        RadioButton redSShapeRadioButton = new RadioButton("S");
+        redSShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
+
+        RadioButton redOShapeRadioButton = new RadioButton("O");
+        redOShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
+
+        VBox rightSide = new VBox(rightSideLabel, redSShapeRadioButton, redOShapeRadioButton);
 
         // bottom pane
         Button newGameButton = new Button("New Game");
@@ -86,26 +113,74 @@ public class SosGui extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        // event handlers ==================================================================================
+
         // new game button pressed event handler
         newGameButton.setOnAction(new EventHandler<ActionEvent>() {
+            // start our new game
             @Override
             public void handle(ActionEvent actionEvent) {
                 int boardSize = Integer.parseInt(getBoardSizeField().getText());
-                sosGame = new SosGame(boardSize);
+                sosGame = new SosGame(boardSize, selectedGameType);
                 centerPane = newGame(sosGame);
                 borderPane.setCenter(centerPane);
+                displayGameStatus();
+            }
+        });
+
+        blueSShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                bluePlayerShape = SosGame.Cell.S;
+            }
+        });
+
+        blueOShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                bluePlayerShape = SosGame.Cell.O;
+            }
+        });
+
+        redSShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                redPlayerShape = SosGame.Cell.S;
+            }
+        });
+
+        redOShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                redPlayerShape = SosGame.Cell.O;
+            }
+        });
+
+        simpleGameRb.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                selectedGameType = SosGame.GameType.SIMPLE;
+            }
+        });
+
+        generalGameRb.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                selectedGameType = SosGame.GameType.GENERAL;
             }
         });
     }
+
+    // functions ===================================================================================
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
     public GridPane newGame(SosGame sosGame) {
         // center pane
         centerPane = new GridPane();
-        cells = new Cell[sosGame.getTotalRows()][sosGame.getTotalColumns()];
+        cells = new Cell[sosGame.getTotalRows()][sosGame.getTotalRows()];
         for (int i = 0; i < sosGame.getTotalRows(); i++)
-            for (int j = 0; j < sosGame.getTotalColumns(); j++)
+            for (int j = 0; j < sosGame.getTotalRows(); j++)
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
         drawBoard();
 
@@ -115,7 +190,7 @@ public class SosGui extends Application {
     // draws the board with what is in the logical grid
     public void drawBoard() {
         for (int row = 0; row < sosGame.getTotalRows(); row++)
-            for (int column = 0; column < sosGame.getTotalColumns(); column++) {
+            for (int column = 0; column < sosGame.getTotalRows(); column++) {
                 cells[row][column].getChildren().clear();
                 if (sosGame.getCell(row, column) == SosGame.Cell.S)
                     cells[row][column].drawS();
@@ -124,15 +199,17 @@ public class SosGui extends Application {
             }
     }
 
-    public TextField getBoardSizeField() { return boardSizeField; }
-
     private void displayGameStatus() {
-        if (sosGame.getTurn() == SosGame.Turn.Blue) {
+        if (sosGame.getTurn() == SosGame.Turn.BLUE) {
             gameStatus.setText("Blue's Turn");
         } else {
             gameStatus.setText("Red's Turn");
         }
     }
+
+    public TextField getBoardSizeField() { return boardSizeField; }
+
+    // Cell class =============================================================================
 
     public class Cell extends Pane {
 
@@ -141,13 +218,22 @@ public class SosGui extends Application {
         public Cell(int row, int column) {
             this.row = row;
             this.column = column;
-            setStyle("-fx-border-color: white");
+            setStyle("-fx-border-color: black");
             this.setPrefSize(2000, 2000);
             this.setOnMouseClicked(e -> handleMouseClick());
         }
 
         private void handleMouseClick() {
-            sosGame.makeMove(row, column);
+            SosGame.Cell shape = SosGame.Cell.EMPTY;
+
+            if (sosGame.getTurn() == SosGame.Turn.BLUE) {
+                shape = bluePlayerShape;
+            }
+            else {
+                shape = redPlayerShape;
+            }
+
+            sosGame.makeMove(row, column, shape);
             drawBoard();
             displayGameStatus();
         }
@@ -174,6 +260,8 @@ public class SosGui extends Application {
             getChildren().add(anchorPane);
         }
     }
+
+    // main method ====================================================================================
 
     public static void main(String[] args) {
         launch(args);

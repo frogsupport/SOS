@@ -1,55 +1,55 @@
 package com.sos;
 
 public class SosGame {
-    public enum Cell {EMPTY, S, O, INVALID}
-    public enum Turn {Blue, Red}
+    public enum Cell {EMPTY, S, O}
+    public enum Turn {BLUE, RED}
+    public enum GameType {SIMPLE, GENERAL}
     private static int TOTALROWS;
-    private static int TOTALCOLUMNS;
-
     private Cell[][] grid;
     private Turn turn;
+    private GameType gameType = GameType.SIMPLE;
 
-    public SosGame(int boardSize) {
+    public SosGame(int boardSize, GameType gameType) {
         TOTALROWS = boardSize;
-        TOTALCOLUMNS = boardSize;
-        grid = new Cell[TOTALROWS][TOTALCOLUMNS];
+        grid = new Cell[TOTALROWS][TOTALROWS];
+        this.gameType = gameType;
         initBoard();
     }
 
     public void initBoard() {
         for (int row = 0; row < TOTALROWS; row++) {
-            for (int column = 0; column < TOTALCOLUMNS; column++) {
+            for (int column = 0; column < TOTALROWS; column++) {
                 grid[row][column] = Cell.EMPTY;
             }
         }
-        turn = Turn.Blue;
-    }
-
-    public int getTotalRows() {
-        return TOTALROWS;
-    }
-
-    public int getTotalColumns() {
-        return TOTALCOLUMNS;
+        turn = Turn.BLUE;
     }
 
     public Cell getCell(int row, int column) {
-        if (row >= 0 && row < TOTALROWS && column >= 0 && column < TOTALCOLUMNS) {
+        if (row >= 0 && row < TOTALROWS && column >= 0 && column < TOTALROWS) {
             return grid[row][column];
         } else {
             return null;
         }
     }
 
-    public Turn getTurn() {
-        return turn;
-    }
-
-    public void makeMove(int row, int column) {
-        if (row >= 0 && row < TOTALROWS && column >= 0 && column < TOTALCOLUMNS && grid[row][column] == Cell.EMPTY) {
-            grid[row][column] = (turn == Turn.Blue) ? Cell.S : Cell.O;
-            turn = (turn == Turn.Blue) ? Turn.Red : Turn.Blue;
+    public void makeMove(int row, int column, Cell shape) {
+        if (row >= 0 && row < TOTALROWS && column >= 0 && column < TOTALROWS && grid[row][column] == Cell.EMPTY) {
+            grid[row][column] = shape;
+            turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
         }
     }
 
+    // returns the size of the board
+    public int getTotalRows() {
+        return TOTALROWS;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public Turn getTurn() {
+        return turn;
+    }
 }
