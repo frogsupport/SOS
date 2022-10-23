@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +62,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestSosGame.testChooseGameMode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
+      <option name="METHOD_NAME" value="testChooseGameMode" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSosGame.testChooseInvalidBoardSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
+      <option name="METHOD_NAME" value="testChooseInvalidBoardSize" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestSosGame.testChooseSimpleGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -72,9 +92,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestSosGame.testMakeInvalidMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
+      <option name="METHOD_NAME" value="testMakeInvalidMove" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestSosGame" />
+        <item itemvalue="JUnit.TestSosGame.testMakeInvalidMove" />
+        <item itemvalue="JUnit.TestSosGame.testChooseInvalidBoardSize" />
+        <item itemvalue="JUnit.TestSosGame.testChooseGameMode" />
         <item itemvalue="JUnit.TestSosGame.testChooseSimpleGame" />
       </list>
     </recent_temporary>

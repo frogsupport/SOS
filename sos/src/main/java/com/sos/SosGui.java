@@ -123,7 +123,10 @@ public class SosGui extends Application {
             // start our new game
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 int boardSize = Integer.parseInt(getBoardSizeField().getText());
+
+                // Choose the game type
                 if (selectedGameType == GameType.SIMPLE) {
                     sosGame = new SimpleSosGame(boardSize);
                 }
@@ -131,6 +134,7 @@ public class SosGui extends Application {
                     sosGame = new GeneralSosGame(boardSize);
                 }
 
+                // set the pane
                 centerPane = newGame(sosGame);
                 borderPane.setCenter(centerPane);
                 displayGameStatus();
@@ -180,7 +184,7 @@ public class SosGui extends Application {
         });
     }
 
-    // functions ===================================================================================
+    // class functions ===================================================================================
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
@@ -218,9 +222,9 @@ public class SosGui extends Application {
 
     public TextField getBoardSizeField() { return boardSizeField; }
 
-    // Cell class =============================================================================
+    // Internal Cell class =============================================================================
 
-    public class Cell extends Pane {
+    private class Cell extends Pane {
 
         private int row, column;
 

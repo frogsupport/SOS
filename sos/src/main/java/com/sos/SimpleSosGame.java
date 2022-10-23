@@ -6,7 +6,14 @@ public class SimpleSosGame implements SosGame {
     private Turn turn;
 
     public SimpleSosGame(int boardSize) {
-        BOARDSIZE = boardSize;
+        // Board size must be at least 3
+        if (boardSize < 3) {
+            BOARDSIZE = 3;
+        }
+        else {
+            BOARDSIZE = boardSize;
+        }
+
         grid = new Cell[BOARDSIZE][BOARDSIZE];
         // this.gameType = gameType;
         initBoard();
