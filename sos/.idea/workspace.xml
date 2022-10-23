@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sos.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestBoard.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,35 +37,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.29770115",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.29770115&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.sos" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="TestBoard" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestBoard" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestBoard.testChooseSimpleGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSosGame.testChooseSimpleGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestBoard" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
       <option name="METHOD_NAME" value="testChooseSimpleGame" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -72,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestBoard.testChooseSimpleGame" />
-        <item itemvalue="JUnit.TestBoard" />
+        <item itemvalue="JUnit.TestSosGame" />
+        <item itemvalue="JUnit.TestSosGame.testChooseSimpleGame" />
       </list>
     </recent_temporary>
   </component>

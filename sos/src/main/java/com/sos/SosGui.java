@@ -12,22 +12,22 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 public class SosGui extends Application {
-
+    public enum GameType {SIMPLE, GENERAL}
     private TextField boardSizeField = new TextField();
     private Cell[][] cells;
     private Label gameStatus = new Label("Blue's Turn");
     private SosGame sosGame;
     private GridPane centerPane;
-    private SosGame.Cell bluePlayerShape = SosGame.Cell.EMPTY;
-    private SosGame.Cell redPlayerShape = SosGame.Cell.EMPTY;
-    private SosGame.GameType selectedGameType = SosGame.GameType.SIMPLE;
+    private SosGame.Cell bluePlayerShape = SosGame.Cell.S;
+    private SosGame.Cell redPlayerShape = SosGame.Cell.S;
+    private GameType selectedGameType = GameType.SIMPLE;
 
     // set up gui ===============================================================================
 
     @Override
     public void start(Stage primaryStage) {
         if (sosGame == null) {
-            sosGame = new SosGame(3, SosGame.GameType.SIMPLE);
+            sosGame = new SimpleSosGame(3);
         }
         newGame(sosGame);
 
@@ -44,6 +44,7 @@ public class SosGui extends Application {
 
         RadioButton simpleGameRb = new RadioButton("Simple Game");
         simpleGameRb.setToggleGroup(toggleGroup);
+        simpleGameRb.setSelected(true);
 
         // board size text field
         Label boardSizeLabel = new Label("Board Size");
@@ -67,6 +68,7 @@ public class SosGui extends Application {
 
         RadioButton blueSShapeRadioButton = new RadioButton("S");
         blueSShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
+        blueSShapeRadioButton.setSelected(true);
 
         RadioButton blueOShapeRadioButton = new RadioButton("O");
         blueOShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
@@ -83,6 +85,7 @@ public class SosGui extends Application {
 
         RadioButton redSShapeRadioButton = new RadioButton("S");
         redSShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
+        redSShapeRadioButton.setSelected(true);
 
         RadioButton redOShapeRadioButton = new RadioButton("O");
         redOShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
@@ -121,7 +124,13 @@ public class SosGui extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 int boardSize = Integer.parseInt(getBoardSizeField().getText());
-                sosGame = new SosGame(boardSize, selectedGameType);
+                if (selectedGameType == GameType.SIMPLE) {
+                    sosGame = new SimpleSosGame(boardSize);
+                }
+                else if (selectedGameType == GameType.GENERAL) {
+                    sosGame = new GeneralSosGame(boardSize);
+                }
+
                 centerPane = newGame(sosGame);
                 borderPane.setCenter(centerPane);
                 displayGameStatus();
@@ -131,42 +140,42 @@ public class SosGui extends Application {
         blueSShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                bluePlayerShape = SosGame.Cell.S;
+                bluePlayerShape = SimpleSosGame.Cell.S;
             }
         });
 
         blueOShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                bluePlayerShape = SosGame.Cell.O;
+                bluePlayerShape = SimpleSosGame.Cell.O;
             }
         });
 
         redSShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                redPlayerShape = SosGame.Cell.S;
+                redPlayerShape = SimpleSosGame.Cell.S;
             }
         });
 
         redOShapeRadioButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                redPlayerShape = SosGame.Cell.O;
+                redPlayerShape = SimpleSosGame.Cell.O;
             }
         });
 
         simpleGameRb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                selectedGameType = SosGame.GameType.SIMPLE;
+                selectedGameType = GameType.SIMPLE;
             }
         });
 
         generalGameRb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                selectedGameType = SosGame.GameType.GENERAL;
+                selectedGameType = GameType.GENERAL;
             }
         });
     }
@@ -178,9 +187,9 @@ public class SosGui extends Application {
     public GridPane newGame(SosGame sosGame) {
         // center pane
         centerPane = new GridPane();
-        cells = new Cell[sosGame.getTotalRows()][sosGame.getTotalRows()];
-        for (int i = 0; i < sosGame.getTotalRows(); i++)
-            for (int j = 0; j < sosGame.getTotalRows(); j++)
+        cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
+        for (int i = 0; i < sosGame.getBoardSize(); i++)
+            for (int j = 0; j < sosGame.getBoardSize(); j++)
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
         drawBoard();
 
@@ -189,18 +198,18 @@ public class SosGui extends Application {
 
     // draws the board with what is in the logical grid
     public void drawBoard() {
-        for (int row = 0; row < sosGame.getTotalRows(); row++)
-            for (int column = 0; column < sosGame.getTotalRows(); column++) {
+        for (int row = 0; row < sosGame.getBoardSize(); row++)
+            for (int column = 0; column < sosGame.getBoardSize(); column++) {
                 cells[row][column].getChildren().clear();
-                if (sosGame.getCell(row, column) == SosGame.Cell.S)
+                if (sosGame.getCell(row, column) == SimpleSosGame.Cell.S)
                     cells[row][column].drawS();
-                else if (sosGame.getCell(row, column) == SosGame.Cell.O)
+                else if (sosGame.getCell(row, column) == SimpleSosGame.Cell.O)
                     cells[row][column].drawO();
             }
     }
 
     private void displayGameStatus() {
-        if (sosGame.getTurn() == SosGame.Turn.BLUE) {
+        if (sosGame.getTurn() == SimpleSosGame.Turn.BLUE) {
             gameStatus.setText("Blue's Turn");
         } else {
             gameStatus.setText("Red's Turn");
