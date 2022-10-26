@@ -13,12 +13,9 @@ public class TestSosGame {
     // Basic functionality is tested on the simple sos game class
     private SosGame sosGame = new SimpleSosGame(3);
 
-    // TODO test some things in the gui
-    private SosGui sosGui = new SosGui();
-
     @BeforeEach
     public void setUp() throws Exception {
-        sosGame.initBoard();
+        sosGame = new SimpleSosGame(3);
     }
 
     @Test
@@ -28,6 +25,19 @@ public class TestSosGame {
 
         sosGame = new GeneralSosGame(3);
         assertTrue(sosGame instanceof GeneralSosGame);
+    }
+
+    @Test
+    public void testChooseGameModeAndBoardSize() {
+        final int BOARDSIZE = 9;
+
+        sosGame = new SimpleSosGame(BOARDSIZE);
+        assertTrue(sosGame instanceof SimpleSosGame);
+        assertEquals(BOARDSIZE, sosGame.getBoardSize());
+
+        sosGame = new GeneralSosGame(BOARDSIZE);
+        assertTrue(sosGame instanceof GeneralSosGame);
+        assertEquals(BOARDSIZE, sosGame.getBoardSize());
     }
 
     @Test
@@ -89,6 +99,17 @@ public class TestSosGame {
                 assertEquals(SosGame.Cell.EMPTY, sosGame.getCell(i, j));
             }
         }
+    }
+
+    @Test
+    public void testMakeMoveOccupiedCell() {
+        sosGame.makeMove(0, 1, SosGame.Cell.S);
+        sosGame.makeMove(1, 0, SosGame.Cell.O);
+
+        // make a move in the occupied (0, 1) cell
+        sosGame.makeMove(0, 1, SosGame.Cell.O);
+
+        assertEquals(sosGame.getCell(0, 1), SosGame.Cell.S);
     }
 
     @Test

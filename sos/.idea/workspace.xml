@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralGame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleGame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +62,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSosGame.testChooseGameMode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSosGame.testChooseGameModeAndBoardSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testChooseGameMode" />
+      <option name="METHOD_NAME" value="testChooseGameModeAndBoardSize" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -82,16 +82,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSosGame.testChooseSimpleGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testChooseSimpleGame" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestSosGame.testMakeInvalidMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -102,13 +92,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestSosGame.testMakeMoveOccupiedCell" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
+      <option name="METHOD_NAME" value="testMakeMoveOccupiedCell" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestSosGame" />
+        <item itemvalue="JUnit.TestSosGame.testChooseGameModeAndBoardSize" />
+        <item itemvalue="JUnit.TestSosGame.testMakeMoveOccupiedCell" />
         <item itemvalue="JUnit.TestSosGame.testMakeInvalidMove" />
         <item itemvalue="JUnit.TestSosGame.testChooseInvalidBoardSize" />
-        <item itemvalue="JUnit.TestSosGame.testChooseGameMode" />
-        <item itemvalue="JUnit.TestSosGame.testChooseSimpleGame" />
       </list>
     </recent_temporary>
   </component>
@@ -133,5 +133,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NumberFormatException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

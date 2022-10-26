@@ -4,12 +4,21 @@ public class GeneralSosGame implements SosGame {
     private static int BOARDSIZE;
     private Cell[][] grid;
     private Turn turn;
+    private GameStatus currentGameStatus;
 
     public GeneralSosGame(int boardSize) {
-        BOARDSIZE = boardSize;
+        // Board size must be at least 3
+        if (boardSize < 3) {
+            BOARDSIZE = 3;
+        }
+        else {
+            BOARDSIZE = boardSize;
+        }
+
         grid = new Cell[BOARDSIZE][BOARDSIZE];
         // this.gameType = gameType;
         initBoard();
+        currentGameStatus = GameStatus.PLAYING;
     }
 
     public void initBoard() {
@@ -24,7 +33,26 @@ public class GeneralSosGame implements SosGame {
     public void makeMove(int row, int column, Cell shape) {
         if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Cell.EMPTY) {
             grid[row][column] = shape;
-            turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
+
+            if (hasWon()) {
+                if (turn == Turn.BLUE) {
+                    currentGameStatus = GameStatus.BLUE_WON;
+                } else if (turn == Turn.RED) {
+                    currentGameStatus = GameStatus.RED_WON;
+                }
+            }
+            else {
+                changeTurn();
+            }
+        }
+    }
+
+    private boolean hasWon() {
+        if (grid[0][0] == Cell.S && grid[0][1] == Cell.O && grid[0][2] == Cell.S) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -36,7 +64,14 @@ public class GeneralSosGame implements SosGame {
         }
     }
 
-    // returns the size of the board
+    private void changeTurn() {
+        turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
+    }
+
+    public GameStatus getCurrentGameStatus() {
+        return currentGameStatus;
+    }
+
     public int getBoardSize() {
         return BOARDSIZE;
     }

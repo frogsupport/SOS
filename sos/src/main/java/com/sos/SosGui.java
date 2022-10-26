@@ -11,6 +11,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
+// CS449 SOS Project Fall 2022
+// Professor Leo Chen
+// Student Kyle Schaudt
 public class SosGui extends Application {
     public enum GameType {SIMPLE, GENERAL}
     private TextField boardSizeField = new TextField();
@@ -123,8 +126,13 @@ public class SosGui extends Application {
             // start our new game
             @Override
             public void handle(ActionEvent actionEvent) {
-
-                int boardSize = Integer.parseInt(getBoardSizeField().getText());
+                int boardSize;
+                try {
+                    boardSize = Integer.parseInt(getBoardSizeField().getText());
+                }
+                catch (NumberFormatException e) {
+                    boardSize = 3;
+                }
 
                 // Choose the game type
                 if (selectedGameType == GameType.SIMPLE) {
@@ -213,10 +221,18 @@ public class SosGui extends Application {
     }
 
     private void displayGameStatus() {
-        if (sosGame.getTurn() == SimpleSosGame.Turn.BLUE) {
-            gameStatus.setText("Blue's Turn");
-        } else {
-            gameStatus.setText("Red's Turn");
+        if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+            if (sosGame.getTurn() == SimpleSosGame.Turn.BLUE) {
+                gameStatus.setText("Blue's Turn");
+            } else {
+                gameStatus.setText("Red's Turn");
+            }
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.DRAW) {
+            gameStatus.setText("It's a DRAW!!!");
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.BLUE_WON) {
+            gameStatus.setText("Blue Player Won!!!");
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.RED_WON) {
+            gameStatus.setText("Red Player Won!!!");
         }
     }
 
@@ -237,18 +253,23 @@ public class SosGui extends Application {
         }
 
         private void handleMouseClick() {
-            SosGame.Cell shape = SosGame.Cell.EMPTY;
+            if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+                SosGame.Cell shape = SosGame.Cell.EMPTY;
 
-            if (sosGame.getTurn() == SosGame.Turn.BLUE) {
-                shape = bluePlayerShape;
+                if (sosGame.getTurn() == SosGame.Turn.BLUE) {
+                    shape = bluePlayerShape;
+                }
+                else {
+                    shape = redPlayerShape;
+                }
+
+                sosGame.makeMove(row, column, shape);
+                drawBoard();
+                displayGameStatus();
             }
             else {
-                shape = redPlayerShape;
+                gameStatus.setText("It's time to start a new game!!!");
             }
-
-            sosGame.makeMove(row, column, shape);
-            drawBoard();
-            displayGameStatus();
         }
 
         // is a method called on a cell to add an S
