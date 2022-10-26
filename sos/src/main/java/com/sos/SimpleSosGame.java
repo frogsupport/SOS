@@ -68,54 +68,73 @@ public class SimpleSosGame implements SosGame {
         else if (shape == Cell.S) {
             // CASE: At least 3 spaces into the board in any direction
             if ((row - 2) >=0 && (col - 2) >= 0 && (row + 2) <= (BOARDSIZE - 1) && (col + 2) <= (BOARDSIZE - 1)) {
-                return (
-                        // Check up and down
-                        grid[row - 2][col] == Cell.S && grid[row - 1][col] == Cell.O
-                        || grid[row + 2][col] == Cell.S && grid[row + 1][col] == Cell.O
-
-                        // check left to right
-                        || grid[row][col - 2] == Cell.S && grid[row][col - 1] == Cell.O
-                        || grid[row][col + 2] == Cell.S && grid[row][col + 1] == Cell.O
-
-                        // check backslash '\' diagonal
-                        || grid[row - 2][col - 2] == Cell.S && grid[row - 1][col - 1] == Cell.O
-                        || grid[row + 2][col + 2] == Cell.S && grid[row + 1][col + 1] == Cell.O
-
-                        // check forward slash '/' diagonal
-                        || grid[row + 2][col - 2] == Cell.S && grid[row + 1][col - 1] == Cell.O
-                        || grid[row - 2][col + 2] == Cell.S && grid[row - 1][col + 1] == Cell.O);
+                return (checkColS(row, col)
+                        || checkRowS(row, col)
+                        || checkBackslashDiagonalS(row, col)
+                        || checkForwardSlashDiagonal(row, col));
             }
             // CASE: Top left corner
             else if (row <= 1 && col <= 1) {
                 // check down, right, and lower right diagonal
-                return (grid[row + 2][col] == Cell.S && grid[row + 1][col] == Cell.O
-                        || grid[row][col + 2] == Cell.S && grid[row][col + 1] == Cell.O
-                        || grid[row + 2][col + 2] == Cell.S && grid[row + 1][col + 1] == Cell.O);
+                return (checkDownS(row, col)
+                        || checkRightS(row, col)
+                        || checkLowerRightDiagonalS(row, col));
             }
             // CASE: Top right corner
             else if ((row - 2) <= -1 && (col + 2) >= BOARDSIZE) {
                 // check left, down, and bottom left diagonal
-                return (grid[row][col - 2] == Cell.S && grid[row][col - 1] == Cell.O
-                        || grid[row + 2][col] == Cell.S && grid[row + 1][col] == Cell.O
-                        || grid[row + 2][col - 2] == Cell.S && grid[row + 1][col - 1] == Cell.O);
+                return (checkLeftS(row, col)
+                        || checkDownS(row, col)
+                        || checkLowerLeftDiagonalS(row, col));
             }
             // CASE: Bottom left corner
             else if ((row + 2) >= BOARDSIZE && (col - 2) <= -1) {
                 // check right, up, and upper right diagonal
-                return (grid[row][col + 2] == Cell.S && grid[row][col + 1] == Cell.O
-                        || grid[row - 2][col] == Cell.S && grid[row - 1][col] == Cell.O
-                        || grid[row - 2][col + 2] == Cell.S && grid[row - 1][col + 1] == Cell.O);
+                return (checkRightS(row, col)
+                        || checkUpS(row, col)
+                        || checkUpperRightDiagonalS(row, col));
             }
             // CASE: Bottom right corner
             else if ((row + 2) >= BOARDSIZE && (col + 2) >= BOARDSIZE) {
                 // check left, up, and upper left diagonal
-                return (grid[row][col - 2] == Cell.S && grid[row][col - 1] == Cell.O
-                        || grid[row - 2][col] == Cell.S && grid[row - 1][col] == Cell.O
-                        || grid[row - 2][col - 2] == Cell.S && grid[row - 1][col - 1] == Cell.O);
+                return (checkLeftS(row, col)
+                        || checkUpS(row, col)
+                        || checkUpperLeftDiagonalS(row, col));
             }
-            // CASE: 
+            // CASE: Bottom in between borders
+            else if ((row + 2) >= BOARDSIZE && (col - 2) >= 0 && (col + 3) <= BOARDSIZE) {
+                // Check left, right, up, top left diagonal, top right diagonal
+                return (checkRowS(row, col)
+                        || checkUpS(row, col)
+                        || checkUpperLeftDiagonalS(row, col)
+                        || checkUpperRightDiagonalS(row, col));
+            }
+            // CASE: Top in between borders
+            else if ((row - 1) <= 0 && (col - 2) >= 0 && (col + 3) <= BOARDSIZE)  {
+                // Check left, right, down, lower left diagonal, lower right diagonal
+                return (checkRowS(row, col)
+                        || checkDownS(row, col)
+                        || checkLowerLeftDiagonalS(row, col)
+                        || checkLowerRightDiagonalS(row, col));
+            }
+            // CASE: Left side in between top and bottom
+            else if ((row - 2) >= 0 && (row + 3) <= BOARDSIZE && (col - 1) <= 0) {
+                // Check up, down, right, upper right diagonal, lower right diagonal
+                return (checkColS(row, col)
+                        || checkRightS(row, col)
+                        || checkUpperRightDiagonalS(row, col)
+                        || checkLowerRightDiagonalS(row, col));
+            }
+            // CASE: Right side in between top and bottom
+            else if ((row - 2) >= 0 && (row + 3) <= BOARDSIZE && (col + 2) >= BOARDSIZE) {
+                // Check up, down, left, upper left diagonal, lower left diagonal
+                return (checkColS(row, col)
+                        || checkLeftS(row, col)
+                        || checkUpperLeftDiagonalS(row, col)
+                        || checkLowerLeftDiagonalS(row, col));
+            }
         }
-        // O shape
+        // TODO: O shape
         else {
             return false;
         }
@@ -139,6 +158,54 @@ public class SimpleSosGame implements SosGame {
         } else {
             return null;
         }
+    }
+
+    private boolean checkLowerLeftDiagonalS(int row, int col) {
+        return (grid[row + 2][col - 2] == Cell.S && grid[row + 1][col - 1] == Cell.O);
+    }
+
+    private boolean checkUpperRightDiagonalS(int row, int col) {
+        return (grid[row - 2][col + 2] == Cell.S && grid[row - 1][col + 1] == Cell.O);
+    }
+
+    private boolean checkForwardSlashDiagonal(int row, int col) {
+        return (checkLowerLeftDiagonalS(row, col) || checkUpperRightDiagonalS(row, col));
+    }
+
+    private boolean checkUpperLeftDiagonalS(int row, int col) {
+        return (grid[row - 2][col - 2] == Cell.S && grid[row - 1][col - 1] == Cell.O);
+    }
+
+    private boolean checkLowerRightDiagonalS(int row, int col) {
+        return (grid[row + 2][col + 2] == Cell.S && grid[row + 1][col + 1] == Cell.O);
+    }
+
+    private boolean checkBackslashDiagonalS(int row, int col) {
+        return (checkUpperLeftDiagonalS(row, col) || checkLowerRightDiagonalS(row, col));
+    }
+
+    private boolean checkUpS(int row, int col) {
+        return (grid[row - 2][col] == Cell.S && grid[row - 1][col] == Cell.O);
+    }
+
+    private boolean checkDownS(int row, int col) {
+        return (grid[row + 2][col] == Cell.S && grid[row + 1][col] == Cell.O);
+    }
+
+    private boolean checkColS(int row, int col) {
+        return (checkUpS(row, col) || checkDownS(row, col));
+    }
+
+    private boolean checkLeftS(int row, int col) {
+        return (grid[row][col - 2] == Cell.S && grid[row][col - 1] == Cell.O);
+    }
+
+    private boolean checkRightS(int row, int col) {
+        return (grid[row][col + 2] == Cell.S && grid[row][col + 1] == Cell.O);
+    }
+
+    private boolean checkRowS(int row, int col) {
+        return (checkLeftS(row, col) || checkRightS(row, col));
     }
 
     private void changeTurn() {
