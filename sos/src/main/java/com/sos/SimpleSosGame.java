@@ -51,6 +51,7 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean hasWon(int row, int col, Cell shape) {
+        // Handles all logic for a board size of 3
         if (BOARDSIZE == 3) {
             return (grid[row][0] == Cell.S // 3-in-the-row
                     && grid[row][1] == Cell.O && grid[row][2] == Cell.S
@@ -64,13 +65,14 @@ public class SimpleSosGame implements SosGame {
                     || row + col == 2 // 3-in-the-opposite-diagonal
                     && grid[0][2] == Cell.S && grid[1][1] == Cell.O && grid[2][0] == Cell.S);
         }
-        // BOARDSIZE > 3 and shape is S
+        // Handles logic for BOARDSIZE > 3 and shape == 'S'
         else if (shape == Cell.S) {
             // CASE: At least 3 spaces into the board in any direction
-            if ((row - 2) >=0 && (col - 2) >= 0 && (row + 2) <= (BOARDSIZE - 1) && (col + 2) <= (BOARDSIZE - 1)) {
+            if ((row - 2) >= 0 && (col - 2) >= 0 && (row + 3) <= BOARDSIZE && (col + 3) <= BOARDSIZE) {
+                // Check in every direction
                 return (checkColS(row, col)
                         || checkRowS(row, col)
-                        || checkBackslashDiagonalS(row, col)
+                        || checkBackSlashDiagonalS(row, col)
                         || checkForwardSlashDiagonal(row, col));
             }
             // CASE: Top left corner
@@ -134,30 +136,35 @@ public class SimpleSosGame implements SosGame {
                         || checkLowerLeftDiagonalS(row, col));
             }
         }
-        // TODO: O shape
-        else {
-            return false;
+        // Handles logic for BOARDSIZE > 3 and shape == 'O'
+        else if (shape == Cell.O)
+        {
+            // TODO there is an error when we place an 'O' in the corner or certain places on the edge
+            // CASE: At least 2 spaces into the board in any direction
+            if ((row - 1) >= 0 && (col - 1) >= 0 && (col + 1) <= BOARDSIZE && (row + 1) <= BOARDSIZE) {
+                return (checkRowO(row, col)
+                        || checkColO(row, col)
+                        || checkBackSlashDiagonalO(row, col)
+                        || checkForwardSlashDiagonalO(row, col));
+            }
         }
         return false;
     }
 
-    private boolean isDraw() {
-        for (int row = 0; row < BOARDSIZE; row++) {
-            for (int col = 0; col < BOARDSIZE; col++) {
-                if (grid[row][col] == Cell.EMPTY) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    private boolean checkBackSlashDiagonalO(int row, int col) {
+        return (grid[row - 1][col - 1] == Cell.S && grid[row + 1][col + 1] == Cell.S);
     }
 
-    public Cell getCell(int row, int column) {
-        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE) {
-            return grid[row][column];
-        } else {
-            return null;
-        }
+    private boolean checkForwardSlashDiagonalO(int row, int col) {
+        return (grid[row + 1][col - 1] == Cell.S && grid[row - 1][col + 1] == Cell.S);
+    }
+
+    private boolean checkColO(int row, int col) {
+        return (grid[row - 1][col] == Cell.S && grid[row + 1][col] == Cell.S);
+    }
+
+    private boolean checkRowO(int row, int col) {
+        return (grid[row][col - 1] == Cell.S && grid[row][col + 1] == Cell.S);
     }
 
     private boolean checkLowerLeftDiagonalS(int row, int col) {
@@ -180,7 +187,7 @@ public class SimpleSosGame implements SosGame {
         return (grid[row + 2][col + 2] == Cell.S && grid[row + 1][col + 1] == Cell.O);
     }
 
-    private boolean checkBackslashDiagonalS(int row, int col) {
+    private boolean checkBackSlashDiagonalS(int row, int col) {
         return (checkUpperLeftDiagonalS(row, col) || checkLowerRightDiagonalS(row, col));
     }
 
@@ -206,6 +213,25 @@ public class SimpleSosGame implements SosGame {
 
     private boolean checkRowS(int row, int col) {
         return (checkLeftS(row, col) || checkRightS(row, col));
+    }
+
+    private boolean isDraw() {
+        for (int row = 0; row < BOARDSIZE; row++) {
+            for (int col = 0; col < BOARDSIZE; col++) {
+                if (grid[row][col] == Cell.EMPTY) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public Cell getCell(int row, int column) {
+        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE) {
+            return grid[row][column];
+        } else {
+            return null;
+        }
     }
 
     private void changeTurn() {
