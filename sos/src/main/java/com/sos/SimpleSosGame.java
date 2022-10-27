@@ -51,7 +51,7 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean hasWon(int row, int col, Cell shape) {
-        // Handles all logic for a board size of 3
+        // Handles logic for a board size of 3
         if (BOARDSIZE == 3) {
             return (grid[row][0] == Cell.S // 3-in-the-row
                     && grid[row][1] == Cell.O && grid[row][2] == Cell.S
@@ -139,13 +139,29 @@ public class SimpleSosGame implements SosGame {
         // Handles logic for BOARDSIZE > 3 and shape == 'O'
         else if (shape == Cell.O)
         {
-            // TODO there is an error when we place an 'O' in the corner or certain places on the edge
             // CASE: At least 2 spaces into the board in any direction
-            if ((row - 1) >= 0 && (col - 1) >= 0 && (col + 1) <= BOARDSIZE && (row + 1) <= BOARDSIZE) {
+            if ((row - 1) >= 0 && (col - 1) >= 0 && (col + 2) <= BOARDSIZE && (row + 2) <= BOARDSIZE) {
                 return (checkRowO(row, col)
                         || checkColO(row, col)
                         || checkBackSlashDiagonalO(row, col)
                         || checkForwardSlashDiagonalO(row, col));
+            }
+            // CASE: On the top edge
+            else if (row == 0 && (col - 1) >= 0 && (col + 2) <= BOARDSIZE) {
+                // Check row
+                return(checkRowO(row, col));
+            }
+            // CASE: On the bottom edge
+            else if (row == (BOARDSIZE - 1) && (col - 1) >= 0 && (col + 2) <= BOARDSIZE) {
+                return(checkRowO(row, col));
+            }
+            // CASE: On the left edge
+            else if (col == 0 && (row - 1) >= 0 && (row + 2) <= BOARDSIZE) {
+                return (checkColO(row, col));
+            }
+            // CASE: On the right edge
+            else if (col == (BOARDSIZE - 1) && (row - 1) >= 0 && (row + 2) <= BOARDSIZE) {
+                return (checkColO(row, col));
             }
         }
         return false;
