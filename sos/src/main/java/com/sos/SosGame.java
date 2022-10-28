@@ -16,4 +16,7 @@ public interface SosGame {
     public GameStatus getCurrentGameStatus();
 
     public SimpleSosGame.Turn getTurn();
+
+    public int getBluePlayerScore();
+    public int getRedPlayerScore();
 }

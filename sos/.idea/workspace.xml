@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

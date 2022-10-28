@@ -19,6 +19,8 @@ public class SosGui extends Application {
     private TextField boardSizeField = new TextField();
     private Cell[][] cells;
     private Label gameStatus = new Label("Blue's Turn");
+    private Label bluePlayerScore = new Label("0");
+    private Label redPlayerScore = new Label("0");
     private SosGame sosGame;
     private GridPane centerPane;
     private SosGame.Cell bluePlayerShape = SosGame.Cell.S;
@@ -36,6 +38,9 @@ public class SosGui extends Application {
 
         // game title label
         Label gameTitle = new Label("SOS");
+        // insets: top right bottom left
+        gameTitle.setPadding(new Insets(5, 30, 5, 5));
+        gameTitle.setFont(new Font(20));
 
         // game type radio buttons
         RadioMenuItem radioMenuItem = new RadioMenuItem();
@@ -52,7 +57,7 @@ public class SosGui extends Application {
         // board size text field
         Label boardSizeLabel = new Label("Board Size");
         boardSizeField.setPrefSize(50, 30);
-        boardSizeField.setPromptText("ex. 7");
+        boardSizeField.setPromptText("ex. 6");
 
         // top pane
         HBox topPane = new HBox();
@@ -62,7 +67,8 @@ public class SosGui extends Application {
         topPane.getChildren().addAll(gameTitle, generalGameRb, simpleGameRb, boardSizeLabel, boardSizeField);
 
         // left pane
-        Label leftSideLabel = new Label("Blue PLayer");
+        Label leftSideLabel = new Label("Blue Player");
+        leftSideLabel.setFont(new Font(13));
         leftSideLabel.setPadding(new Insets(8));
 
         RadioMenuItem bluePlayerShapes = new RadioMenuItem();
@@ -70,16 +76,28 @@ public class SosGui extends Application {
         bluePlayerShapes.setToggleGroup(bluePlayerShapeToggle);
 
         RadioButton blueSShapeRadioButton = new RadioButton("S");
+        blueSShapeRadioButton.setPadding(new Insets(3));
         blueSShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
         blueSShapeRadioButton.setSelected(true);
 
         RadioButton blueOShapeRadioButton = new RadioButton("O");
+        blueOShapeRadioButton.setPadding(new Insets(3));
         blueOShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
 
-        VBox leftSide = new VBox(leftSideLabel, blueSShapeRadioButton, blueOShapeRadioButton);
+        Label blueScoreLabel = new Label("Score:");
+        blueScoreLabel.setFont(new Font(13));
+        blueScoreLabel.setPadding(new Insets(8));
+        blueScoreLabel.setVisible(false);
+
+        bluePlayerScore.setPadding(new Insets(5, 5, 5, 25));
+        bluePlayerScore.setVisible(false);
+
+        VBox leftSide = new VBox(leftSideLabel, blueSShapeRadioButton, blueOShapeRadioButton, blueScoreLabel, bluePlayerScore);
+        leftSide.setPadding(new Insets(10));
 
         // right pane
         Label rightSideLabel = new Label("Red Player");
+        rightSideLabel.setFont(new Font(13));
         rightSideLabel.setPadding(new Insets(8));
 
         RadioMenuItem redPlayerShapes = new RadioMenuItem();
@@ -87,13 +105,24 @@ public class SosGui extends Application {
         redPlayerShapes.setToggleGroup(redPlayerShapeToggle);
 
         RadioButton redSShapeRadioButton = new RadioButton("S");
+        redSShapeRadioButton.setPadding(new Insets(3));
         redSShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
         redSShapeRadioButton.setSelected(true);
 
         RadioButton redOShapeRadioButton = new RadioButton("O");
+        redOShapeRadioButton.setPadding(new Insets(3));
         redOShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
 
-        VBox rightSide = new VBox(rightSideLabel, redSShapeRadioButton, redOShapeRadioButton);
+        Label redScoreLabel = new Label("Score:");
+        redScoreLabel.setFont(new Font(13));
+        redScoreLabel.setPadding(new Insets(8));
+        redScoreLabel.setVisible(false);
+
+        redPlayerScore.setPadding(new Insets(5, 5, 5, 25));
+        redPlayerScore.setVisible(false);
+
+        VBox rightSide = new VBox(rightSideLabel, redSShapeRadioButton, redOShapeRadioButton, redScoreLabel, redPlayerScore);
+        rightSide.setPadding(new Insets(10));
 
         // bottom pane
         Button newGameButton = new Button("New Game");
@@ -137,14 +166,25 @@ public class SosGui extends Application {
                 // Choose the game type
                 if (selectedGameType == GameType.SIMPLE) {
                     sosGame = new SimpleSosGame(boardSize);
+
+                    blueScoreLabel.setVisible(false);
+                    bluePlayerScore.setVisible(false);
+                    redScoreLabel.setVisible(false);
+                    redPlayerScore.setVisible(false);
                 }
                 else if (selectedGameType == GameType.GENERAL) {
                     sosGame = new GeneralSosGame(boardSize);
+
+                    blueScoreLabel.setVisible(true);
+                    bluePlayerScore.setVisible(true);
+                    redScoreLabel.setVisible(true);
+                    redPlayerScore.setVisible(true);
                 }
 
                 // set the pane
                 centerPane = newGame(sosGame);
                 borderPane.setCenter(centerPane);
+                resetScoreLabels();
                 displayGameStatus();
             }
         });
@@ -233,6 +273,16 @@ public class SosGui extends Application {
             gameStatus.setText("Blue Player Won!!!");
         } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.RED_WON) {
             gameStatus.setText("Red Player Won!!!");
+        }
+
+        resetScoreLabels();
+    }
+
+    private void resetScoreLabels() {
+        if (String.valueOf(sosGame.getBluePlayerScore()) != bluePlayerScore.toString()
+                || String.valueOf(sosGame.getRedPlayerScore()) != redPlayerScore.toString()) {
+            bluePlayerScore.setText(String.valueOf(sosGame.getBluePlayerScore()));
+            redPlayerScore.setText(String.valueOf(sosGame.getRedPlayerScore()));
         }
     }
 
