@@ -9,12 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestISosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,30 +58,11 @@
       <recent name="com.sos" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.All in sos">
     <configuration name="All in sos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestGeneralSosGameScoring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestGeneralSosGameScoring.testBlueWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
-      <option name="METHOD_NAME" value="testBlueWon" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -101,10 +77,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGeneralSosGameScoring.testRedWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestSimpleSosGameScoring.testBlueWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
+      <option name="MAIN_CLASS_NAME" value="TestSimpleSosGameScoring" />
+      <option name="METHOD_NAME" value="testBlueWon" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSimpleSosGameScoring.testIsDraw" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSimpleSosGameScoring" />
+      <option name="METHOD_NAME" value="testIsDraw" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSimpleSosGameScoring.testRedWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSimpleSosGameScoring" />
       <option name="METHOD_NAME" value="testRedWon" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -114,10 +110,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in sos" />
+        <item itemvalue="JUnit.TestSimpleSosGameScoring.testIsDraw" />
+        <item itemvalue="JUnit.TestSimpleSosGameScoring.testRedWon" />
+        <item itemvalue="JUnit.TestSimpleSosGameScoring.testBlueWon" />
         <item itemvalue="JUnit.TestGeneralSosGameScoring.testDrawBothScore" />
-        <item itemvalue="JUnit.TestGeneralSosGameScoring" />
-        <item itemvalue="JUnit.TestGeneralSosGameScoring.testRedWon" />
-        <item itemvalue="JUnit.TestGeneralSosGameScoring.testBlueWon" />
       </list>
     </recent_temporary>
   </component>
