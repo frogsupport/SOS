@@ -1,8 +1,8 @@
 package com.sos;
 
-public class SimpleSosGame implements SosGame {
+public class SimpleSosGame implements ISosGame {
     private static int BOARDSIZE;
-    private Cell[][] grid;
+    private Shape[][] grid;
     private Turn turn;
     private GameStatus currentGameStatus;
 
@@ -15,7 +15,7 @@ public class SimpleSosGame implements SosGame {
             BOARDSIZE = boardSize;
         }
 
-        grid = new Cell[BOARDSIZE][BOARDSIZE];
+        grid = new Shape[BOARDSIZE][BOARDSIZE];
         // this.gameType = gameType;
         initBoard();
         currentGameStatus = GameStatus.PLAYING;
@@ -24,21 +24,23 @@ public class SimpleSosGame implements SosGame {
     public void initBoard() {
         for (int row = 0; row < BOARDSIZE; row++) {
             for (int column = 0; column < BOARDSIZE; column++) {
-                grid[row][column] = Cell.EMPTY;
+                grid[row][column] = Shape.EMPTY;
             }
         }
         turn = Turn.BLUE;
     }
 
-    public void makeMove(int row, int column, Cell shape) {
-        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Cell.EMPTY) {
+    public boolean makeMove(int row, int column, Shape shape) {
+        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Shape.EMPTY) {
             grid[row][column] = shape;
             updateGameStatus(row, column, shape);
             changeTurn();
+            return true;
         }
+        return false;
     }
 
-    private void updateGameStatus(int row, int column, Cell shape) {
+    private void updateGameStatus(int row, int column, Shape shape) {
         if (hasWon(row, column, shape)) {
             if (turn == Turn.BLUE) {
                 currentGameStatus = GameStatus.BLUE_WON;
@@ -50,23 +52,24 @@ public class SimpleSosGame implements SosGame {
         }
     }
 
-    private boolean hasWon(int row, int col, Cell shape) {
+    // For a simple game, a single SOS will win the game
+    private boolean hasWon(int row, int col, Shape shape) {
         // Handles logic for a board size of 3
         if (BOARDSIZE == 3) {
-            return (grid[row][0] == Cell.S // 3-in-the-row
-                    && grid[row][1] == Cell.O && grid[row][2] == Cell.S
+            return (grid[row][0] == Shape.S // 3-in-the-row
+                    && grid[row][1] == Shape.O && grid[row][2] == Shape.S
 
-                    || grid[0][col] == Cell.S // 3-in-the-column
-                    && grid[1][col] == Cell.O && grid[2][col] == Cell.S
+                    || grid[0][col] == Shape.S // 3-in-the-column
+                    && grid[1][col] == Shape.O && grid[2][col] == Shape.S
 
                     || row == col // 3-in-the-diagonal
-                    && grid[0][0] == Cell.S && grid[1][1] == Cell.O && grid[2][2] == Cell.S
+                    && grid[0][0] == Shape.S && grid[1][1] == Shape.O && grid[2][2] == Shape.S
 
                     || row + col == 2 // 3-in-the-opposite-diagonal
-                    && grid[0][2] == Cell.S && grid[1][1] == Cell.O && grid[2][0] == Cell.S);
+                    && grid[0][2] == Shape.S && grid[1][1] == Shape.O && grid[2][0] == Shape.S);
         }
         // Handles logic for BOARDSIZE > 3 and shape == 'S'
-        else if (shape == Cell.S) {
+        else if (shape == Shape.S) {
             // CASE: At least 3 spaces into the board in any direction
             if ((row - 2) >= 0 && (col - 2) >= 0 && (row + 3) <= BOARDSIZE && (col + 3) <= BOARDSIZE) {
                 // Check in every direction
@@ -137,7 +140,7 @@ public class SimpleSosGame implements SosGame {
             }
         }
         // Handles logic for BOARDSIZE > 3 and shape == 'O'
-        else if (shape == Cell.O)
+        else if (shape == Shape.O)
         {
             // CASE: At least 2 spaces into the board in any direction
             if ((row - 1) >= 0 && (col - 1) >= 0 && (col + 2) <= BOARDSIZE && (row + 2) <= BOARDSIZE) {
@@ -168,27 +171,27 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean checkBackSlashDiagonalO(int row, int col) {
-        return (grid[row - 1][col - 1] == Cell.S && grid[row + 1][col + 1] == Cell.S);
+        return (grid[row - 1][col - 1] == Shape.S && grid[row + 1][col + 1] == Shape.S);
     }
 
     private boolean checkForwardSlashDiagonalO(int row, int col) {
-        return (grid[row + 1][col - 1] == Cell.S && grid[row - 1][col + 1] == Cell.S);
+        return (grid[row + 1][col - 1] == Shape.S && grid[row - 1][col + 1] == Shape.S);
     }
 
     private boolean checkColO(int row, int col) {
-        return (grid[row - 1][col] == Cell.S && grid[row + 1][col] == Cell.S);
+        return (grid[row - 1][col] == Shape.S && grid[row + 1][col] == Shape.S);
     }
 
     private boolean checkRowO(int row, int col) {
-        return (grid[row][col - 1] == Cell.S && grid[row][col + 1] == Cell.S);
+        return (grid[row][col - 1] == Shape.S && grid[row][col + 1] == Shape.S);
     }
 
     private boolean checkLowerLeftDiagonalS(int row, int col) {
-        return (grid[row + 2][col - 2] == Cell.S && grid[row + 1][col - 1] == Cell.O);
+        return (grid[row + 2][col - 2] == Shape.S && grid[row + 1][col - 1] == Shape.O);
     }
 
     private boolean checkUpperRightDiagonalS(int row, int col) {
-        return (grid[row - 2][col + 2] == Cell.S && grid[row - 1][col + 1] == Cell.O);
+        return (grid[row - 2][col + 2] == Shape.S && grid[row - 1][col + 1] == Shape.O);
     }
 
     private boolean checkForwardSlashDiagonal(int row, int col) {
@@ -196,11 +199,11 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean checkUpperLeftDiagonalS(int row, int col) {
-        return (grid[row - 2][col - 2] == Cell.S && grid[row - 1][col - 1] == Cell.O);
+        return (grid[row - 2][col - 2] == Shape.S && grid[row - 1][col - 1] == Shape.O);
     }
 
     private boolean checkLowerRightDiagonalS(int row, int col) {
-        return (grid[row + 2][col + 2] == Cell.S && grid[row + 1][col + 1] == Cell.O);
+        return (grid[row + 2][col + 2] == Shape.S && grid[row + 1][col + 1] == Shape.O);
     }
 
     private boolean checkBackSlashDiagonalS(int row, int col) {
@@ -208,11 +211,11 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean checkUpS(int row, int col) {
-        return (grid[row - 2][col] == Cell.S && grid[row - 1][col] == Cell.O);
+        return (grid[row - 2][col] == Shape.S && grid[row - 1][col] == Shape.O);
     }
 
     private boolean checkDownS(int row, int col) {
-        return (grid[row + 2][col] == Cell.S && grid[row + 1][col] == Cell.O);
+        return (grid[row + 2][col] == Shape.S && grid[row + 1][col] == Shape.O);
     }
 
     private boolean checkColS(int row, int col) {
@@ -220,11 +223,11 @@ public class SimpleSosGame implements SosGame {
     }
 
     private boolean checkLeftS(int row, int col) {
-        return (grid[row][col - 2] == Cell.S && grid[row][col - 1] == Cell.O);
+        return (grid[row][col - 2] == Shape.S && grid[row][col - 1] == Shape.O);
     }
 
     private boolean checkRightS(int row, int col) {
-        return (grid[row][col + 2] == Cell.S && grid[row][col + 1] == Cell.O);
+        return (grid[row][col + 2] == Shape.S && grid[row][col + 1] == Shape.O);
     }
 
     private boolean checkRowS(int row, int col) {
@@ -234,7 +237,7 @@ public class SimpleSosGame implements SosGame {
     private boolean isDraw() {
         for (int row = 0; row < BOARDSIZE; row++) {
             for (int col = 0; col < BOARDSIZE; col++) {
-                if (grid[row][col] == Cell.EMPTY) {
+                if (grid[row][col] == Shape.EMPTY) {
                     return false;
                 }
             }
@@ -250,7 +253,7 @@ public class SimpleSosGame implements SosGame {
         return 0;
     }
 
-    public Cell getCell(int row, int column) {
+    public Shape getCell(int row, int column) {
         if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE) {
             return grid[row][column];
         } else {
@@ -273,4 +276,13 @@ public class SimpleSosGame implements SosGame {
     public Turn getTurn() {
         return turn;
     }
+
+    // TODO: Figure out lines
+    /*public Vector<Triplet<Integer, Integer, LineDirection>> getBlueLineCoordinates() {
+        return new Vector<Triplet<Integer, Integer, LineDirection>>();
+    }
+
+    public Vector<Triplet<Integer, Integer, LineDirection>> getRedLineCoordinates() {
+        return new Vector<Triplet<Integer, Integer, LineDirection>>();
+    }*/
 }

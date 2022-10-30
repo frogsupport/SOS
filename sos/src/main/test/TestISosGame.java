@@ -1,29 +1,30 @@
 import com.sos.GeneralSosGame;
 import com.sos.SimpleSosGame;
-import com.sos.SosGame;
-import com.sos.SosGui;
+import com.sos.ISosGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestSosGame {
-
-    // Basic functionality is tested on the simple sos game class
-    private SosGame sosGame = new SimpleSosGame(3);
+// Note that these tests test the functionality of the interface, ISosGame, as well
+// as the functionality of the SimpleSosGame class. This is because the scope of the interface
+// and the scope of what is offered by a simple sos game are the same.
+public class TestISosGame {
+    private final int SIZE = 3;
+    private ISosGame sosGame = new SimpleSosGame(SIZE);
 
     @BeforeEach
     public void setUp() throws Exception {
-        sosGame = new SimpleSosGame(3);
+        sosGame = new SimpleSosGame(SIZE);
     }
 
     @Test
     public void testChooseGameMode() {
-        sosGame = new SimpleSosGame(3);
+        sosGame = new SimpleSosGame(SIZE);
         assertTrue(sosGame instanceof SimpleSosGame);
 
-        sosGame = new GeneralSosGame(3);
+        sosGame = new GeneralSosGame(SIZE);
         assertTrue(sosGame instanceof GeneralSosGame);
     }
 
@@ -59,18 +60,18 @@ public class TestSosGame {
     public void testMakeValidMove() {
         int row, col;
         row = col = 1;
-        sosGame.makeMove(row, col, SosGame.Cell.S);
-        assertEquals(SosGame.Cell.S, sosGame.getCell(row, col));
+        sosGame.makeMove(row, col, ISosGame.Shape.S);
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(row, col));
     }
 
     @Test
     public void testMakeInvalidMove() {
         int row, col;
         row = col = -1;
-        sosGame.makeMove(row, col, SosGame.Cell.O);
+        sosGame.makeMove(row, col, ISosGame.Shape.O);
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                assertEquals(SosGame.Cell.EMPTY, sosGame.getCell(i, j));
+                assertEquals(ISosGame.Shape.EMPTY, sosGame.getCell(i, j));
             }
         }
     }
@@ -80,10 +81,10 @@ public class TestSosGame {
         int row, col;
         row = -1;
         col = 1;
-        sosGame.makeMove(row, col, SosGame.Cell.S);
+        sosGame.makeMove(row, col, ISosGame.Shape.S);
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                assertEquals(SosGame.Cell.EMPTY, sosGame.getCell(i, j));
+                assertEquals(ISosGame.Shape.EMPTY, sosGame.getCell(i, j));
             }
         }
     }
@@ -93,30 +94,30 @@ public class TestSosGame {
         int row, col;
         row = 1;
         col = -1;
-        sosGame.makeMove(row, col, SosGame.Cell.S);
+        sosGame.makeMove(row, col, ISosGame.Shape.S);
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                assertEquals(SosGame.Cell.EMPTY, sosGame.getCell(i, j));
+                assertEquals(ISosGame.Shape.EMPTY, sosGame.getCell(i, j));
             }
         }
     }
 
     @Test
     public void testMakeMoveOccupiedCell() {
-        sosGame.makeMove(0, 1, SosGame.Cell.S);
-        sosGame.makeMove(1, 0, SosGame.Cell.O);
+        sosGame.makeMove(0, 1, ISosGame.Shape.S);
+        sosGame.makeMove(1, 0, ISosGame.Shape.O);
 
         // make a move in the occupied (0, 1) cell
-        sosGame.makeMove(0, 1, SosGame.Cell.O);
+        sosGame.makeMove(0, 1, ISosGame.Shape.O);
 
-        assertEquals(sosGame.getCell(0, 1), SosGame.Cell.S);
+        assertEquals(sosGame.getCell(0, 1), ISosGame.Shape.S);
     }
 
     @Test
     public void testEmptyBoard() {
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                assertEquals(SosGame.Cell.EMPTY, sosGame.getCell(i, j));
+                assertEquals(ISosGame.Shape.EMPTY, sosGame.getCell(i, j));
             }
         }
     }

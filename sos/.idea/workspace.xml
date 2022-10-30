@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -8,8 +12,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestISosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +34,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2FrWxY7BGhaWcIWd8es1nFNOkKu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -43,59 +51,61 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.29770115&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.sos" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.sos" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="TestSosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in sos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestGeneralSosGameScoring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSosGame.testChooseGameModeAndBoardSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGeneralSosGameScoring.testBlueWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testChooseGameModeAndBoardSize" />
+      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
+      <option name="METHOD_NAME" value="testBlueWon" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSosGame.testChooseInvalidBoardSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGeneralSosGameScoring.testDrawBothScore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testChooseInvalidBoardSize" />
+      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
+      <option name="METHOD_NAME" value="testDrawBothScore" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSosGame.testMakeInvalidMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGeneralSosGameScoring.testRedWon" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testMakeInvalidMove" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestSosGame.testMakeMoveOccupiedCell" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSosGame" />
-      <option name="METHOD_NAME" value="testMakeMoveOccupiedCell" />
+      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
+      <option name="METHOD_NAME" value="testRedWon" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -103,11 +113,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestSosGame" />
-        <item itemvalue="JUnit.TestSosGame.testChooseGameModeAndBoardSize" />
-        <item itemvalue="JUnit.TestSosGame.testMakeMoveOccupiedCell" />
-        <item itemvalue="JUnit.TestSosGame.testMakeInvalidMove" />
-        <item itemvalue="JUnit.TestSosGame.testChooseInvalidBoardSize" />
+        <item itemvalue="JUnit.All in sos" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring.testDrawBothScore" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring.testRedWon" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring.testBlueWon" />
       </list>
     </recent_temporary>
   </component>
@@ -132,15 +142,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.NumberFormatException" package="java.lang" />
-          <option name="timeStamp" value="1" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
