@@ -11,7 +11,6 @@ public interface ISosGame {
 
     Shape getCell(int row, int column);
 
-    // returns the size of the board
     int getBoardSize();
 
     GameStatus getCurrentGameStatus();
@@ -19,9 +18,6 @@ public interface ISosGame {
     ISosGame.Turn getTurn();
 
     int getBluePlayerScore();
-    int getRedPlayerScore();
 
-    // TODO: Figure out how to connect SOS's with lines
-    // Vector<Triplet<Integer, Integer, LineDirection>> getBlueLineCoordinates();
-    // Vector<Triplet<Integer, Integer, LineDirection>> getRedLineCoordinates();
+    int getRedPlayerScore();
 }

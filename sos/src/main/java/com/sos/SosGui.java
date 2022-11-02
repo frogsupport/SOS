@@ -25,10 +25,6 @@ public class SosGui extends Application {
     private ISosGame.Shape redPlayerShape = ISosGame.Shape.S;
     private GameType selectedGameType = GameType.SIMPLE;
 
-    // TODO: Figure out good way to connect SOS's with lines
-    // private Vector<Triplet<Integer, Integer, ISosGame.LineDirection>> blueLineCoordinates;
-    // private Vector<Triplet<Integer, Integer, ISosGame.LineDirection>> redLineCoordinates;
-
     // set up gui ===============================================================================
 
     @Override
@@ -203,29 +199,17 @@ public class SosGui extends Application {
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
     public GridPane newGame(ISosGame sosGame) {
-        // center pane
         centerPane = new GridPane();
         cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
         for (int i = 0; i < sosGame.getBoardSize(); i++)
             for (int j = 0; j < sosGame.getBoardSize(); j++)
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
 
-        // TODO: Figure out SOS lines
-        // blueLineCoordinates = new Vector<Triplet<Integer, Integer, ISosGame.LineDirection>>();
-        // redLineCoordinates = new Vector<Triplet<Integer, Integer, ISosGame.LineDirection>>();
-
         return centerPane;
     }
 
     // gets called once each time a successful move is made
     public void drawBoard(int row, int col, ISosGame.Turn currentTurn) {
-        /*for (int row = 0; row < sosGame.getBoardSize(); row++)
-            for (int column = 0; column < sosGame.getBoardSize(); column++) {
-                if (sosGame.getCell(row, column) == ISosGame.Cell.S)
-                    cells[row][column].drawS();
-                else if (sosGame.getCell(row, column) == ISosGame.Cell.O)
-                    cells[row][column].drawO();
-            }*/
         if (sosGame.getCell(row, col) == ISosGame.Shape.S)
             cells[row][col].drawS(currentTurn);
         else if (sosGame.getCell(row, col) == ISosGame.Shape.O)
@@ -257,53 +241,7 @@ public class SosGui extends Application {
             bluePlayerScore.setText(String.valueOf(sosGame.getBluePlayerScore()));
             redPlayerScore.setText(String.valueOf(sosGame.getRedPlayerScore()));
         }
-
-        // TODO: Lines
-        /*if (!sosGame.getBlueLineCoordinates().isEmpty()) {
-            blueLineCoordinates.addAll(sosGame.getBlueLineCoordinates());
-
-            System.out.println(blueLineCoordinates.elementAt(0).getFirst().toString() + blueLineCoordinates.elementAt(0).getSecond().toString());
-
-            drawLine(blueLineCoordinates, "blue");
-            blueLineCoordinates.clear();
-        }
-
-        if (!sosGame.getRedLineCoordinates().isEmpty()) {
-            redLineCoordinates.addAll(sosGame.getRedLineCoordinates());
-
-            System.out.println(redLineCoordinates.elementAt(0).getFirst().toString() + redLineCoordinates.elementAt(0).getSecond().toString());
-
-            drawLine(redLineCoordinates, "red");
-            redLineCoordinates.clear();
-        }*/
     }
-
-    // TODO: Lines
-    // Draw the line starting from the upper leftmost node. Draw lines until the vector of line coordinates is empty
-    /*public void drawLine(Vector<Triplet<Integer, Integer, ISosGame.LineDirection>> lineCoordinates, String lineColor) {
-        while (!lineCoordinates.isEmpty()) {
-            int i = lineCoordinates.elementAt(0).getFirst();
-            int j = lineCoordinates.elementAt(0).getSecond();
-            ISosGame.LineDirection direction = lineCoordinates.elementAt(0).getThird();
-            Cell node = cells[i][j];
-
-            if (direction == ISosGame.LineDirection.RIGHT) {
-                // startx, starty, endx, endy
-                Line line = new Line(node.getBaselineOffset(), node.getHeight() / 2, node.getWidth() , node.getHeight() / 2);
-                line.setStyle(String.format("-fx-stroke: %s;", lineColor));
-                line.setStrokeWidth(6.0);
-                cells[i][j].getChildren().add(line);
-            } else if (direction == ISosGame.LineDirection.DOWN) {
-                // startx, starty, endx, endy
-                Line line = new Line(node.getWidth() / 2, node.getHeight() / 8, (node.getWidth() / 2), centerPane.getWidth() + (node.getHeight() * 0.25));
-                line.setStyle(String.format("-fx-stroke: %s;", lineColor));
-                line.setStrokeWidth(6.0);
-                cells[i][j].getChildren().add(line);
-            }
-            // TODO: Figure out the diagonal lines
-            lineCoordinates.remove(0);
-        }
-    }*/
 
     public TextField getBoardSizeField() { return boardSizeField; }
 
@@ -368,7 +306,6 @@ public class SosGui extends Application {
 
         public void setCellTextSize(Label text, String textColor) {
             // insets: top right bottom left
-            // String textColor = (sosGame.getTurn() == ISosGame.Turn.BLUE) ? "blue" : "red";
             text.setStyle(String.format("-fx-text-fill: %s", textColor));
             if (sosGame.getBoardSize() == 3) {
                 text.setFont(new Font("Arial", 120));

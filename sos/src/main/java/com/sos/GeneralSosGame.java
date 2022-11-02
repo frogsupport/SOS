@@ -7,12 +7,9 @@ public class GeneralSosGame implements ISosGame {
     private GameStatus currentGameStatus;
     private int BluePlayerScore;
     private int RedPlayerScore;
-    // TODO: Figure out lines
-    // private Vector<Triplet<Integer, Integer, LineDirection>> blueLineCoordinates;
-    // private Vector<Triplet<Integer, Integer, LineDirection>> redLineCoordinates;
 
     public GeneralSosGame(int boardSize) {
-        // Board size must be at least 3
+        // Board size must be at least 3 for a valid sos game
         if (boardSize < 3) {
             BOARDSIZE = 3;
         }
@@ -25,10 +22,6 @@ public class GeneralSosGame implements ISosGame {
         currentGameStatus = GameStatus.PLAYING;
         BluePlayerScore = 0;
         RedPlayerScore = 0;
-
-        // TODO: Lines
-        // blueLineCoordinates  = new Vector<Triplet<Integer, Integer, LineDirection>>();
-        // redLineCoordinates  = new Vector<Triplet<Integer, Integer, LineDirection>>();
     }
 
     public void initBoard() {
@@ -49,6 +42,7 @@ public class GeneralSosGame implements ISosGame {
             // changeTurn();
             return true;
         }
+
         return false;
     }
 
@@ -56,10 +50,6 @@ public class GeneralSosGame implements ISosGame {
     // Changes the current game status if there is a winner or a draw
     // Changes the turn if no SOS is made
     private void updateGameStatus(int row, int column, Shape shape) {
-        // TODO: Lines
-        // blueLineCoordinates.clear();
-        // redLineCoordinates.clear();
-
         int score = hasScored(row, column, shape);
         // If an SOS is scored, keep the turn the same and add the score
         if (score > 0) {
@@ -84,15 +74,6 @@ public class GeneralSosGame implements ISosGame {
         }
     }
 
-    // TODO: Figure out how to add coordinates and directions for every case
-    /*private void addLineCoordinates(int row, int col, LineDirection direction) {
-        if (turn == Turn.BLUE) {
-            blueLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(row, col, direction));
-        } else if (turn == Turn.RED) {
-            redLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(row, col, direction));
-        }
-    }*/
-
     // For a general game, SOS's can continue to be scored until the board is filled.
     // This returns an int so that if we score multiple SOS's in one turn, they will all
     // be counted and added to the score.
@@ -104,42 +85,18 @@ public class GeneralSosGame implements ISosGame {
             if (grid[row][0] == Shape.S // 3-in-the-row
                     && grid[row][1] == Shape.O && grid[row][2] == Shape.S) {
                 score++;
-                // addLineCoordinates(row, 0, LineDirection.RIGHT);
-                /*if (turn == Turn.BLUE) {
-                    blueLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(row, 0, LineDirection.RIGHT));
-                } else if (turn == Turn.RED) {
-                    redLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(row, 0, LineDirection.RIGHT));
-                }*/
             }
             if (grid[0][col] == Shape.S // 3-in-the-column
                     && grid[1][col] == Shape.O && grid[2][col] == Shape.S) {
                 score++;
-                // addLineCoordinates(0, col, LineDirection.DOWN);
-                /*if (turn == Turn.BLUE) {
-                    blueLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, col, LineDirection.DOWN));
-                } else if (turn == Turn.RED) {
-                    redLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, col, LineDirection.DOWN));
-                }*/
             }
             if (row == col // 3-in-the-diagonal
                     && grid[0][0] == Shape.S && grid[1][1] == Shape.O && grid[2][2] == Shape.S) {
                 score++;
-                // addLineCoordinates(0, 0, LineDirection.LOWER_DIAGONAL_RIGHT);
-                /*if (turn == Turn.BLUE) {
-                    blueLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, 0, LineDirection.LOWER_DIAGONAL_RIGHT));
-                } else if (turn == Turn.RED) {
-                    redLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, 0, LineDirection.LOWER_DIAGONAL_RIGHT));
-                }*/
             }
             if (row + col == 2 // 3-in-the-opposite-diagonal
                     && grid[0][2] == Shape.S && grid[1][1] == Shape.O && grid[2][0] == Shape.S) {
                 score++;
-                // addLineCoordinates(0, 2, LineDirection.UPPER_DIAGONAL_RIGHT);
-                /*if (turn == Turn.BLUE) {
-                    blueLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, 2, LineDirection.UPPER_DIAGONAL_RIGHT));
-                } else if (turn == Turn.RED) {
-                    redLineCoordinates.add(new Triplet<Integer, Integer, LineDirection>(0, 2, LineDirection.UPPER_DIAGONAL_RIGHT));
-                }*/
             }
         }
         // Handles logic for BOARDSIZE > 3 and shape == 'S'
@@ -390,13 +347,4 @@ public class GeneralSosGame implements ISosGame {
     public int getRedPlayerScore() {
         return RedPlayerScore;
     }
-
-    // TODO: Lines
-    /*public Vector<Triplet<Integer, Integer, LineDirection>> getBlueLineCoordinates() {
-        return blueLineCoordinates;
-    }
-
-    public Vector<Triplet<Integer, Integer, LineDirection>> getRedLineCoordinates() {
-        return redLineCoordinates;
-    }*/
 }

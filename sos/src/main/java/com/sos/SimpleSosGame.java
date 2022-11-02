@@ -7,7 +7,7 @@ public class SimpleSosGame implements ISosGame {
     private GameStatus currentGameStatus;
 
     public SimpleSosGame(int boardSize) {
-        // Board size must be at least 3
+        // Board size must be at least 3 for a valid sos game
         if (boardSize < 3) {
             BOARDSIZE = 3;
         }
@@ -16,7 +16,6 @@ public class SimpleSosGame implements ISosGame {
         }
 
         grid = new Shape[BOARDSIZE][BOARDSIZE];
-        // this.gameType = gameType;
         initBoard();
         currentGameStatus = GameStatus.PLAYING;
     }
@@ -27,6 +26,7 @@ public class SimpleSosGame implements ISosGame {
                 grid[row][column] = Shape.EMPTY;
             }
         }
+
         turn = Turn.BLUE;
     }
 
@@ -37,6 +37,7 @@ public class SimpleSosGame implements ISosGame {
             changeTurn();
             return true;
         }
+
         return false;
     }
 
@@ -167,6 +168,7 @@ public class SimpleSosGame implements ISosGame {
                 return (checkColO(row, col));
             }
         }
+
         return false;
     }
 
@@ -242,6 +244,7 @@ public class SimpleSosGame implements ISosGame {
                 }
             }
         }
+
         return true;
     }
 
@@ -276,13 +279,4 @@ public class SimpleSosGame implements ISosGame {
     public Turn getTurn() {
         return turn;
     }
-
-    // TODO: Figure out lines
-    /*public Vector<Triplet<Integer, Integer, LineDirection>> getBlueLineCoordinates() {
-        return new Vector<Triplet<Integer, Integer, LineDirection>>();
-    }
-
-    public Vector<Triplet<Integer, Integer, LineDirection>> getRedLineCoordinates() {
-        return new Vector<Triplet<Integer, Integer, LineDirection>>();
-    }*/
 }

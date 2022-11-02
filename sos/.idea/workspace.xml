@@ -9,6 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/Triplet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,11 +74,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGeneralSosGameScoring.testDrawBothScore" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGeneralSosGameScoring.testScoreCornersWithS" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
-      <option name="METHOD_NAME" value="testDrawBothScore" />
+      <option name="METHOD_NAME" value="testScoreCornersWithS" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -110,10 +117,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in sos" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring.testScoreCornersWithS" />
         <item itemvalue="JUnit.TestSimpleSosGameScoring.testIsDraw" />
         <item itemvalue="JUnit.TestSimpleSosGameScoring.testRedWon" />
         <item itemvalue="JUnit.TestSimpleSosGameScoring.testBlueWon" />
-        <item itemvalue="JUnit.TestGeneralSosGameScoring.testDrawBothScore" />
       </list>
     </recent_temporary>
   </component>

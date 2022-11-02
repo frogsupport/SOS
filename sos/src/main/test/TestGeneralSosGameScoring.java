@@ -6,6 +6,67 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestGeneralSosGameScoring {
 
+    // TODO: Finish this test
+    @Test
+    public void testScoreCenterAreaWithO() {
+        // Given
+        final int SIZE = 20;
+        final int BLUE_EXPECTED_SCORE = 3;
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+
+        // When (Blue goes first)
+        sosGame.makeMove(SIZE / 2, SIZE / 2, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE / 2, (SIZE / 2) + 1, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE / 2, (SIZE / 2) + 2, ISosGame.Shape.O);
+        // Red scores
+        sosGame.makeMove(SIZE / 2, (SIZE / 2) + 3, ISosGame.Shape.O);
+        sosGame.makeMove(0, SIZE - 3, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, SIZE - 1, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, SIZE - 2, ISosGame.Shape.O);
+        // Blue scores in bottom right corner
+        sosGame.makeMove(SIZE - 1, SIZE - 3, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, 0, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 2, 0, ISosGame.Shape.O);
+        // Blue scores a third time
+        sosGame.makeMove(SIZE - 3, 0, ISosGame.Shape.S);
+
+        // Then
+        assertEquals(BLUE_EXPECTED_SCORE, sosGame.getBluePlayerScore());
+        // Make sure an S is in each corner
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(0, SIZE - 1));
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(SIZE - 1, SIZE - 1));
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(SIZE - 1, 0));
+    }
+
+    @Test
+    public void testScoreCornersWithS() {
+        // Given
+        final int SIZE = 11;
+        final int BLUE_EXPECTED_SCORE = 3;
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+
+        // When (Blue goes first)
+        sosGame.makeMove(0, SIZE - 1, ISosGame.Shape.S);
+        sosGame.makeMove(0, SIZE - 2, ISosGame.Shape.O);
+        // Blue Scores in top right corner
+        sosGame.makeMove(0, SIZE - 3, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, SIZE - 1, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, SIZE - 2, ISosGame.Shape.O);
+        // Blue scores in bottom right corner
+        sosGame.makeMove(SIZE - 1, SIZE - 3, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 1, 0, ISosGame.Shape.S);
+        sosGame.makeMove(SIZE - 2, 0, ISosGame.Shape.O);
+        // Blue scores a third time
+        sosGame.makeMove(SIZE - 3, 0, ISosGame.Shape.S);
+
+        // Then
+        assertEquals(BLUE_EXPECTED_SCORE, sosGame.getBluePlayerScore());
+        // Make sure an S is in each corner
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(0, SIZE - 1));
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(SIZE - 1, SIZE - 1));
+        assertEquals(ISosGame.Shape.S, sosGame.getCell(SIZE - 1, 0));
+    }
+
     @Test
     public void testIsDrawBothScore() {
         // Given
