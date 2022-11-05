@@ -24,6 +24,9 @@ public class SosGui extends Application {
     private ISosGame.Shape bluePlayerShape = ISosGame.Shape.S;
     private ISosGame.Shape redPlayerShape = ISosGame.Shape.S;
     private GameType selectedGameType = GameType.SIMPLE;
+    private final int TEXT_SIZE = 13;
+    private final int TITLE_SIZE = 30;
+    private final int SCORE_TEXT_SIZE = 20;
 
     // set up gui ===============================================================================
 
@@ -38,7 +41,7 @@ public class SosGui extends Application {
         Label gameTitle = new Label("SOS");
         // insets: top right bottom left
         gameTitle.setPadding(new Insets(5, 30, 5, 5));
-        gameTitle.setFont(new Font(20));
+        gameTitle.setFont(new Font(TITLE_SIZE));
 
         // game type radio buttons
         RadioMenuItem radioMenuItem = new RadioMenuItem();
@@ -46,14 +49,17 @@ public class SosGui extends Application {
         radioMenuItem.setToggleGroup(toggleGroup);
 
         RadioButton generalGameRb = new RadioButton("General Game");
+        generalGameRb.setFont(new Font(TEXT_SIZE));
         generalGameRb.setToggleGroup(toggleGroup);
 
         RadioButton simpleGameRb = new RadioButton("Simple Game");
+        simpleGameRb.setFont(new Font(TEXT_SIZE));
         simpleGameRb.setToggleGroup(toggleGroup);
         simpleGameRb.setSelected(true);
 
         // board size text field
         Label boardSizeLabel = new Label("Board Size");
+        boardSizeLabel.setFont(new Font(TEXT_SIZE));
         boardSizeField.setPrefSize(50, 30);
         boardSizeField.setPromptText("ex. 6");
 
@@ -66,7 +72,7 @@ public class SosGui extends Application {
 
         // left pane
         Label leftSideLabel = new Label("Blue Player");
-        leftSideLabel.setFont(new Font(13));
+        leftSideLabel.setFont(new Font(SCORE_TEXT_SIZE));
         leftSideLabel.setPadding(new Insets(8));
 
         RadioMenuItem bluePlayerShapes = new RadioMenuItem();
@@ -74,20 +80,23 @@ public class SosGui extends Application {
         bluePlayerShapes.setToggleGroup(bluePlayerShapeToggle);
 
         RadioButton blueSShapeRadioButton = new RadioButton("S");
-        blueSShapeRadioButton.setPadding(new Insets(3));
+        blueSShapeRadioButton.setFont(new Font(TEXT_SIZE));
+        blueSShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
         blueSShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
         blueSShapeRadioButton.setSelected(true);
 
         RadioButton blueOShapeRadioButton = new RadioButton("O");
-        blueOShapeRadioButton.setPadding(new Insets(3));
+        blueOShapeRadioButton.setFont(new Font(TEXT_SIZE));
+        blueOShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
         blueOShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
 
         Label blueScoreLabel = new Label("Score:");
-        blueScoreLabel.setFont(new Font(13));
+        blueScoreLabel.setFont(new Font(SCORE_TEXT_SIZE));
         blueScoreLabel.setPadding(new Insets(8));
         blueScoreLabel.setVisible(false);
 
         bluePlayerScore.setPadding(new Insets(5, 5, 5, 25));
+        bluePlayerScore.setFont(new Font(SCORE_TEXT_SIZE));
         bluePlayerScore.setVisible(false);
 
         VBox leftSide = new VBox(leftSideLabel, blueSShapeRadioButton, blueOShapeRadioButton, blueScoreLabel, bluePlayerScore);
@@ -95,7 +104,7 @@ public class SosGui extends Application {
 
         // right pane
         Label rightSideLabel = new Label("Red Player");
-        rightSideLabel.setFont(new Font(13));
+        rightSideLabel.setFont(new Font(SCORE_TEXT_SIZE));
         rightSideLabel.setPadding(new Insets(8));
 
         RadioMenuItem redPlayerShapes = new RadioMenuItem();
@@ -103,20 +112,23 @@ public class SosGui extends Application {
         redPlayerShapes.setToggleGroup(redPlayerShapeToggle);
 
         RadioButton redSShapeRadioButton = new RadioButton("S");
-        redSShapeRadioButton.setPadding(new Insets(3));
+        redSShapeRadioButton.setFont(new Font(TEXT_SIZE));
+        redSShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
         redSShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
         redSShapeRadioButton.setSelected(true);
 
         RadioButton redOShapeRadioButton = new RadioButton("O");
-        redOShapeRadioButton.setPadding(new Insets(3));
+        redOShapeRadioButton.setFont(new Font(TEXT_SIZE));
+        redOShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
         redOShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
 
         Label redScoreLabel = new Label("Score:");
-        redScoreLabel.setFont(new Font(13));
+        redScoreLabel.setFont(new Font(SCORE_TEXT_SIZE));
         redScoreLabel.setPadding(new Insets(8));
         redScoreLabel.setVisible(false);
 
         redPlayerScore.setPadding(new Insets(5, 5, 5, 25));
+        redPlayerScore.setFont(new Font(SCORE_TEXT_SIZE));
         redPlayerScore.setVisible(false);
 
         VBox rightSide = new VBox(rightSideLabel, redSShapeRadioButton, redOShapeRadioButton, redScoreLabel, redPlayerScore);
@@ -124,6 +136,9 @@ public class SosGui extends Application {
 
         // bottom pane
         Button newGameButton = new Button("New Game");
+        newGameButton.setFont(new Font(TEXT_SIZE));
+
+        gameStatus.setFont(new Font(SCORE_TEXT_SIZE));
 
         HBox bottomPane = new HBox();
         bottomPane.setPadding(new Insets(10));
@@ -141,7 +156,7 @@ public class SosGui extends Application {
         borderPane.setPadding(new Insets(10));
 
         // set up scene
-        Scene scene = new Scene(borderPane, 700, 700);
+        Scene scene = new Scene(borderPane, 800, 800);
         primaryStage.setTitle("SOS: The Game");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -202,8 +217,9 @@ public class SosGui extends Application {
         centerPane = new GridPane();
         cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
         for (int i = 0; i < sosGame.getBoardSize(); i++)
-            for (int j = 0; j < sosGame.getBoardSize(); j++)
+            for (int j = 0; j < sosGame.getBoardSize(); j++) {
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
+            }
 
         return centerPane;
     }
@@ -305,34 +321,13 @@ public class SosGui extends Application {
         }
 
         public void setCellTextSize(Label text, String textColor) {
-            // insets: top right bottom left
+            // As the board size gets bigger we want the text size and padding to get smaller
+            // so we set up an inverse relationship among the two.
+            double fontSize = (1.0 / sosGame.getBoardSize()) * 300;
+            double padding = (1.0 / sosGame.getBoardSize()) * 150;
             text.setStyle(String.format("-fx-text-fill: %s", textColor));
-            if (sosGame.getBoardSize() == 3) {
-                text.setFont(new Font("Arial", 120));
-                text.setPadding(new Insets(10, 10, 10, 30));
-            } else if (sosGame.getBoardSize() < 5) {
-                text.setFont(new Font("Arial", 100));
-                text.setPadding(new Insets(10, 10, 10, 20));
-            } else if (sosGame.getBoardSize() < 8) {
-                text.setFont(new Font("Arial", 70));
-                text.setPadding(new Insets(8, 8, 8, 12));
-            } else if (sosGame.getBoardSize() < 10) {
-                text.setFont(new Font("Arial", 50));
-                text.setPadding(new Insets(10, 10, 10, 10));
-            } else if (sosGame.getBoardSize() < 14) {
-                text.setFont(new Font("Arial", 30));
-                text.setPadding(new Insets(10, 10, 10, 10));
-            } else if (sosGame.getBoardSize() < 19) {
-                text.setFont(new Font("Arial", 20));
-                text.setPadding(new Insets(8, 8, 8, 8));
-            } else {
-                text.setFont(new Font("Arial", 15));
-                text.setPadding(new Insets(8, 8, 8, 8));
-            }
-        }
-
-        public Label getLabel() {
-            return text;
+            text.setFont(new Font("Arial", fontSize));
+            text.setPadding(new Insets(padding));
         }
     }
 

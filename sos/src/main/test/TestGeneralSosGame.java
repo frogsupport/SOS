@@ -20,11 +20,15 @@ public class TestGeneralSosGame {
     public void testMakeMoveOccupiedCell() {
         sosGame.makeMove(0, 0, ISosGame.Shape.S);
         assertFalse(sosGame.makeMove(0, 0, ISosGame.Shape.O));
+        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
     }
 
     @Test
     public void testMakeMoveUnoccupiedCell() {
+        assertEquals(ISosGame.Turn.BLUE, sosGame.getTurn());
         assertTrue(sosGame.makeMove(0, 0, ISosGame.Shape.O));
+        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
+        assertEquals(ISosGame.Turn.RED, sosGame.getTurn());
     }
 
     @Test
@@ -35,6 +39,7 @@ public class TestGeneralSosGame {
             }
         }
         assertTrue(sosGame.isBoardFilled());
+        assertEquals(ISosGame.GameStatus.DRAW, sosGame.getCurrentGameStatus());
     }
 
     @Test
@@ -46,5 +51,6 @@ public class TestGeneralSosGame {
             }
         }
         assertFalse(sosGame.isBoardFilled());
+        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
     }
 }

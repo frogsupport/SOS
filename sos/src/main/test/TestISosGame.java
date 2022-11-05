@@ -20,6 +20,14 @@ public class TestISosGame {
     }
 
     @Test
+    public void testTurnChanges() {
+        // Blue starts
+        assertEquals(ISosGame.Turn.BLUE, sosGame.getTurn());
+        sosGame.makeMove(0, 0, ISosGame.Shape.S);
+        assertEquals(ISosGame.Turn.RED, sosGame.getTurn());
+    }
+
+    @Test
     public void testChooseGameMode() {
         sosGame = new SimpleSosGame(SIZE);
         assertTrue(sosGame instanceof SimpleSosGame);

@@ -5,7 +5,6 @@ public interface ISosGame {
     enum Shape {EMPTY, S, O}
     enum Turn {BLUE, RED}
     enum GameStatus {PLAYING, DRAW, BLUE_WON, RED_WON}
-    enum LineDirection { DOWN, RIGHT, UPPER_DIAGONAL_RIGHT, LOWER_DIAGONAL_RIGHT }
 
     boolean makeMove(int row, int column, Shape shape);
 
