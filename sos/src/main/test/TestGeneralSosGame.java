@@ -1,5 +1,5 @@
 import com.sos.GeneralSosGame;
-import com.sos.ISosGame;
+import com.sos.SosGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,28 +18,28 @@ public class TestGeneralSosGame {
 
     @Test
     public void testMakeMoveOccupiedCell() {
-        sosGame.makeMove(0, 0, ISosGame.Shape.S);
-        assertFalse(sosGame.makeMove(0, 0, ISosGame.Shape.O));
-        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
+        sosGame.makeMove(0, 0, SosGame.Shape.S);
+        assertFalse(sosGame.makeMove(0, 0, SosGame.Shape.O));
+        assertEquals(SosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
     }
 
     @Test
     public void testMakeMoveUnoccupiedCell() {
-        assertEquals(ISosGame.Turn.BLUE, sosGame.getTurn());
-        assertTrue(sosGame.makeMove(0, 0, ISosGame.Shape.O));
-        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
-        assertEquals(ISosGame.Turn.RED, sosGame.getTurn());
+        assertEquals(SosGame.Turn.BLUE, sosGame.getTurn());
+        assertTrue(sosGame.makeMove(0, 0, SosGame.Shape.O));
+        assertEquals(SosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.Turn.RED, sosGame.getTurn());
     }
 
     @Test
     public void testIsBoardFilledFullBoard() {
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                sosGame.makeMove(i, j, ISosGame.Shape.O);
+                sosGame.makeMove(i, j, SosGame.Shape.O);
             }
         }
         assertTrue(sosGame.isBoardFilled());
-        assertEquals(ISosGame.GameStatus.DRAW, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.GameStatus.DRAW, sosGame.getCurrentGameStatus());
     }
 
     @Test
@@ -47,10 +47,10 @@ public class TestGeneralSosGame {
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             // When the column index is decremented by one so the board isn't filled
             for (int j = 0; j < sosGame.getBoardSize() - 1; j++) {
-                sosGame.makeMove(i, j, ISosGame.Shape.O);
+                sosGame.makeMove(i, j, SosGame.Shape.O);
             }
         }
         assertFalse(sosGame.isBoardFilled());
-        assertEquals(ISosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.GameStatus.PLAYING, sosGame.getCurrentGameStatus());
     }
 }

@@ -19,10 +19,10 @@ public class SosGui extends Application {
     private Label gameStatus = new Label("Blue's Turn");
     private Label bluePlayerScore = new Label("0");
     private Label redPlayerScore = new Label("0");
-    private ISosGame sosGame;
+    private SosGame sosGame;
     private GridPane centerPane;
-    private ISosGame.Shape bluePlayerShape = ISosGame.Shape.S;
-    private ISosGame.Shape redPlayerShape = ISosGame.Shape.S;
+    private SosGame.Shape bluePlayerShape = SosGame.Shape.S;
+    private SosGame.Shape redPlayerShape = SosGame.Shape.S;
     private GameType selectedGameType = GameType.SIMPLE;
     private final int TEXT_SIZE = 13;
     private final int TITLE_SIZE = 30;
@@ -199,11 +199,11 @@ public class SosGui extends Application {
             displayGameStatus();
         });
 
-        blueSShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = ISosGame.Shape.S);
-        blueOShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = ISosGame.Shape.O);
+        blueSShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = SosGame.Shape.S);
+        blueOShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = SosGame.Shape.O);
 
-        redSShapeRadioButton.setOnAction(actionEvent -> redPlayerShape = ISosGame.Shape.S);
-        redOShapeRadioButton.setOnAction(actionEvent -> redPlayerShape = ISosGame.Shape.O);
+        redSShapeRadioButton.setOnAction(actionEvent -> redPlayerShape = SosGame.Shape.S);
+        redOShapeRadioButton.setOnAction(actionEvent -> redPlayerShape = SosGame.Shape.O);
 
         simpleGameRb.setOnAction(actionEvent -> selectedGameType = GameType.SIMPLE);
         generalGameRb.setOnAction(actionEvent -> selectedGameType = GameType.GENERAL);
@@ -213,7 +213,7 @@ public class SosGui extends Application {
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
-    public GridPane newGame(ISosGame sosGame) {
+    public GridPane newGame(SosGame sosGame) {
         centerPane = new GridPane();
         cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
         for (int i = 0; i < sosGame.getBoardSize(); i++)
@@ -225,25 +225,25 @@ public class SosGui extends Application {
     }
 
     // gets called once each time a successful move is made
-    public void drawBoard(int row, int col, ISosGame.Turn currentTurn) {
-        if (sosGame.getCell(row, col) == ISosGame.Shape.S)
+    public void drawBoard(int row, int col, SosGame.Turn currentTurn) {
+        if (sosGame.getCell(row, col) == SosGame.Shape.S)
             cells[row][col].drawS(currentTurn);
-        else if (sosGame.getCell(row, col) == ISosGame.Shape.O)
+        else if (sosGame.getCell(row, col) == SosGame.Shape.O)
             cells[row][col].drawO(currentTurn);
     }
 
     private void displayGameStatus() {
-        if (sosGame.getCurrentGameStatus() == ISosGame.GameStatus.PLAYING) {
+        if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
             if (sosGame.getTurn() == SimpleSosGame.Turn.BLUE) {
                 gameStatus.setText("Blue's Turn");
             } else {
                 gameStatus.setText("Red's Turn");
             }
-        } else if (sosGame.getCurrentGameStatus() == ISosGame.GameStatus.DRAW) {
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.DRAW) {
             gameStatus.setText("It's a DRAW!!!");
-        } else if (sosGame.getCurrentGameStatus() == ISosGame.GameStatus.BLUE_WON) {
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.BLUE_WON) {
             gameStatus.setText("Blue Player Won!!!");
-        } else if (sosGame.getCurrentGameStatus() == ISosGame.GameStatus.RED_WON) {
+        } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.RED_WON) {
             gameStatus.setText("Red Player Won!!!");
         }
 
@@ -281,17 +281,17 @@ public class SosGui extends Application {
 
         private void handleMouseClick() {
             // Ongoing game
-            if (sosGame.getCurrentGameStatus() == ISosGame.GameStatus.PLAYING) {
-                ISosGame.Shape shape = ISosGame.Shape.EMPTY;
+            if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+                SosGame.Shape shape = SosGame.Shape.EMPTY;
 
-                if (sosGame.getTurn() == ISosGame.Turn.BLUE) {
+                if (sosGame.getTurn() == SosGame.Turn.BLUE) {
                     shape = bluePlayerShape;
                 }
                 else {
                     shape = redPlayerShape;
                 }
 
-                ISosGame.Turn currentTurn = (sosGame.getTurn() == ISosGame.Turn.BLUE) ? ISosGame.Turn.BLUE : ISosGame.Turn.RED;
+                SosGame.Turn currentTurn = (sosGame.getTurn() == SosGame.Turn.BLUE) ? SosGame.Turn.BLUE : SosGame.Turn.RED;
                 // If a valid move is made, add it to the board
                 if (sosGame.makeMove(row, column, shape)) {
                     drawBoard(row, column, currentTurn);
@@ -304,17 +304,17 @@ public class SosGui extends Application {
             }
         }
 
-        public void drawS(ISosGame.Turn currentTurn) {
+        public void drawS(SosGame.Turn currentTurn) {
             text = new Label("S");
-            String textColor = (currentTurn == ISosGame.Turn.BLUE) ? "blue" : "red";
+            String textColor = (currentTurn == SosGame.Turn.BLUE) ? "blue" : "red";
             setCellTextSize(text, textColor);
             AnchorPane anchorPane = new AnchorPane(text);
             getChildren().add(anchorPane);
         }
 
-        public void drawO(ISosGame.Turn currentTurn) {
+        public void drawO(SosGame.Turn currentTurn) {
             text = new Label("O");
-            String textColor = (currentTurn == ISosGame.Turn.BLUE) ? "blue" : "red";
+            String textColor = (currentTurn == SosGame.Turn.BLUE) ? "blue" : "red";
             setCellTextSize(text, textColor);
             AnchorPane anchorPane = new AnchorPane(text);
             getChildren().add(anchorPane);

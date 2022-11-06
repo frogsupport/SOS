@@ -11,6 +11,13 @@
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestISosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -60,7 +67,7 @@
       <recent name="com.sos" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestGeneralSosGameScoring">
+  <component name="RunManager">
     <configuration name="All in sos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -107,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in sos" />
         <item itemvalue="JUnit.TestGeneralSosGameScoring" />
         <item itemvalue="JUnit.TestGeneralSosGame" />
         <item itemvalue="JUnit.TestSimpleSosGameScoring" />
         <item itemvalue="JUnit.TestISosGame" />
-        <item itemvalue="JUnit.All in sos" />
       </list>
     </recent_temporary>
   </component>

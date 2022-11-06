@@ -1,5 +1,5 @@
 import com.sos.SimpleSosGame;
-import com.sos.ISosGame;
+import com.sos.SosGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,12 +15,12 @@ public class TestSimpleSosGameScoring {
         // When
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
-                sosGame.makeMove(i, j, ISosGame.Shape.O);
+                sosGame.makeMove(i, j, SosGame.Shape.O);
             }
         }
 
         // Then
-        assertEquals(ISosGame.GameStatus.DRAW, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.GameStatus.DRAW, sosGame.getCurrentGameStatus());
     }
 
     @Test
@@ -30,14 +30,14 @@ public class TestSimpleSosGameScoring {
         SimpleSosGame sosGame = new SimpleSosGame(SIZE);
 
         // When
-        sosGame.makeMove(0, 0, ISosGame.Shape.S);
-        sosGame.makeMove(1, 1, ISosGame.Shape.O);
-        sosGame.makeMove(0, 2, ISosGame.Shape.S);
+        sosGame.makeMove(0, 0, SosGame.Shape.S);
+        sosGame.makeMove(1, 1, SosGame.Shape.O);
+        sosGame.makeMove(0, 2, SosGame.Shape.S);
         // Red wins
-        sosGame.makeMove(0, 1, ISosGame.Shape.O);
+        sosGame.makeMove(0, 1, SosGame.Shape.O);
 
         // Then
-        assertEquals(ISosGame.GameStatus.RED_WON, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.GameStatus.RED_WON, sosGame.getCurrentGameStatus());
     }
 
     @Test
@@ -47,12 +47,12 @@ public class TestSimpleSosGameScoring {
         SimpleSosGame sosGame = new SimpleSosGame(SIZE);
 
         // When
-        sosGame.makeMove(0, 0, ISosGame.Shape.S);
-        sosGame.makeMove(0, 1, ISosGame.Shape.O);
+        sosGame.makeMove(0, 0, SosGame.Shape.S);
+        sosGame.makeMove(0, 1, SosGame.Shape.O);
         // Blue wins
-        sosGame.makeMove(0, 2, ISosGame.Shape.S);
+        sosGame.makeMove(0, 2, SosGame.Shape.S);
 
         // Then
-        assertEquals(ISosGame.GameStatus.BLUE_WON, sosGame.getCurrentGameStatus());
+        assertEquals(SosGame.GameStatus.BLUE_WON, sosGame.getCurrentGameStatus());
     }
 }
