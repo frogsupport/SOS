@@ -104,13 +104,21 @@ public class GeneralSosGame implements ISosGame {
             // CASE: At least 3 spaces into the board in any direction
             if ((row - 2) >= 0 && (col - 2) >= 0 && (row + 3) <= BOARDSIZE && (col + 3) <= BOARDSIZE) {
                 // Check in every direction
-                if (checkColS(row, col))
+                if (checkUpS(row, col))
                     score++;
-                if (checkRowS(row, col))
+                if (checkDownS(row, col))
                     score++;
-                if (checkBackSlashDiagonalS(row, col))
+                if (checkLeftS(row, col))
                     score++;
-                if (checkForwardSlashDiagonal(row, col))
+                if (checkRightS(row, col))
+                    score++;
+                if (checkUpperLeftDiagonalS(row, col))
+                    score++;
+                if (checkUpperRightDiagonalS(row, col))
+                    score++;
+                if (checkLowerLeftDiagonalS(row, col))
+                    score++;
+                if (checkLowerRightDiagonalS(row, col))
                     score++;
             }
             // CASE: Top left corner
@@ -156,7 +164,9 @@ public class GeneralSosGame implements ISosGame {
             // CASE: Bottom in between borders
             else if ((row + 2) >= BOARDSIZE && (col - 2) >= 0 && (col + 3) <= BOARDSIZE) {
                 // Check left, right, up, top left diagonal, top right diagonal
-                if (checkRowS(row, col))
+                if (checkLeftS(row, col))
+                    score++;
+                if (checkRightS(row, col))
                     score++;
                 if (checkUpS(row, col))
                     score++;
@@ -168,7 +178,9 @@ public class GeneralSosGame implements ISosGame {
             // CASE: Top in between borders
             else if ((row - 1) <= 0 && (col - 2) >= 0 && (col + 3) <= BOARDSIZE)  {
                 // Check left, right, down, lower left diagonal, lower right diagonal
-                if (checkRowS(row, col))
+                if (checkLeftS(row, col))
+                    score++;
+                if (checkRightS(row, col))
                     score++;
                 if (checkDownS(row, col))
                     score++;
@@ -180,7 +192,9 @@ public class GeneralSosGame implements ISosGame {
             // CASE: Left side in between top and bottom
             else if ((row - 2) >= 0 && (row + 3) <= BOARDSIZE && (col - 1) <= 0) {
                 // Check up, down, right, upper right diagonal, lower right diagonal
-                if (checkColS(row, col))
+                if (checkUpS(row, col))
+                    score++;
+                if (checkDownS(row, col))
                     score++;
                 if (checkRightS(row, col))
                     score++;
@@ -192,7 +206,9 @@ public class GeneralSosGame implements ISosGame {
             // CASE: Right side in between top and bottom
             else if ((row - 2) >= 0 && (row + 3) <= BOARDSIZE && (col + 2) >= BOARDSIZE) {
                 // Check up, down, left, upper left diagonal, lower left diagonal
-                if (checkColS(row, col))
+                if (checkUpS(row, col))
+                    score++;
+                if (checkDownS(row, col))
                     score++;
                 if (checkLeftS(row, col))
                     score++;
@@ -265,20 +281,12 @@ public class GeneralSosGame implements ISosGame {
         return (grid[row - 2][col + 2] == Shape.S && grid[row - 1][col + 1] == Shape.O);
     }
 
-    private boolean checkForwardSlashDiagonal(int row, int col) {
-        return (checkLowerLeftDiagonalS(row, col) || checkUpperRightDiagonalS(row, col));
-    }
-
     private boolean checkUpperLeftDiagonalS(int row, int col) {
         return (grid[row - 2][col - 2] == Shape.S && grid[row - 1][col - 1] == Shape.O);
     }
 
     private boolean checkLowerRightDiagonalS(int row, int col) {
         return (grid[row + 2][col + 2] == Shape.S && grid[row + 1][col + 1] == Shape.O);
-    }
-
-    private boolean checkBackSlashDiagonalS(int row, int col) {
-        return (checkUpperLeftDiagonalS(row, col) || checkLowerRightDiagonalS(row, col));
     }
 
     private boolean checkUpS(int row, int col) {
@@ -289,20 +297,12 @@ public class GeneralSosGame implements ISosGame {
         return (grid[row + 2][col] == Shape.S && grid[row + 1][col] == Shape.O);
     }
 
-    private boolean checkColS(int row, int col) {
-        return (checkUpS(row, col) || checkDownS(row, col));
-    }
-
     private boolean checkLeftS(int row, int col) {
         return (grid[row][col - 2] == Shape.S && grid[row][col - 1] == Shape.O);
     }
 
     private boolean checkRightS(int row, int col) {
         return (grid[row][col + 2] == Shape.S && grid[row][col + 1] == Shape.O);
-    }
-
-    private boolean checkRowS(int row, int col) {
-        return (checkLeftS(row, col) || checkRightS(row, col));
     }
 
     public boolean isBoardFilled() {

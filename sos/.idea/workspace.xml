@@ -10,11 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/ISosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestISosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestISosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +60,7 @@
       <recent name="com.sos" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TestGeneralSosGameScoring">
     <configuration name="All in sos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -73,52 +69,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGeneralSosGameScoring.testGameWinningMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGeneralSosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGame" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestGeneralSosGameScoring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestGeneralSosGameScoring" />
-      <option name="METHOD_NAME" value="testGameWinningMove" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestGeneralSosGame.testMakeMoveOccupiedCell" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGame" />
-      <option name="METHOD_NAME" value="testMakeMoveOccupiedCell" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestGeneralSosGame.testMakeMoveUnoccupiedCell" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestGeneralSosGame" />
-      <option name="METHOD_NAME" value="testMakeMoveUnoccupiedCell" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestISosGame.testTurnChanges" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestISosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestISosGame" />
-      <option name="METHOD_NAME" value="testTurnChanges" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSimpleSosGameScoring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sos" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSimpleSosGameScoring" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestGeneralSosGameScoring.testGameWinningMove" />
-        <item itemvalue="JUnit.TestGeneralSosGame.testMakeMoveUnoccupiedCell" />
-        <item itemvalue="JUnit.TestGeneralSosGame.testMakeMoveOccupiedCell" />
-        <item itemvalue="JUnit.TestISosGame.testTurnChanges" />
+        <item itemvalue="JUnit.TestGeneralSosGameScoring" />
+        <item itemvalue="JUnit.TestGeneralSosGame" />
+        <item itemvalue="JUnit.TestSimpleSosGameScoring" />
+        <item itemvalue="JUnit.TestISosGame" />
         <item itemvalue="JUnit.All in sos" />
       </list>
     </recent_temporary>
