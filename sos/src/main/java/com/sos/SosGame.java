@@ -10,8 +10,10 @@ public abstract class SosGame {
     protected Shape[][] grid;
     protected Turn turn;
     protected GameStatus currentGameStatus;
-    protected int BluePlayerScore;
-    protected int RedPlayerScore;
+    protected int bluePlayerScore;
+    protected int redPlayerScore;
+    protected SosGame.PlayerType bluePlayerType;
+    protected SosGame.PlayerType redPlayerType;
 
     public abstract boolean makeMove(int row, int column, Shape shape);
 
@@ -27,8 +29,10 @@ public abstract class SosGame {
         grid = new Shape[BOARDSIZE][BOARDSIZE];
         initBoard();
         currentGameStatus = GameStatus.PLAYING;
-        BluePlayerScore = 0;
-        RedPlayerScore = 0;
+        bluePlayerScore = 0;
+        redPlayerScore = 0;
+        bluePlayerType = PlayerType.HUMAN;
+        redPlayerType = PlayerType.HUMAN;
     }
 
     public void initBoard() {
@@ -73,6 +77,10 @@ public abstract class SosGame {
         return true;
     }
 
+    public SosGame.PlayerType getBluePlayerType() { return bluePlayerType; }
+
+    public SosGame.PlayerType getRedPlayerType() { return redPlayerType; }
+
     protected void changeTurn() {
         turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
     }
@@ -90,10 +98,10 @@ public abstract class SosGame {
     }
 
     public int getBluePlayerScore() {
-        return BluePlayerScore;
+        return bluePlayerScore;
     }
 
     public int getRedPlayerScore() {
-        return RedPlayerScore;
+        return redPlayerScore;
     }
 }

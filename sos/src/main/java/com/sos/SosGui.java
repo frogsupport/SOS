@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 // Professor Leo Chen
 // Student Kyle Schaudt
 public class SosGui extends Application {
-    public enum GameType {SIMPLE, GENERAL}
+    private enum GameType {SIMPLE, GENERAL}
     private TextField boardSizeField = new TextField();
     private Cell[][] cells;
     private Label gameStatus = new Label("Blue's Turn");
@@ -212,7 +212,7 @@ public class SosGui extends Application {
         newGameButton.setOnAction(actionEvent -> {
             int boardSize;
             try {
-                boardSize = Integer.parseInt(getBoardSizeField().getText());
+                boardSize = Integer.parseInt(getBoardSizeTextField().getText());
             }
             catch (NumberFormatException e) {
                 boardSize = 3;
@@ -226,12 +226,18 @@ public class SosGui extends Application {
                 else {
                     sosGame = new SimpleSosGame(boardSize);
                 }
-                setScoreVisibility(false);
+
+                setScoreLabelVisibility(false);
             }
             else if (selectedGameType == GameType.GENERAL) {
-                // TODO: Currently do not support general game auto at all
-                sosGame = new GeneralSosGame(boardSize);
-                setScoreVisibility(true);
+                if (bluePlayerType == SosGame.PlayerType.COMPUTER || redPlayerType == SosGame.PlayerType.COMPUTER) {
+                    sosGame = new AutoGeneralSosGame(boardSize, bluePlayerType, redPlayerType);
+                }
+                else {
+                    sosGame = new GeneralSosGame(boardSize);
+                }
+
+                setScoreLabelVisibility(true);
             }
 
             // set the pane
@@ -239,7 +245,7 @@ public class SosGui extends Application {
             borderPane.setCenter(centerPane);
             resetScoreLabels();
             displayGameStatus();
-            nextMove();
+            tryNextAutoMove();
         });
 
         blueHumanPlayerButton.setOnAction(actionEvent -> bluePlayerType = SosGame.PlayerType.HUMAN);
@@ -271,7 +277,7 @@ public class SosGui extends Application {
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
             }
-        
+
         return centerPane;
     }
 
@@ -309,59 +315,39 @@ public class SosGui extends Application {
         }
     }
 
-    public void setScoreVisibility(boolean visibility) {
+    public void setScoreLabelVisibility(boolean visibility) {
         blueScoreLabel.setVisible(visibility);
         bluePlayerScore.setVisible(visibility);
         redScoreLabel.setVisible(visibility);
         redPlayerScore.setVisible(visibility);
     }
 
-    // Want a function that checks if it's the AI's turn. If it's a human player it returns, else it calls the
-    // next turn for an AI player
-    public void nextMove() {
+    // Handles the next auto move
+    public void tryNextAutoMove() {
         // Check for an ongoing game
         if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
-            // Check for AutoSimpleSosGame
-            if (sosGame instanceof AutoSimpleSosGame) {
-                // Check for Blue's turn
-                if (sosGame.getTurn() == SosGame.Turn.BLUE) {
-                    // Check if Blue player is a computer opponent or not
-                    if (((AutoSimpleSosGame) sosGame).getBluePlayerType() == SosGame.PlayerType.COMPUTER) {
-                        // Make blue's turn
-                        SosGame.Turn currentTurn = SosGame.Turn.BLUE;
-                        SosMove sosMove = ((AutoSimpleSosGame) sosGame).makeAutoMove();
+            // Check for an Auto game
+            if (sosGame instanceof AutoSimpleSosGame || sosGame instanceof AutoGeneralSosGame) {
+                // Check if it's a computer's turn
+                if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
+                        || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
+                    SosGame.Turn currentTurn = sosGame.getTurn();
+                    // Call the correct auto move depending on the game type
+                    SosMove sosMove = (sosGame instanceof SimpleSosGame) ? ((AutoSimpleSosGame) sosGame).makeAutoMove() : ((AutoGeneralSosGame) sosGame).makeAutoMove();
 
-                        // If a valid move is made, add it to the board
-                        if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
-                            drawBoard(sosMove.Row, sosMove.Col, currentTurn);
-                        }
-                        displayGameStatus();
-                        resetScoreLabels();
-                        nextMove();
+                    // If a valid move is made, add it to the board
+                    if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
+                        drawBoard(sosMove.Row, sosMove.Col, currentTurn);
                     }
-                }
-                // Check for Red's turn
-                else if (sosGame.getTurn() == SosGame.Turn.RED){
-                    if (((AutoSimpleSosGame) sosGame).getRedPlayerType() == SosGame.PlayerType.COMPUTER) {
-                        // Make Red's turn
-                        SosGame.Turn currentTurn = SosGame.Turn.RED;
-                        SosMove sosMove = ((AutoSimpleSosGame) sosGame).makeAutoMove();
-
-                        // If a valid move is made, add it to the board
-                        if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
-                            drawBoard(sosMove.Row, sosMove.Col, currentTurn);
-                        }
-                        displayGameStatus();
-                        resetScoreLabels();
-                        nextMove();
-                    }
+                    displayGameStatus();
+                    resetScoreLabels();
+                    tryNextAutoMove();
                 }
             }
-            // TODO: Do this for AutoGeneralSosGame
         }
     }
 
-    public TextField getBoardSizeField() { return boardSizeField; }
+    public TextField getBoardSizeTextField() { return boardSizeField; }
 
     // Internal Cell class =============================================================================
 
@@ -400,7 +386,7 @@ public class SosGui extends Application {
                 }
                 displayGameStatus();
                 resetScoreLabels();
-                nextMove();
+                tryNextAutoMove();
             }
         }
 

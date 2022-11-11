@@ -29,9 +29,9 @@ public class GeneralSosGame extends SosGame {
         // If an SOS is scored, keep the turn the same and add the score
         if (score > 0) {
             if (turn == Turn.BLUE) {
-                BluePlayerScore += score;
+                bluePlayerScore += score;
             } else if (turn == Turn.RED) {
-                RedPlayerScore += score;
+                redPlayerScore += score;
             }
         }
         // If no SOS is scored, then change the turn
@@ -40,11 +40,11 @@ public class GeneralSosGame extends SosGame {
         }
 
         // Check end of game status
-        if (isBoardFilled() && BluePlayerScore > RedPlayerScore) {
+        if (isBoardFilled() && bluePlayerScore > redPlayerScore) {
             currentGameStatus = GameStatus.BLUE_WON;
-        } else if (isBoardFilled() && RedPlayerScore > BluePlayerScore) {
+        } else if (isBoardFilled() && redPlayerScore > bluePlayerScore) {
             currentGameStatus = GameStatus.RED_WON;
-        } else if (isBoardFilled() && BluePlayerScore == RedPlayerScore) {
+        } else if (isBoardFilled() && bluePlayerScore == redPlayerScore) {
             currentGameStatus = GameStatus.DRAW;
         }
     }
