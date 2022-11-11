@@ -21,26 +21,14 @@ public class SimpleSosGame extends SosGame {
     private void updateGameStatus(int row, int column, Shape shape) {
         // Create the object to handle the scoring logic
         BoardScorer boardScorer = new BoardScorer(grid);
-        if (boardScorer.hasWon(row, column, shape)) {
+        if (boardScorer.hasScored(row, column, shape) != 0) {
             if (turn == Turn.BLUE) {
                 currentGameStatus = GameStatus.BLUE_WON;
             } else if (turn == Turn.RED) {
                 currentGameStatus = GameStatus.RED_WON;
             }
-        } else if (isDraw()) {
+        } else if (isBoardFilled()) {
             currentGameStatus = GameStatus.DRAW;
         }
-    }
-
-    private boolean isDraw() {
-        for (int row = 0; row < BOARDSIZE; row++) {
-            for (int col = 0; col < BOARDSIZE; col++) {
-                if (grid[row][col] == Shape.EMPTY) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 }

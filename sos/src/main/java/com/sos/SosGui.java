@@ -19,11 +19,15 @@ public class SosGui extends Application {
     private Label gameStatus = new Label("Blue's Turn");
     private Label bluePlayerScore = new Label("0");
     private Label redPlayerScore = new Label("0");
+    private Label blueScoreLabel;
+    private Label redScoreLabel;
     private SosGame sosGame;
     private GridPane centerPane;
     private SosGame.Shape bluePlayerShape = SosGame.Shape.S;
     private SosGame.Shape redPlayerShape = SosGame.Shape.S;
     private GameType selectedGameType = GameType.SIMPLE;
+    private SosGame.PlayerType redPlayerType = SosGame.PlayerType.HUMAN;
+    private SosGame.PlayerType bluePlayerType = SosGame.PlayerType.HUMAN;
     private final int TEXT_SIZE = 13;
     private final int TITLE_SIZE = 30;
     private final int SCORE_TEXT_SIZE = 20;
@@ -35,11 +39,12 @@ public class SosGui extends Application {
         if (sosGame == null) {
             sosGame = new SimpleSosGame(3);
         }
-        newGame(sosGame);
+        setBoard(sosGame);
 
+        // top pane ====================================
+        // insets: top right bottom left
         // game title label
         Label gameTitle = new Label("SOS");
-        // insets: top right bottom left
         gameTitle.setPadding(new Insets(5, 30, 5, 5));
         gameTitle.setFont(new Font(TITLE_SIZE));
 
@@ -63,34 +68,52 @@ public class SosGui extends Application {
         boardSizeField.setPrefSize(50, 30);
         boardSizeField.setPromptText("ex. 6");
 
-        // top pane
+        // set top pane
         HBox topPane = new HBox();
         topPane.setPadding(new Insets(10));
         topPane.setSpacing(10);
         topPane.setAlignment(Pos.CENTER);
         topPane.getChildren().addAll(gameTitle, generalGameRb, simpleGameRb, boardSizeLabel, boardSizeField);
 
-        // left pane
-        Label leftSideLabel = new Label("Blue Player");
-        leftSideLabel.setFont(new Font(SCORE_TEXT_SIZE));
-        leftSideLabel.setPadding(new Insets(8));
+        // left pane ====================================
+        Label bluePlayerLabel = new Label("Blue Player");
+        bluePlayerLabel.setFont(new Font(SCORE_TEXT_SIZE));
+        bluePlayerLabel.setPadding(new Insets(8));
 
+        // blue player human computer radio buttons
+        RadioMenuItem bluePlayerTypes = new RadioMenuItem();
+        ToggleGroup bluePlayerTypesToggle = new ToggleGroup();
+        bluePlayerTypes.setToggleGroup(bluePlayerTypesToggle);
+
+        RadioButton blueHumanPlayerButton = new RadioButton("Human");
+        blueHumanPlayerButton.setFont(new Font(TEXT_SIZE));
+        blueHumanPlayerButton.setPadding(new Insets(3, 8, 8, 3));
+        blueHumanPlayerButton.setToggleGroup(bluePlayerTypesToggle);
+        blueHumanPlayerButton.setSelected(true);
+
+        RadioButton blueComputerPlayerButton = new RadioButton("Computer");
+        blueComputerPlayerButton.setFont(new Font(TEXT_SIZE));
+        blueComputerPlayerButton.setPadding(new Insets(3, 8, 8, 3));
+        blueComputerPlayerButton.setToggleGroup(bluePlayerTypesToggle);
+
+        // blue player shapes radio buttons
         RadioMenuItem bluePlayerShapes = new RadioMenuItem();
         ToggleGroup bluePlayerShapeToggle = new ToggleGroup();
         bluePlayerShapes.setToggleGroup(bluePlayerShapeToggle);
 
         RadioButton blueSShapeRadioButton = new RadioButton("S");
         blueSShapeRadioButton.setFont(new Font(TEXT_SIZE));
-        blueSShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
+        blueSShapeRadioButton.setPadding(new Insets(3, 8, 8, 45));
         blueSShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
         blueSShapeRadioButton.setSelected(true);
 
         RadioButton blueOShapeRadioButton = new RadioButton("O");
         blueOShapeRadioButton.setFont(new Font(TEXT_SIZE));
-        blueOShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
+        blueOShapeRadioButton.setPadding(new Insets(3, 8, 8, 45));
         blueOShapeRadioButton.setToggleGroup(bluePlayerShapeToggle);
 
-        Label blueScoreLabel = new Label("Score:");
+        // blue player score label
+        blueScoreLabel = new Label("Score:");
         blueScoreLabel.setFont(new Font(SCORE_TEXT_SIZE));
         blueScoreLabel.setPadding(new Insets(8));
         blueScoreLabel.setVisible(false);
@@ -99,30 +122,49 @@ public class SosGui extends Application {
         bluePlayerScore.setFont(new Font(SCORE_TEXT_SIZE));
         bluePlayerScore.setVisible(false);
 
-        VBox leftSide = new VBox(leftSideLabel, blueSShapeRadioButton, blueOShapeRadioButton, blueScoreLabel, bluePlayerScore);
+        // set left side pane
+        VBox leftSide = new VBox(bluePlayerLabel, blueHumanPlayerButton, blueSShapeRadioButton, blueOShapeRadioButton, blueComputerPlayerButton, blueScoreLabel, bluePlayerScore);
         leftSide.setPadding(new Insets(10));
 
-        // right pane
-        Label rightSideLabel = new Label("Red Player");
-        rightSideLabel.setFont(new Font(SCORE_TEXT_SIZE));
-        rightSideLabel.setPadding(new Insets(8));
+        // right pane ===================================
+        Label redPlayerLabel = new Label("Red Player");
+        redPlayerLabel.setFont(new Font(SCORE_TEXT_SIZE));
+        redPlayerLabel.setPadding(new Insets(8));
 
+        // red player human computer radio buttons
+        RadioMenuItem redPlayerTypes = new RadioMenuItem();
+        ToggleGroup redPlayerTypesToggle = new ToggleGroup();
+        redPlayerTypes.setToggleGroup(redPlayerTypesToggle);
+
+        RadioButton redHumanPlayerButton = new RadioButton("Human");
+        redHumanPlayerButton.setFont(new Font(TEXT_SIZE));
+        redHumanPlayerButton.setPadding(new Insets(3, 8, 8, 3));
+        redHumanPlayerButton.setToggleGroup(redPlayerTypesToggle);
+        redHumanPlayerButton.setSelected(true);
+
+        RadioButton redComputerPlayerButton = new RadioButton("Computer");
+        redComputerPlayerButton.setFont(new Font(TEXT_SIZE));
+        redComputerPlayerButton.setPadding(new Insets(3, 8, 8, 3));
+        redComputerPlayerButton.setToggleGroup(redPlayerTypesToggle);
+
+        // red player shapeS radio buttons
         RadioMenuItem redPlayerShapes = new RadioMenuItem();
         ToggleGroup redPlayerShapeToggle = new ToggleGroup();
         redPlayerShapes.setToggleGroup(redPlayerShapeToggle);
 
         RadioButton redSShapeRadioButton = new RadioButton("S");
         redSShapeRadioButton.setFont(new Font(TEXT_SIZE));
-        redSShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
+        redSShapeRadioButton.setPadding(new Insets(3, 8, 8, 45));
         redSShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
         redSShapeRadioButton.setSelected(true);
 
         RadioButton redOShapeRadioButton = new RadioButton("O");
         redOShapeRadioButton.setFont(new Font(TEXT_SIZE));
-        redOShapeRadioButton.setPadding(new Insets(3, 8, 8, 15));
+        redOShapeRadioButton.setPadding(new Insets(3, 8, 8, 45));
         redOShapeRadioButton.setToggleGroup(redPlayerShapeToggle);
 
-        Label redScoreLabel = new Label("Score:");
+        // red score label
+        redScoreLabel = new Label("Score:");
         redScoreLabel.setFont(new Font(SCORE_TEXT_SIZE));
         redScoreLabel.setPadding(new Insets(8));
         redScoreLabel.setVisible(false);
@@ -131,22 +173,24 @@ public class SosGui extends Application {
         redPlayerScore.setFont(new Font(SCORE_TEXT_SIZE));
         redPlayerScore.setVisible(false);
 
-        VBox rightSide = new VBox(rightSideLabel, redSShapeRadioButton, redOShapeRadioButton, redScoreLabel, redPlayerScore);
+        // set the right side pane
+        VBox rightSide = new VBox(redPlayerLabel, redHumanPlayerButton, redSShapeRadioButton, redOShapeRadioButton, redComputerPlayerButton, redScoreLabel, redPlayerScore);
         rightSide.setPadding(new Insets(10));
 
-        // bottom pane
+        // bottom pane ===================================
         Button newGameButton = new Button("New Game");
         newGameButton.setFont(new Font(TEXT_SIZE));
 
         gameStatus.setFont(new Font(SCORE_TEXT_SIZE));
 
+        // set the bottom pane
         HBox bottomPane = new HBox();
         bottomPane.setPadding(new Insets(10));
         bottomPane.setSpacing(30);
         bottomPane.setAlignment(Pos.CENTER);
         bottomPane.getChildren().addAll(gameStatus, newGameButton);
 
-        // set up borderpane
+        // set up the borderpane layout
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(topPane);
         borderPane.setCenter(centerPane);
@@ -174,30 +218,35 @@ public class SosGui extends Application {
                 boardSize = 3;
             }
 
-            // Choose the game type, make score visible for general game or invisible for simple game
+            // Instantiate the correct game type
             if (selectedGameType == GameType.SIMPLE) {
-                sosGame = new SimpleSosGame(boardSize);
-
-                blueScoreLabel.setVisible(false);
-                bluePlayerScore.setVisible(false);
-                redScoreLabel.setVisible(false);
-                redPlayerScore.setVisible(false);
+                if (bluePlayerType == SosGame.PlayerType.COMPUTER || redPlayerType == SosGame.PlayerType.COMPUTER) {
+                    sosGame = new AutoSimpleSosGame(boardSize, bluePlayerType, redPlayerType);
+                }
+                else {
+                    sosGame = new SimpleSosGame(boardSize);
+                }
+                setScoreVisibility(false);
             }
             else if (selectedGameType == GameType.GENERAL) {
+                // TODO: Currently do not support general game auto at all
                 sosGame = new GeneralSosGame(boardSize);
-
-                blueScoreLabel.setVisible(true);
-                bluePlayerScore.setVisible(true);
-                redScoreLabel.setVisible(true);
-                redPlayerScore.setVisible(true);
+                setScoreVisibility(true);
             }
 
             // set the pane
-            centerPane = newGame(sosGame);
+            centerPane = setBoard(sosGame);
             borderPane.setCenter(centerPane);
             resetScoreLabels();
             displayGameStatus();
+            nextMove();
         });
+
+        blueHumanPlayerButton.setOnAction(actionEvent -> bluePlayerType = SosGame.PlayerType.HUMAN);
+        blueComputerPlayerButton.setOnAction(actionEvent -> bluePlayerType = SosGame.PlayerType.COMPUTER);
+
+        redHumanPlayerButton.setOnAction(actionEvent -> redPlayerType = SosGame.PlayerType.HUMAN);
+        redComputerPlayerButton.setOnAction(actionEvent -> redPlayerType = SosGame.PlayerType.COMPUTER);
 
         blueSShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = SosGame.Shape.S);
         blueOShapeRadioButton.setOnAction(actionEvent -> bluePlayerShape = SosGame.Shape.O);
@@ -207,20 +256,22 @@ public class SosGui extends Application {
 
         simpleGameRb.setOnAction(actionEvent -> selectedGameType = GameType.SIMPLE);
         generalGameRb.setOnAction(actionEvent -> selectedGameType = GameType.GENERAL);
+
+
     }
 
-    // class functions ===================================================================================
+    // SosGui class functions ===================================================================================
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
-    public GridPane newGame(SosGame sosGame) {
+    public GridPane setBoard(SosGame sosGame) {
         centerPane = new GridPane();
         cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
         for (int i = 0; i < sosGame.getBoardSize(); i++)
             for (int j = 0; j < sosGame.getBoardSize(); j++) {
                 centerPane.add(cells[i][j] = new Cell(i, j), j, i);
             }
-
+        
         return centerPane;
     }
 
@@ -232,6 +283,7 @@ public class SosGui extends Application {
             cells[row][col].drawO(currentTurn);
     }
 
+    // Sets the message at the bottom of the game
     private void displayGameStatus() {
         if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
             if (sosGame.getTurn() == SimpleSosGame.Turn.BLUE) {
@@ -246,8 +298,6 @@ public class SosGui extends Application {
         } else if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.RED_WON) {
             gameStatus.setText("Red Player Won!!!");
         }
-
-        resetScoreLabels();
     }
 
     // If the logical score changes, updates the displayed scores
@@ -256,6 +306,58 @@ public class SosGui extends Application {
                 || !String.valueOf(sosGame.getRedPlayerScore()).equals(redPlayerScore.toString())) {
             bluePlayerScore.setText(String.valueOf(sosGame.getBluePlayerScore()));
             redPlayerScore.setText(String.valueOf(sosGame.getRedPlayerScore()));
+        }
+    }
+
+    public void setScoreVisibility(boolean visibility) {
+        blueScoreLabel.setVisible(visibility);
+        bluePlayerScore.setVisible(visibility);
+        redScoreLabel.setVisible(visibility);
+        redPlayerScore.setVisible(visibility);
+    }
+
+    // Want a function that checks if it's the AI's turn. If it's a human player it returns, else it calls the
+    // next turn for an AI player
+    public void nextMove() {
+        // Check for an ongoing game
+        if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+            // Check for AutoSimpleSosGame
+            if (sosGame instanceof AutoSimpleSosGame) {
+                // Check for Blue's turn
+                if (sosGame.getTurn() == SosGame.Turn.BLUE) {
+                    // Check if Blue player is a computer opponent or not
+                    if (((AutoSimpleSosGame) sosGame).getBluePlayerType() == SosGame.PlayerType.COMPUTER) {
+                        // Make blue's turn
+                        SosGame.Turn currentTurn = SosGame.Turn.BLUE;
+                        SosMove sosMove = ((AutoSimpleSosGame) sosGame).makeAutoMove();
+
+                        // If a valid move is made, add it to the board
+                        if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
+                            drawBoard(sosMove.Row, sosMove.Col, currentTurn);
+                        }
+                        displayGameStatus();
+                        resetScoreLabels();
+                        nextMove();
+                    }
+                }
+                // Check for Red's turn
+                else if (sosGame.getTurn() == SosGame.Turn.RED){
+                    if (((AutoSimpleSosGame) sosGame).getRedPlayerType() == SosGame.PlayerType.COMPUTER) {
+                        // Make Red's turn
+                        SosGame.Turn currentTurn = SosGame.Turn.RED;
+                        SosMove sosMove = ((AutoSimpleSosGame) sosGame).makeAutoMove();
+
+                        // If a valid move is made, add it to the board
+                        if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
+                            drawBoard(sosMove.Row, sosMove.Col, currentTurn);
+                        }
+                        displayGameStatus();
+                        resetScoreLabels();
+                        nextMove();
+                    }
+                }
+            }
+            // TODO: Do this for AutoGeneralSosGame
         }
     }
 
@@ -282,7 +384,7 @@ public class SosGui extends Application {
         private void handleMouseClick() {
             // Ongoing game
             if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
-                SosGame.Shape shape = SosGame.Shape.EMPTY;
+                SosGame.Shape shape;
 
                 if (sosGame.getTurn() == SosGame.Turn.BLUE) {
                     shape = bluePlayerShape;
@@ -297,10 +399,8 @@ public class SosGui extends Application {
                     drawBoard(row, column, currentTurn);
                 }
                 displayGameStatus();
-            }
-            // Game over
-            else {
-                gameStatus.setText("It's time to start a new game!!!");
+                resetScoreLabels();
+                nextMove();
             }
         }
 

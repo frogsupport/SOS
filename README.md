@@ -11,3 +11,5 @@ There are two different game types, Simple Game and General game.
 ### General Game
 
 ## Resources Used
+
+https://stackoverflow.com/questions/1972392/pick-a-random-value-from-an-enum

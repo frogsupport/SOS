@@ -48,16 +48,4 @@ public class GeneralSosGame extends SosGame {
             currentGameStatus = GameStatus.DRAW;
         }
     }
-
-    public boolean isBoardFilled() {
-        for (int row = 0; row < BOARDSIZE; row++) {
-            for (int col = 0; col < BOARDSIZE; col++) {
-                if (grid[row][col] == Shape.EMPTY) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
 }

@@ -4,8 +4,8 @@ package com.sos;
 public abstract class SosGame {
     public enum Shape {EMPTY, S, O}
     public enum Turn {BLUE, RED}
+    public enum PlayerType {HUMAN, COMPUTER}
     public enum GameStatus {PLAYING, DRAW, BLUE_WON, RED_WON}
-
     protected int BOARDSIZE;
     protected Shape[][] grid;
     protected Turn turn;
@@ -49,6 +49,30 @@ public abstract class SosGame {
         }
     }
 
+    public boolean isEmpty() {
+        for (int row = 0; row < BOARDSIZE; row++) {
+            for (int col = 0; col < BOARDSIZE; col++) {
+                if (grid[row][col] != Shape.EMPTY) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isBoardFilled() {
+        for (int row = 0; row < BOARDSIZE; row++) {
+            for (int col = 0; col < BOARDSIZE; col++) {
+                if (grid[row][col] == Shape.EMPTY) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     protected void changeTurn() {
         turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
     }
@@ -72,6 +96,4 @@ public abstract class SosGame {
     public int getRedPlayerScore() {
         return RedPlayerScore;
     }
-
-
 }
