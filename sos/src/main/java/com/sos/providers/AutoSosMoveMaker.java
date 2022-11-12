@@ -1,5 +1,7 @@
-package com.sos;
+package com.sos.providers;
 
+import com.sos.models.SosMove;
+import com.sos.sos.SosGame;
 import java.util.Random;
 
 public class AutoSosMoveMaker {

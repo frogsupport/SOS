@@ -1,4 +1,6 @@
-package com.sos;
+package com.sos.sos;
+
+import com.sos.providers.SosBoardScorer;
 
 public class GeneralSosGame extends SosGame {
 

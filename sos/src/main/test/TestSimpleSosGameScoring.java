@@ -1,5 +1,5 @@
-import com.sos.SimpleSosGame;
-import com.sos.SosGame;
+import com.sos.sos.SimpleSosGame;
+import com.sos.sos.SosGame;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

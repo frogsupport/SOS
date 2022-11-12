@@ -1,4 +1,7 @@
-package com.sos;
+package com.sos.sos;
+
+import com.sos.models.SosMove;
+import com.sos.providers.AutoSosMoveMaker;
 
 public class AutoGeneralSosGame extends GeneralSosGame {
     public AutoGeneralSosGame(int boardsize, PlayerType bluePlayerType, PlayerType redPlayerType) {

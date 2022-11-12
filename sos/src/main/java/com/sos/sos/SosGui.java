@@ -1,5 +1,7 @@
-package com.sos;
+package com.sos.sos;
 
+import com.sos.models.SosLineCoordinate;
+import com.sos.models.SosMove;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

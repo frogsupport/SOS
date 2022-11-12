@@ -1,4 +1,6 @@
-package com.sos;
+package com.sos.models;
+
+import com.sos.sos.SosGame;
 
 // The components needed to make an Sos Game move
 public class SosMove {
@@ -6,7 +8,7 @@ public class SosMove {
     public int Col;
     public SosGame.Shape Shape;
 
-    SosMove(int row, int col, SosGame.Shape shape) {
+    public SosMove(int row, int col, SosGame.Shape shape) {
         Row = row;
         Col = col;
         this.Shape = shape;

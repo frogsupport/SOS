@@ -1,5 +1,5 @@
-import com.sos.GeneralSosGame;
-import com.sos.SosGame;
+import com.sos.sos.GeneralSosGame;
+import com.sos.sos.SosGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

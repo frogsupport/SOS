@@ -1,5 +1,7 @@
-package com.sos;
+package com.sos.providers;
 
+import com.sos.models.SosLineCoordinate;
+import com.sos.sos.SosGame;
 import java.util.ArrayList;
 import java.util.List;
 
