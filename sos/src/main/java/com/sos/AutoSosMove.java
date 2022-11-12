@@ -2,11 +2,11 @@ package com.sos;
 
 import java.util.Random;
 
-public class AutoMove {
+public class AutoSosMove {
     private SosGame.Shape[][] grid;
     private int BOARDSIZE;
 
-    public AutoMove(SosGame.Shape[][] grid) {
+    public AutoSosMove(SosGame.Shape[][] grid) {
         this.grid = grid;
         BOARDSIZE = grid.length;
     }

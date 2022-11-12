@@ -5,12 +5,12 @@ import java.util.List;
 
 // This class handles all the logic for a simple and general SOS game's scoring logic, as well as adding the
 // appropriate line coordinates to be drawn for winning SOS moves
-public class BoardScorer {
+public class SosBoardScorer {
     private List<SosLineCoordinate> lineCoordinates;
     private SosGame.Shape[][] grid;
     private int BOARDSIZE;
 
-    public BoardScorer(SosGame.Shape[][] grid) {
+    public SosBoardScorer(SosGame.Shape[][] grid) {
         this.grid = grid;
         this.BOARDSIZE = grid.length;
         lineCoordinates = new ArrayList<>();

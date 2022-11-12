@@ -20,8 +20,8 @@ public class SimpleSosGame extends SosGame {
 
     private void updateGameStatus(int row, int column, Shape shape) {
         // Create the object to handle the scoring logic
-        BoardScorer boardScorer = new BoardScorer(grid);
-        if (boardScorer.hasScored(row, column, shape) != 0) {
+        SosBoardScorer sosBoardScorer = new SosBoardScorer(grid);
+        if (sosBoardScorer.hasScored(row, column, shape) != 0) {
             if (turn == Turn.BLUE) {
                 currentGameStatus = GameStatus.BLUE_WON;
             } else if (turn == Turn.RED) {

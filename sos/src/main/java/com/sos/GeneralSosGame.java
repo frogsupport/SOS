@@ -27,8 +27,8 @@ public class GeneralSosGame extends SosGame {
     // Changes the turn if no SOS is made
     private void updateGameStatus(int row, int column, Shape shape) {
         // The object that handles the scoring logic for the general SOS game
-        BoardScorer boardScorer = new BoardScorer(grid);
-        int score = boardScorer.hasScored(row, column, shape);
+        SosBoardScorer sosBoardScorer = new SosBoardScorer(grid);
+        int score = sosBoardScorer.hasScored(row, column, shape);
         // If an SOS is scored, keep the turn the same and add the score
         if (score > 0) {
             if (turn == Turn.BLUE) {
@@ -37,7 +37,7 @@ public class GeneralSosGame extends SosGame {
                 redPlayerScore += score;
             }
 
-            lineCoordinates = boardScorer.getLineCoordinates();
+            lineCoordinates = sosBoardScorer.getLineCoordinates();
         }
         // If no SOS is scored, then change the turn
         else {
