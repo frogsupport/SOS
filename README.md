@@ -3,6 +3,16 @@
 The SOS board game. The goal is to place 'SOS's in a line using the 'S' and 'O' game pieces.
 This game was made for the UMKC CS449 Fall 2022 SOS project.
 
+## How to Use
+
+1. Pull this repo down to your local machine
+2. This game was developed using Intellij IDEA, so opening it in that IDE would be preferable. However, 
+I believe it is also possible to run an Intellij project in other IDE's.
+3. To run with Intellij, open the project in Intellij
+4. Reload the Maven dependencies
+5. Run the SosGui.java file
+6. The SOS game should now be running
+
 ## Game Types
 
 There are two different game types, Simple Game and General game.

@@ -9,22 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoGeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoSimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoSimpleSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoSosMoveMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/providers/AutoSosMoveMaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/GeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SimpleSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosBoardScorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/providers/SosBoardScorer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosLineCoordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/models/SosLineCoordinate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/models/SosMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +60,7 @@
       <recent name="com.sos" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.SosGui">
     <configuration name="SosGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.sos.sos.SosGui" />
       <module name="sos" />
