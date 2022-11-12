@@ -1,6 +1,7 @@
 # SOS
 
-The SOS board game. This game is by Kyle Schaudt for a CS449 project.
+The SOS board game. The goal is to place 'SOS's in a line using the 'S' and 'O' game pieces.
+This game was made for the UMKC CS449 Fall 2022 SOS project.
 
 ## Game Types
 
