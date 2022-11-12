@@ -5,9 +5,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
+import java.util.List;
 
 // CS449 SOS Project Fall 2022
 // Professor Leo Chen
@@ -243,6 +246,10 @@ public class SosGui extends Application {
             // set the pane
             centerPane = setBoard(sosGame);
             borderPane.setCenter(centerPane);
+
+            // need to manually request a layout or else it will not be initialized for an Auto game
+            // this is so we can draw our lines using the layout bounds of the board
+            borderPane.layout();
             resetScoreLabels();
             displayGameStatus();
             tryNextAutoMove();
@@ -332,8 +339,7 @@ public class SosGui extends Application {
                 if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
                         || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
                     SosGame.Turn currentTurn = sosGame.getTurn();
-                    // Call the correct auto move depending on the game type
-                    SosMove sosMove = (sosGame instanceof SimpleSosGame) ? ((AutoSimpleSosGame) sosGame).makeAutoMove() : ((AutoGeneralSosGame) sosGame).makeAutoMove();
+                    SosMove sosMove = sosGame.makeAutoMove();
 
                     // If a valid move is made, add it to the board
                     if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
@@ -341,8 +347,72 @@ public class SosGui extends Application {
                     }
                     displayGameStatus();
                     resetScoreLabels();
+                    drawLines();
                     tryNextAutoMove();
                 }
+            }
+        }
+    }
+
+    // Loops through the array of lines to be drawn until empty
+    public void drawLines() {
+        if (sosGame.getLineCoordinates() != null && !sosGame.getLineCoordinates().isEmpty()) {
+
+            List<SosLineCoordinate> lineCoordinates = sosGame.getLineCoordinates();
+            String lineColor = (sosGame.getTurn() == SosGame.Turn.BLUE) ? "-fx-stroke: blue;" : "-fx-stroke: red;";
+            SosLineCoordinate coordinate = lineCoordinates.get(0);
+
+            if (coordinate.lineDirection == SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL) {
+                Line line = new Line();
+                line.setStartX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxX());
+                line.setStartY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxY());
+                line.setEndX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinX());
+                line.setEndY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinY());
+                line.setStyle(lineColor);
+                line.setStrokeWidth(5.0);
+                cells[coordinate.row][coordinate.col].getChildren().add(line);
+                sosGame.popLineCoordinate();
+                drawLines();
+            }
+            else if (coordinate.lineDirection == SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL) {
+                Line line = new Line();
+                line.setStartX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxX());
+                line.setStartY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinY());
+                line.setEndX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinX());
+                line.setEndY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxY());
+                line.setStyle(lineColor);
+                line.setStrokeWidth(5.0);
+                cells[coordinate.row][coordinate.col].getChildren().add(line);
+                sosGame.popLineCoordinate();
+                drawLines();
+            }
+            else if (coordinate.lineDirection == SosLineCoordinate.LineDirection.VERTICAL) {
+                Line line = new Line();
+                line.setStartX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxX() / 2);
+                line.setStartY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxY());
+                line.setEndX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxX() / 2);
+                line.setEndY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinY());
+                line.setStyle(lineColor);
+                line.setStrokeWidth(5.0);
+                cells[coordinate.row][coordinate.col].getChildren().add(line);
+                sosGame.popLineCoordinate();
+                drawLines();
+            }
+            else if (coordinate.lineDirection == SosLineCoordinate.LineDirection.HORIZONTAL) {
+                Line line = new Line();
+                line.setStartX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxX());
+                line.setStartY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxY() / 2);
+                line.setEndX(cells[coordinate.row][coordinate.col].getLayoutBounds().getMinX());
+                line.setEndY(cells[coordinate.row][coordinate.col].getLayoutBounds().getMaxY() / 2);
+                line.setStyle(lineColor);
+                line.setStrokeWidth(5.0);
+                cells[coordinate.row][coordinate.col].getChildren().add(line);
+                sosGame.popLineCoordinate();
+                drawLines();
+            }
+            // Something went wrong, just empty the list to keep the game moving
+            else {
+                sosGame.popLineCoordinate();
             }
         }
     }
@@ -386,6 +456,7 @@ public class SosGui extends Application {
                 }
                 displayGameStatus();
                 resetScoreLabels();
+                drawLines();
                 tryNextAutoMove();
             }
         }

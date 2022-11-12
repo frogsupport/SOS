@@ -1,9 +1,12 @@
 package com.sos;
 
+import java.util.ArrayList;
+
 public class GeneralSosGame extends SosGame {
 
     public GeneralSosGame(int boardSize) {
         super(boardSize);
+        lineCoordinates = new ArrayList<>();
     }
 
     // Returns true if the cell is empty and a valid move is made
@@ -33,6 +36,8 @@ public class GeneralSosGame extends SosGame {
             } else if (turn == Turn.RED) {
                 redPlayerScore += score;
             }
+
+            lineCoordinates = boardScorer.getLineCoordinates();
         }
         // If no SOS is scored, then change the turn
         else {

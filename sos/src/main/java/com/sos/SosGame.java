@@ -1,5 +1,7 @@
 package com.sos;
 
+import java.util.List;
+
 // The base class used by SimpleSosGame and GeneralSosGame. Contains the shared functionality of the two classes.
 public abstract class SosGame {
     public enum Shape {EMPTY, S, O}
@@ -8,6 +10,7 @@ public abstract class SosGame {
     public enum GameStatus {PLAYING, DRAW, BLUE_WON, RED_WON}
     protected int BOARDSIZE;
     protected Shape[][] grid;
+    protected List<SosLineCoordinate> lineCoordinates;
     protected Turn turn;
     protected GameStatus currentGameStatus;
     protected int bluePlayerScore;
@@ -77,6 +80,16 @@ public abstract class SosGame {
         return true;
     }
 
+    public SosMove makeAutoMove() {
+        return new SosMove(-1, -1, Shape.EMPTY);
+    }
+
+    public void popLineCoordinate() {
+        if (!lineCoordinates.isEmpty()) {
+            lineCoordinates.remove(0);
+        }
+    }
+
     public SosGame.PlayerType getBluePlayerType() { return bluePlayerType; }
 
     public SosGame.PlayerType getRedPlayerType() { return redPlayerType; }
@@ -92,6 +105,8 @@ public abstract class SosGame {
     public int getBoardSize() {
         return BOARDSIZE;
     }
+
+    public List<SosLineCoordinate> getLineCoordinates() { return lineCoordinates; }
 
     public Turn getTurn() {
         return turn;

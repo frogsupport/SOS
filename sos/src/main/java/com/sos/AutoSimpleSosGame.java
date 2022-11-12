@@ -7,6 +7,7 @@ public class AutoSimpleSosGame extends SimpleSosGame {
         this.redPlayerType = redPlayerType;
     }
 
+    @Override
     public SosMove makeAutoMove() {
         AutoMove autoMove = new AutoMove(grid);
 

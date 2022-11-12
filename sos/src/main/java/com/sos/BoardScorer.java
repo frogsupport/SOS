@@ -1,14 +1,19 @@
 package com.sos;
 
-// This class handles all the logic for a simple and general SOS game's scoring logic
-public class BoardScorer {
+import java.util.ArrayList;
+import java.util.List;
 
+// This class handles all the logic for a simple and general SOS game's scoring logic, as well as adding the
+// appropriate line coordinates to be drawn for winning SOS moves
+public class BoardScorer {
+    private List<SosLineCoordinate> lineCoordinates;
     private SosGame.Shape[][] grid;
     private int BOARDSIZE;
 
     public BoardScorer(SosGame.Shape[][] grid) {
         this.grid = grid;
         this.BOARDSIZE = grid.length;
+        lineCoordinates = new ArrayList<>();
     }
 
     // For a general game, SOS's can continue to be scored until the board is filled.
@@ -195,51 +200,204 @@ public class BoardScorer {
         return score;
     }
 
+    // TODO: See if this method works for adding lines for every case
     private boolean checkBackSlashDiagonalO(int row, int col) {
-        return (grid[row - 1][col - 1] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.S);
+        // return (grid[row - 1][col - 1] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.S);
+        if (grid[row - 1][col - 1] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.S) {
+            addBackslashDiagonalLineCoordinate(row - 1, col - 1);
+            addBackslashDiagonalLineCoordinate(row, col);
+            addBackslashDiagonalLineCoordinate(row + 1, col + 1);
+
+            // lineCoordinates.add(new SosLineCoordinate(row - 1, col - 1, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
+            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
+            // lineCoordinates.add(new SosLineCoordinate(row + 1, col + 1, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkForwardSlashDiagonalO(int row, int col) {
-        return (grid[row + 1][col - 1] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.S);
+        // return (grid[row + 1][col - 1] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.S);
+        if (grid[row + 1][col - 1] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.S) {
+            addForwardslashDiagonalLineCoordinate(row + 1, col - 1);
+            addForwardslashDiagonalLineCoordinate(row, col);
+            addForwardslashDiagonalLineCoordinate(row - 1, col + 1);
+
+            // lineCoordinates.add(new SosLineCoordinate(row + 1, col - 1, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
+            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
+            // lineCoordinates.add(new SosLineCoordinate(row - 1, col + 1, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkColO(int row, int col) {
-        return (grid[row - 1][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.S);
+        // return (grid[row - 1][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.S);
+        if (grid[row - 1][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.S) {
+            addVerticalLineCoordinate(row - 1, col);
+            addVerticalLineCoordinate(row, col);
+            addVerticalLineCoordinate(row + 1, col);
+
+            // lineCoordinates.add(new SosLineCoordinate(row - 1, col, SosLineCoordinate.LineDirection.VERTICAL));
+            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.VERTICAL));
+            // lineCoordinates.add(new SosLineCoordinate(row + 1, col, SosLineCoordinate.LineDirection.VERTICAL));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkRowO(int row, int col) {
-        return (grid[row][col - 1] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.S);
+        // return (grid[row][col - 1] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.S);
+        if (grid[row][col - 1] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.S) {
+            addHorizontalLineCoordinate(row, col - 1);
+            addHorizontalLineCoordinate(row, col);
+            addHorizontalLineCoordinate(row, col + 1);
+
+            // lineCoordinates.add(new SosLineCoordinate(row , col - 1, SosLineCoordinate.LineDirection.HORIZONTAL));
+            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.HORIZONTAL));
+            // lineCoordinates.add(new SosLineCoordinate(row, col + 1, SosLineCoordinate.LineDirection.HORIZONTAL));
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkLowerLeftDiagonalS(int row, int col) {
-        return (grid[row + 2][col - 2] == SosGame.Shape.S && grid[row + 1][col - 1] == SosGame.Shape.O);
+        // return (grid[row + 2][col - 2] == SosGame.Shape.S && grid[row + 1][col - 1] == SosGame.Shape.O);
+        if (grid[row + 2][col - 2] == SosGame.Shape.S && grid[row + 1][col - 1] == SosGame.Shape.O) {
+            addForwardslashDiagonalLineCoordinate(row + 2, col - 2);
+            addForwardslashDiagonalLineCoordinate(row + 1, col - 1);
+            addForwardslashDiagonalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkUpperRightDiagonalS(int row, int col) {
-        return (grid[row - 2][col + 2] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.O);
+        // return (grid[row - 2][col + 2] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.O);
+        if (grid[row - 2][col + 2] == SosGame.Shape.S && grid[row - 1][col + 1] == SosGame.Shape.O) {
+            addForwardslashDiagonalLineCoordinate(row - 2, col + 2);
+            addForwardslashDiagonalLineCoordinate(row - 1, col + 1);
+            addForwardslashDiagonalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkUpperLeftDiagonalS(int row, int col) {
-        return (grid[row - 2][col - 2] == SosGame.Shape.S && grid[row - 1][col - 1] == SosGame.Shape.O);
+        // return (grid[row - 2][col - 2] == SosGame.Shape.S && grid[row - 1][col - 1] == SosGame.Shape.O);
+        if (grid[row - 2][col - 2] == SosGame.Shape.S && grid[row - 1][col - 1] == SosGame.Shape.O) {
+            addBackslashDiagonalLineCoordinate(row - 2, col - 2);
+            addBackslashDiagonalLineCoordinate(row - 1, col - 1);
+            addBackslashDiagonalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkLowerRightDiagonalS(int row, int col) {
-        return (grid[row + 2][col + 2] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.O);
+        // return (grid[row + 2][col + 2] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.O);
+        if (grid[row + 2][col + 2] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.O) {
+            addBackslashDiagonalLineCoordinate(row + 2, col + 2);
+            addBackslashDiagonalLineCoordinate(row + 1, col + 1);
+            addBackslashDiagonalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkUpS(int row, int col) {
-        return (grid[row - 2][col] == SosGame.Shape.S && grid[row - 1][col] == SosGame.Shape.O);
+        // return (grid[row - 2][col] == SosGame.Shape.S && grid[row - 1][col] == SosGame.Shape.O);
+        if (grid[row - 2][col] == SosGame.Shape.S && grid[row - 1][col] == SosGame.Shape.O) {
+            addVerticalLineCoordinate(row - 2, col);
+            addVerticalLineCoordinate(row - 1, col);
+            addVerticalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkDownS(int row, int col) {
-        return (grid[row + 2][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.O);
+        // return (grid[row + 2][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.O);
+        if (grid[row + 2][col] == SosGame.Shape.S && grid[row + 1][col] == SosGame.Shape.O) {
+            addVerticalLineCoordinate(row + 2, col);
+            addVerticalLineCoordinate(row + 1, col);
+            addVerticalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkLeftS(int row, int col) {
-        return (grid[row][col - 2] == SosGame.Shape.S && grid[row][col - 1] == SosGame.Shape.O);
+        // return (grid[row][col - 2] == SosGame.Shape.S && grid[row][col - 1] == SosGame.Shape.O);
+        if (grid[row][col - 2] == SosGame.Shape.S && grid[row][col - 1] == SosGame.Shape.O) {
+            addHorizontalLineCoordinate(row, col - 2);
+            addHorizontalLineCoordinate(row, col - 1);
+            addHorizontalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean checkRightS(int row, int col) {
-        return (grid[row][col + 2] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.O);
+        // return (grid[row][col + 2] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.O);
+        if (grid[row][col + 2] == SosGame.Shape.S && grid[row][col + 1] == SosGame.Shape.O) {
+            addHorizontalLineCoordinate(row, col + 2);
+            addHorizontalLineCoordinate(row, col + 1);
+            addHorizontalLineCoordinate(row, col);
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    private void addForwardslashDiagonalLineCoordinate(int row, int col) {
+        lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
+    }
+
+    private void addBackslashDiagonalLineCoordinate(int row, int col) {
+        lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
+    }
+
+    private void addHorizontalLineCoordinate(int row, int col) {
+        lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.HORIZONTAL));
+    }
+
+    private void addVerticalLineCoordinate(int row, int col) {
+        lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.VERTICAL));
+    }
+
+    public List<SosLineCoordinate> getLineCoordinates() {
+        return lineCoordinates;
     }
 }
