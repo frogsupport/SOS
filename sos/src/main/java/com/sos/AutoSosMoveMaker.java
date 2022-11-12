@@ -2,16 +2,16 @@ package com.sos;
 
 import java.util.Random;
 
-public class AutoSosMove {
+public class AutoSosMoveMaker {
     private SosGame.Shape[][] grid;
     private int BOARDSIZE;
 
-    public AutoSosMove(SosGame.Shape[][] grid) {
+    public AutoSosMoveMaker(SosGame.Shape[][] grid) {
         this.grid = grid;
         BOARDSIZE = grid.length;
     }
 
-    protected SosMove makeMove() {
+    public SosMove makeMove() {
         boolean haveS;
         boolean haveO;
 
@@ -128,7 +128,7 @@ public class AutoSosMove {
         return makeRandomMove();
     }
 
-    protected SosMove makeRandomMove() {
+    private SosMove makeRandomMove() {
         Random random = new Random();
         int targetMove = random.nextInt(getNumberOfEmptyCells());
         int index=0;

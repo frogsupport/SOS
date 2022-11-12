@@ -9,11 +9,7 @@ public class AutoSimpleSosGame extends SimpleSosGame {
 
     @Override
     public SosMove makeAutoMove() {
-        AutoSosMove autoSosMove = new AutoSosMove(grid);
-
-        if (isEmpty()) {
-            return autoSosMove.makeRandomMove();
-        }
-        return autoSosMove.makeMove();
+        AutoSosMoveMaker autoSosMoveMaker = new AutoSosMoveMaker(grid);
+        return autoSosMoveMaker.makeMove();
     }
 }

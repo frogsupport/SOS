@@ -1,8 +1,9 @@
 package com.sos;
 
+import java.util.ArrayList;
 import java.util.List;
 
-// The base class used by SimpleSosGame and GeneralSosGame. Contains the shared functionality of the two classes.
+// Contains the base logic necessary to run an SOS game
 public abstract class SosGame {
     public enum Shape {EMPTY, S, O}
     public enum Turn {BLUE, RED}
@@ -18,24 +19,41 @@ public abstract class SosGame {
     protected SosGame.PlayerType bluePlayerType;
     protected SosGame.PlayerType redPlayerType;
 
-    public abstract boolean makeMove(int row, int column, Shape shape);
+    protected abstract void updateGameStatus(int row, int col, Shape shape);
 
     public SosGame(int boardSize) {
         // Board size must be at least 3 for a valid sos game
         if (boardSize < 3) {
             BOARDSIZE = 3;
         }
+        // Computer vs computer game will crash with general game bigger than around this size
+        // The board is way too hard to see at this size as well and the game becomes almost
+        // unenjoyable. If you want to crash the program though then remove this precaution
+        else if (boardSize > 50) {
+            BOARDSIZE = 50;
+        }
         else {
             BOARDSIZE = boardSize;
         }
 
         grid = new Shape[BOARDSIZE][BOARDSIZE];
+        lineCoordinates = new ArrayList<>();
         initBoard();
         currentGameStatus = GameStatus.PLAYING;
         bluePlayerScore = 0;
         redPlayerScore = 0;
         bluePlayerType = PlayerType.HUMAN;
         redPlayerType = PlayerType.HUMAN;
+    }
+
+    public boolean makeMove(int row, int column, Shape shape) {
+        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Shape.EMPTY) {
+            grid[row][column] = shape;
+            updateGameStatus(row, column, shape);
+            return true;
+        }
+
+        return false;
     }
 
     public void initBoard() {
@@ -54,18 +72,6 @@ public abstract class SosGame {
         } else {
             return null;
         }
-    }
-
-    public boolean isEmpty() {
-        for (int row = 0; row < BOARDSIZE; row++) {
-            for (int col = 0; col < BOARDSIZE; col++) {
-                if (grid[row][col] != Shape.EMPTY) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     public boolean isBoardFilled() {

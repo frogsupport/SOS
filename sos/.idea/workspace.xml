@@ -9,12 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/AutoGeneralSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/AutoSosMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoSimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/AutoSimpleSosGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/BoardScorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosBoardScorer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/AutoSosMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/AutoSosMoveMaker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/GeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosBoardScorer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosBoardScorer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/SosGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +68,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="SosGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.sos.SosGui" />
+      <module name="sos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in sos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -91,15 +107,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestISosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="sos" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestISosGame" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TestSimpleSosGameScoring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
@@ -112,10 +119,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in sos" />
+        <item itemvalue="Application.SosGui" />
         <item itemvalue="JUnit.TestGeneralSosGameScoring" />
         <item itemvalue="JUnit.TestGeneralSosGame" />
         <item itemvalue="JUnit.TestSimpleSosGameScoring" />
-        <item itemvalue="JUnit.TestISosGame" />
       </list>
     </recent_temporary>
   </component>

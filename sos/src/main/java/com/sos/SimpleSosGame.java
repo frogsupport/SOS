@@ -6,22 +6,14 @@ public class SimpleSosGame extends SosGame {
         super(boardSize);
     }
 
+    // Player wins if they score a single SOS
     @Override
-    public boolean makeMove(int row, int column, Shape shape) {
-        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Shape.EMPTY) {
-            grid[row][column] = shape;
-            updateGameStatus(row, column, shape);
-            changeTurn();
-            return true;
-        }
-
-        return false;
-    }
-
-    private void updateGameStatus(int row, int column, Shape shape) {
+    protected void updateGameStatus(int row, int column, Shape shape) {
         // Create the object to handle the scoring logic
         SosBoardScorer sosBoardScorer = new SosBoardScorer(grid);
         if (sosBoardScorer.hasScored(row, column, shape) != 0) {
+            lineCoordinates = sosBoardScorer.getLineCoordinates();
+
             if (turn == Turn.BLUE) {
                 currentGameStatus = GameStatus.BLUE_WON;
             } else if (turn == Turn.RED) {
@@ -29,6 +21,9 @@ public class SimpleSosGame extends SosGame {
             }
         } else if (isBoardFilled()) {
             currentGameStatus = GameStatus.DRAW;
+        }
+        else {
+            changeTurn();
         }
     }
 }

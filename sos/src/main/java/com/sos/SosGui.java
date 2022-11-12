@@ -9,7 +9,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
 import java.util.List;
 
 // CS449 SOS Project Fall 2022
@@ -35,7 +34,7 @@ public class SosGui extends Application {
     private final int TITLE_SIZE = 30;
     private final int SCORE_TEXT_SIZE = 20;
 
-    // set up gui ===============================================================================
+    // set up gui ====================================================================================================
 
     @Override
     public void start(Stage primaryStage) {
@@ -208,7 +207,7 @@ public class SosGui extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // event handlers ==================================================================================
+        // event handlers ============================================================================================
 
         // new game button pressed event handler
         // start our new game
@@ -273,7 +272,7 @@ public class SosGui extends Application {
 
     }
 
-    // SosGui class functions ===================================================================================
+    // SosGui class functions ========================================================================================
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
@@ -419,7 +418,7 @@ public class SosGui extends Application {
 
     public TextField getBoardSizeTextField() { return boardSizeField; }
 
-    // Internal Cell class =============================================================================
+    // Internal Cell class ===========================================================================================
 
     // The object that is each tile in the board
     private class Cell extends Pane {
@@ -488,8 +487,7 @@ public class SosGui extends Application {
         }
     }
 
-    // main method ====================================================================================
-
+    // main =================================
     public static void main(String[] args) {
         launch(args);
     }

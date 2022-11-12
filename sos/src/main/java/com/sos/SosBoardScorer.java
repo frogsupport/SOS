@@ -25,21 +25,33 @@ public class SosBoardScorer {
 
         // Handles logic for a board size of 3
         if (BOARDSIZE == 3) {
-            if (grid[row][0] == SosGame.Shape.S // 3-in-the-row
-                    && grid[row][1] == SosGame.Shape.O && grid[row][2] == SosGame.Shape.S) {
+            // Row
+            if (grid[row][0] == SosGame.Shape.S && grid[row][1] == SosGame.Shape.O && grid[row][2] == SosGame.Shape.S) {
                 score++;
+                addHorizontalLineCoordinate(row, 0);
+                addHorizontalLineCoordinate(row, 1);
+                addHorizontalLineCoordinate(row, 2);
             }
-            if (grid[0][col] == SosGame.Shape.S // 3-in-the-column
-                    && grid[1][col] == SosGame.Shape.O && grid[2][col] == SosGame.Shape.S) {
+            // Column
+            if (grid[0][col] == SosGame.Shape.S && grid[1][col] == SosGame.Shape.O && grid[2][col] == SosGame.Shape.S) {
                 score++;
+                addVerticalLineCoordinate(0, col);
+                addVerticalLineCoordinate(1, col);
+                addVerticalLineCoordinate(2, col);
             }
-            if (row == col // 3-in-the-diagonal
-                    && grid[0][0] == SosGame.Shape.S && grid[1][1] == SosGame.Shape.O && grid[2][2] == SosGame.Shape.S) {
+            // Backslash Diagonal
+            if (row == col && grid[0][0] == SosGame.Shape.S && grid[1][1] == SosGame.Shape.O && grid[2][2] == SosGame.Shape.S) {
                 score++;
+                addBackslashDiagonalLineCoordinate(0, 0);
+                addBackslashDiagonalLineCoordinate(1, 1);
+                addBackslashDiagonalLineCoordinate(2, 2);
             }
-            if (row + col == 2 // 3-in-the-opposite-diagonal
-                    && grid[0][2] == SosGame.Shape.S && grid[1][1] == SosGame.Shape.O && grid[2][0] == SosGame.Shape.S) {
+            // Forwardslash Diagonal
+            if (row + col == 2 && grid[0][2] == SosGame.Shape.S && grid[1][1] == SosGame.Shape.O && grid[2][0] == SosGame.Shape.S) {
                 score++;
+                addForwardslashDiagonalLineCoordinate(0, 2);
+                addForwardslashDiagonalLineCoordinate(1, 1);
+                addForwardslashDiagonalLineCoordinate(2, 0);
             }
         }
         // Handles logic for BOARDSIZE > 3 and shape == 'S'
@@ -200,7 +212,6 @@ public class SosBoardScorer {
         return score;
     }
 
-    // TODO: See if this method works for adding lines for every case
     private boolean checkBackSlashDiagonalO(int row, int col) {
         // return (grid[row - 1][col - 1] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.S);
         if (grid[row - 1][col - 1] == SosGame.Shape.S && grid[row + 1][col + 1] == SosGame.Shape.S) {
@@ -208,9 +219,6 @@ public class SosBoardScorer {
             addBackslashDiagonalLineCoordinate(row, col);
             addBackslashDiagonalLineCoordinate(row + 1, col + 1);
 
-            // lineCoordinates.add(new SosLineCoordinate(row - 1, col - 1, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
-            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
-            // lineCoordinates.add(new SosLineCoordinate(row + 1, col + 1, SosLineCoordinate.LineDirection.BACKSLASH_DIAGONAL));
             return true;
         }
         else {
@@ -225,9 +233,6 @@ public class SosBoardScorer {
             addForwardslashDiagonalLineCoordinate(row, col);
             addForwardslashDiagonalLineCoordinate(row - 1, col + 1);
 
-            // lineCoordinates.add(new SosLineCoordinate(row + 1, col - 1, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
-            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
-            // lineCoordinates.add(new SosLineCoordinate(row - 1, col + 1, SosLineCoordinate.LineDirection.FORWARDSLASH_DIAGONAL));
             return true;
         }
         else {
@@ -242,9 +247,6 @@ public class SosBoardScorer {
             addVerticalLineCoordinate(row, col);
             addVerticalLineCoordinate(row + 1, col);
 
-            // lineCoordinates.add(new SosLineCoordinate(row - 1, col, SosLineCoordinate.LineDirection.VERTICAL));
-            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.VERTICAL));
-            // lineCoordinates.add(new SosLineCoordinate(row + 1, col, SosLineCoordinate.LineDirection.VERTICAL));
             return true;
         }
         else {
@@ -259,9 +261,6 @@ public class SosBoardScorer {
             addHorizontalLineCoordinate(row, col);
             addHorizontalLineCoordinate(row, col + 1);
 
-            // lineCoordinates.add(new SosLineCoordinate(row , col - 1, SosLineCoordinate.LineDirection.HORIZONTAL));
-            // lineCoordinates.add(new SosLineCoordinate(row, col, SosLineCoordinate.LineDirection.HORIZONTAL));
-            // lineCoordinates.add(new SosLineCoordinate(row, col + 1, SosLineCoordinate.LineDirection.HORIZONTAL));
             return true;
         }
         else {
