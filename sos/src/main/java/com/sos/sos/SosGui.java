@@ -244,16 +244,15 @@ public class SosGui extends Application {
                 setScoreLabelVisibility(true);
             }
 
-            // set the pane
+            // set the pane for the new game
             centerPane = setBoard(sosGame);
             borderPane.setCenter(centerPane);
 
             // need to manually request a layout or else it will not be initialized for an Auto game
             // this is so we can draw our lines using the layout bounds of the board
             borderPane.layout();
-            resetScoreLabels();
-            displayGameStatus();
-            tryNextAutoMove();
+
+            handleEndOfTurn();
         });
 
         blueHumanPlayerButton.setOnAction(actionEvent -> bluePlayerType = SosGame.PlayerType.HUMAN);
@@ -334,25 +333,50 @@ public class SosGui extends Application {
     public void tryNextAutoMove() {
         // Check for an ongoing game
         if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
-            // Check for an Auto game
-            if (sosGame instanceof AutoSimpleSosGame || sosGame instanceof AutoGeneralSosGame) {
-                // Check if it's a computer's turn
-                if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
-                        || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
-                    SosGame.Turn currentTurn = sosGame.getTurn();
-                    SosMove sosMove = sosGame.makeAutoMove();
-
-                    // If a valid move is made, add it to the board
-                    if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
-                        drawBoard(sosMove.Row, sosMove.Col, currentTurn);
-                    }
-                    displayGameStatus();
-                    resetScoreLabels();
-                    drawLines();
-                    tryNextAutoMove();
+            // Check if it's a computer's turn
+            if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
+                    || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
+                SosGame.Turn currentTurn = sosGame.getTurn();
+                if (sosGame.makeAutoMove()) {
+                    drawBoard(sosGame.getLastAutoMove().Row, sosGame.getLastAutoMove().Col, currentTurn);
                 }
+
+                handleEndOfTurn();
             }
         }
+        /*if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+            SosGame.Turn currentTurn = sosGame.getTurn();
+            if (sosGame.makeAutoMove()) {
+                drawBoard(sosGame.getLastAutoMove().Row, sosGame.getLastAutoMove().Col, currentTurn);
+            }
+
+            handleEndOfTurn();
+        }*/
+        /*// Check for an ongoing game
+        if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
+            // Check if it's a computer's turn
+            if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
+                    || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
+                SosGame.Turn currentTurn = sosGame.getTurn();
+                SosMove sosMove = sosGame.makeAutoMove();
+
+                // If a valid move is made, add it to the board
+                if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
+                    drawBoard(sosMove.Row, sosMove.Col, currentTurn);
+                }
+
+                handleEndOfTurn();
+            }
+        }*/
+    }
+
+    // Handles the processes that must be run at the end of every turn, be it human turn or computer.
+    // Likewise, this process must happen at the end of pressing the new game button.
+    private void handleEndOfTurn() {
+        displayGameStatus();
+        resetScoreLabels();
+        drawLines();
+        tryNextAutoMove();
     }
 
     // Loops through the array of lines to be drawn until empty
@@ -455,10 +479,8 @@ public class SosGui extends Application {
                 if (sosGame.makeMove(row, column, shape)) {
                     drawBoard(row, column, currentTurn);
                 }
-                displayGameStatus();
-                resetScoreLabels();
-                drawLines();
-                tryNextAutoMove();
+
+                handleEndOfTurn();
             }
         }
 

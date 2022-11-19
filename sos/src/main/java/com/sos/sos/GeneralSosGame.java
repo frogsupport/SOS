@@ -14,17 +14,17 @@ public class GeneralSosGame extends SosGame {
     @Override
     protected void updateGameStatus(int row, int column, Shape shape) {
         // The object that handles the scoring logic for the general SOS game
-        SosBoardScorer sosBoardScorer = new SosBoardScorer(grid);
+        SosBoardScorer sosBoardScorer = new SosBoardScorer(getGrid());
         int score = sosBoardScorer.hasScored(row, column, shape);
         // If an SOS is scored, keep the turn the same and add the score
         if (score > 0) {
-            if (turn == Turn.BLUE) {
-                bluePlayerScore += score;
-            } else if (turn == Turn.RED) {
-                redPlayerScore += score;
+            if (getTurn() == Turn.BLUE) {
+                setBluePlayerScore(score);
+            } else if (getTurn() == Turn.RED) {
+                setRedPlayerScore(score);
             }
 
-            lineCoordinates = sosBoardScorer.getLineCoordinates();
+            setLineCoordinates(sosBoardScorer.getLineCoordinates());
         }
         // If no SOS is scored, then change the turn
         else {
@@ -32,12 +32,12 @@ public class GeneralSosGame extends SosGame {
         }
 
         // Check end of game status
-        if (isBoardFilled() && bluePlayerScore > redPlayerScore) {
-            currentGameStatus = GameStatus.BLUE_WON;
-        } else if (isBoardFilled() && redPlayerScore > bluePlayerScore) {
-            currentGameStatus = GameStatus.RED_WON;
-        } else if (isBoardFilled() && bluePlayerScore == redPlayerScore) {
-            currentGameStatus = GameStatus.DRAW;
+        if (isBoardFilled() && getBluePlayerScore() > getRedPlayerScore()) {
+            setCurrentGameStatus(GameStatus.BLUE_WON);
+        } else if (isBoardFilled() && getRedPlayerScore() > getBluePlayerScore()) {
+            setCurrentGameStatus(GameStatus.RED_WON);
+        } else if (isBoardFilled() && getBluePlayerScore() == getRedPlayerScore()) {
+            setCurrentGameStatus(GameStatus.DRAW);
         }
     }
 }

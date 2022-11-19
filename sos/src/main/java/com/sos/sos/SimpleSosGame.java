@@ -12,17 +12,18 @@ public class SimpleSosGame extends SosGame {
     @Override
     protected void updateGameStatus(int row, int column, Shape shape) {
         // Create the object to handle the scoring logic
-        SosBoardScorer sosBoardScorer = new SosBoardScorer(grid);
+        SosBoardScorer sosBoardScorer = new SosBoardScorer(getGrid());
         if (sosBoardScorer.hasScored(row, column, shape) != 0) {
-            lineCoordinates = sosBoardScorer.getLineCoordinates();
 
-            if (turn == Turn.BLUE) {
-                currentGameStatus = GameStatus.BLUE_WON;
-            } else if (turn == Turn.RED) {
-                currentGameStatus = GameStatus.RED_WON;
+            setLineCoordinates(sosBoardScorer.getLineCoordinates());
+
+            if (getTurn() == Turn.BLUE) {
+                setCurrentGameStatus(GameStatus.BLUE_WON);
+            } else if (getTurn() == Turn.RED) {
+                setCurrentGameStatus(GameStatus.RED_WON);
             }
         } else if (isBoardFilled()) {
-            currentGameStatus = GameStatus.DRAW;
+            setCurrentGameStatus(GameStatus.DRAW);
         }
         else {
             changeTurn();

@@ -17,18 +17,27 @@ public class AutoSosMoveMaker {
         boolean haveS;
         boolean haveO;
 
-        // Attempt to make an SOS in a row
+        // Attempt to make first SOS in a row
         for (int i = 0; i < BOARDSIZE; i++) {
             haveS = false;
             haveO = false;
             for (int j = 0; j < BOARDSIZE; j++) {
+                // Score SOS
+                if (haveS && haveO && grid[i][j] == SosGame.Shape.EMPTY) {
+                    return new SosMove(i, j, SosGame.Shape.S);
+                }
+                // O
+                else if (grid[i][j] == SosGame.Shape.O && !haveS) {
+                    haveO = false;
+                }
                 // S
-                if (grid[i][j] == SosGame.Shape.S && !haveS) {
+                else if (grid[i][j] == SosGame.Shape.S && !haveS) {
                     haveS = true;
                 }
                 // SS
                 else if (haveS && grid[i][j] == SosGame.Shape.S) {
                     haveS = false;
+                    haveO = false;
                 }
                 // SO
                 else if (haveS && grid[i][j] == SosGame.Shape.O) {
@@ -40,17 +49,13 @@ public class AutoSosMoveMaker {
                     haveO = false;
                 }
                 // SOS
-                else if(haveS && haveO && grid[i][j] == SosGame.Shape.EMPTY) {
-                    return new SosMove(i, j, SosGame.Shape.S);
-                }
-                else {
-                    haveS = false;
+                else if (haveS && haveO && grid[i][j] == SosGame.Shape.S) {
                     haveO = false;
                 }
             }
         }
 
-        // Attempt to make an SOS in a column
+        // Attempt to make first SOS in a column
         for (int j = 0; j < BOARDSIZE; j++) {
             haveS = false;
             haveO = false;
@@ -72,7 +77,7 @@ public class AutoSosMoveMaker {
                     haveS = false;
                     haveO = false;
                 }
-                // SOS
+                // Score SOS
                 else if(haveS && haveO && grid[i][j] == SosGame.Shape.EMPTY) {
                     return new SosMove(i, j, SosGame.Shape.S);
                 }
@@ -82,6 +87,15 @@ public class AutoSosMoveMaker {
                 }
             }
         }
+
+        // Make an sos in a chain of SOS's in a row
+        /*for (int i = 0; i < BOARDSIZE; i++) {
+            haveS = false;
+            haveO = false;
+            for (int j = 0; j < BOARDSIZE; j++) {
+                if (grid[i][j] == SosGame.Shape.EMPTY && haveS && haveO)
+            }
+        }*/
 
         // If no SOS, then try to make an SO in a row
         for (int i = 0; i < BOARDSIZE; i++) {

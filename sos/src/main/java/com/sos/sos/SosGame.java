@@ -11,15 +11,16 @@ public abstract class SosGame {
     public enum Turn {BLUE, RED}
     public enum PlayerType {HUMAN, COMPUTER}
     public enum GameStatus {PLAYING, DRAW, BLUE_WON, RED_WON}
-    protected int BOARDSIZE;
-    protected Shape[][] grid;
-    protected List<SosLineCoordinate> lineCoordinates;
-    protected Turn turn;
-    protected GameStatus currentGameStatus;
-    protected int bluePlayerScore;
-    protected int redPlayerScore;
-    protected SosGame.PlayerType bluePlayerType;
-    protected SosGame.PlayerType redPlayerType;
+    private int BOARDSIZE;
+    private Shape[][] grid;
+    private List<SosLineCoordinate> lineCoordinates;
+    private Turn turn;
+    private GameStatus currentGameStatus;
+    private int bluePlayerScore;
+    private int redPlayerScore;
+    private SosGame.PlayerType bluePlayerType;
+    private SosGame.PlayerType redPlayerType;
+    private SosMove lastAutoMove;
 
     protected abstract void updateGameStatus(int row, int col, Shape shape);
 
@@ -46,6 +47,7 @@ public abstract class SosGame {
         redPlayerScore = 0;
         bluePlayerType = PlayerType.HUMAN;
         redPlayerType = PlayerType.HUMAN;
+        lastAutoMove = null;
     }
 
     public boolean makeMove(int row, int column, Shape shape) {
@@ -88,8 +90,8 @@ public abstract class SosGame {
         return true;
     }
 
-    public SosMove makeAutoMove() {
-        return new SosMove(-1, -1, Shape.EMPTY);
+    public boolean makeAutoMove() {
+        return false;
     }
 
     public void popLineCoordinate() {
@@ -98,9 +100,19 @@ public abstract class SosGame {
         }
     }
 
+    public Shape[][] getGrid() { return grid; }
+
     public SosGame.PlayerType getBluePlayerType() { return bluePlayerType; }
 
+    public void setBluePlayerType(PlayerType playerType) {
+        bluePlayerType = playerType;
+    }
+
     public SosGame.PlayerType getRedPlayerType() { return redPlayerType; }
+
+    public void setRedPlayerType(PlayerType playerType) {
+        redPlayerType = playerType;
+    }
 
     protected void changeTurn() {
         turn = (turn == Turn.BLUE) ? Turn.RED : Turn.BLUE;
@@ -110,11 +122,19 @@ public abstract class SosGame {
         return currentGameStatus;
     }
 
+    public void setCurrentGameStatus(GameStatus status) {
+        currentGameStatus = status;
+    }
+
     public int getBoardSize() {
         return BOARDSIZE;
     }
 
     public List<SosLineCoordinate> getLineCoordinates() { return lineCoordinates; }
+
+    public void setLineCoordinates(List<SosLineCoordinate> coordinates) {
+        lineCoordinates = coordinates;
+    }
 
     public Turn getTurn() {
         return turn;
@@ -124,7 +144,21 @@ public abstract class SosGame {
         return bluePlayerScore;
     }
 
+    public void setBluePlayerScore(int score) {
+        bluePlayerScore += score;
+    }
+
     public int getRedPlayerScore() {
         return redPlayerScore;
+    }
+
+    public void setRedPlayerScore(int score) {
+        redPlayerScore += score;
+    }
+
+    public SosMove getLastAutoMove() { return lastAutoMove; }
+
+    public void setLastAutoMove(SosMove move) {
+        lastAutoMove = move;
     }
 }
