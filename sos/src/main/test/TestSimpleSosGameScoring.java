@@ -10,7 +10,7 @@ public class TestSimpleSosGameScoring {
     public void testIsDraw() {
         // Given
         final int SIZE = 4;
-        SimpleSosGame sosGame = new SimpleSosGame(SIZE);
+        SimpleSosGame sosGame = new SimpleSosGame(SIZE, false);
 
         // When
         for (int i = 0; i < sosGame.getBoardSize(); i++) {
@@ -27,7 +27,7 @@ public class TestSimpleSosGameScoring {
     public void testRedWon() {
         // Given
         final int SIZE = 4;
-        SimpleSosGame sosGame = new SimpleSosGame(SIZE);
+        SimpleSosGame sosGame = new SimpleSosGame(SIZE, false);
 
         // When
         sosGame.makeMove(0, 0, SosGame.Shape.S);
@@ -44,7 +44,7 @@ public class TestSimpleSosGameScoring {
     public void testBlueWon() {
         // Given
         final int SIZE = 4;
-        SimpleSosGame sosGame = new SimpleSosGame(SIZE);
+        SimpleSosGame sosGame = new SimpleSosGame(SIZE, false);
 
         // When
         sosGame.makeMove(0, 0, SosGame.Shape.S);

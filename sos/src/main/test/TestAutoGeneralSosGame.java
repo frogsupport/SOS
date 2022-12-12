@@ -1,7 +1,6 @@
 import com.sos.models.SosMove;
 import com.sos.providers.AutoSosMoveMaker;
 import com.sos.sos.AutoGeneralSosGame;
-import com.sos.sos.AutoSimpleSosGame;
 import com.sos.sos.SosGame;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,7 @@ public class TestAutoGeneralSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
-        SosGame sosGame = new AutoGeneralSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoGeneralSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         while(sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
@@ -32,7 +31,7 @@ public class TestAutoGeneralSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.HUMAN;
-        SosGame sosGame = new AutoGeneralSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoGeneralSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         // Blue makes first move
@@ -68,7 +67,7 @@ public class TestAutoGeneralSosGame {
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
 
         // When
-        SosGame sosGame = new AutoGeneralSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoGeneralSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // Then
         assertEquals(SosGame.PlayerType.COMPUTER, sosGame.getBluePlayerType());
@@ -81,7 +80,7 @@ public class TestAutoGeneralSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.HUMAN;
-        SosGame sosGame = new AutoGeneralSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoGeneralSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         // Blue makes first move
@@ -109,7 +108,7 @@ public class TestAutoGeneralSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.HUMAN;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
-        SosGame sosGame = new AutoGeneralSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoGeneralSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         sosGame.makeAutoMove();
@@ -127,5 +126,4 @@ public class TestAutoGeneralSosGame {
 
         assertEquals(0, movesMade);
     }
-
 }

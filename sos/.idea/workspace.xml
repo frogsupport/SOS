@@ -9,14 +9,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="abeacaab-c47c-4531-ba02-c55cab1ae50b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/providers/AutoSosMoveMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/providers/AutoSosMoveMaker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoGeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoSimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/AutoSimpleSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/GeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/GeneralSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/SimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SimpleSosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sos/sos/SosGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestAutoGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestAutoGeneralSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestAutoSimpleSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestAutoSimpleSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestGeneralSosGameScoring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSimpleSosGameScoring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/TestSosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/TestSosGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +44,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2FrWxY7BGhaWcIWd8es1nFNOkKu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -90,12 +96,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestAutoSimpleSosGame.newAutoSosGameWithComputerPlayers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAutoSimpleSosGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sos" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestAutoSimpleSosGame" />
-      <option name="METHOD_NAME" value="newAutoSosGameWithComputerPlayers" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,10 +128,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in sos" />
+        <item itemvalue="JUnit.TestAutoSimpleSosGame" />
         <item itemvalue="JUnit.TestAutoGeneralSosGame" />
         <item itemvalue="JUnit.TestAutoSimpleSosGame.testGameFinishesWithComputerOpponents" />
         <item itemvalue="JUnit.TestAutoSimpleSosGame.testBlueMakesAutoMoves" />
-        <item itemvalue="JUnit.TestAutoSimpleSosGame.newAutoSosGameWithComputerPlayers" />
       </list>
     </recent_temporary>
   </component>
@@ -140,7 +145,10 @@
       <updated>1665250931085</updated>
       <workItem from="1668292120240" duration="387000" />
       <workItem from="1668303251115" duration="5181000" />
-      <workItem from="1668880569434" duration="5256000" />
+      <workItem from="1668880569434" duration="7849000" />
+      <workItem from="1668965490048" duration="2221000" />
+      <workItem from="1670715130321" duration="4891000" />
+      <workItem from="1670780760890" duration="13041000" />
     </task>
     <servers />
   </component>

@@ -1,7 +1,6 @@
 package com.sos.sos;
 
 import com.sos.models.SosLineCoordinate;
-import com.sos.models.SosMove;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +18,7 @@ import java.util.List;
 public class SosGui extends Application {
     private enum GameType {SIMPLE, GENERAL}
     private TextField boardSizeField = new TextField();
+    private CheckBox recordGameCheckBox;
     private Cell[][] cells;
     private Label gameStatus = new Label("Blue's Turn");
     private Label bluePlayerScore = new Label("0");
@@ -41,8 +41,9 @@ public class SosGui extends Application {
     @Override
     public void start(Stage primaryStage) {
         if (sosGame == null) {
-            sosGame = new SimpleSosGame(3);
+            sosGame = new SimpleSosGame(3, false);
         }
+
         setBoard(sosGame);
 
         // top pane ====================================
@@ -72,12 +73,24 @@ public class SosGui extends Application {
         boardSizeField.setPrefSize(50, 30);
         boardSizeField.setPromptText("ex. 6");
 
+        // Record game checkbox
+        recordGameCheckBox = new CheckBox("Record Game");
+        recordGameCheckBox.setFont(new Font(TEXT_SIZE));
+        recordGameCheckBox.setSelected(false);
+
         // set top pane
         HBox topPane = new HBox();
         topPane.setPadding(new Insets(10));
         topPane.setSpacing(10);
         topPane.setAlignment(Pos.CENTER);
-        topPane.getChildren().addAll(gameTitle, generalGameRb, simpleGameRb, boardSizeLabel, boardSizeField);
+        topPane.getChildren().addAll(
+                gameTitle,
+                generalGameRb,
+                simpleGameRb,
+                recordGameCheckBox,
+                boardSizeLabel,
+                boardSizeField
+        );
 
         // left pane ====================================
         Label bluePlayerLabel = new Label("Blue Player");
@@ -127,7 +140,15 @@ public class SosGui extends Application {
         bluePlayerScore.setVisible(false);
 
         // set left side pane
-        VBox leftSide = new VBox(bluePlayerLabel, blueHumanPlayerButton, blueSShapeRadioButton, blueOShapeRadioButton, blueComputerPlayerButton, blueScoreLabel, bluePlayerScore);
+        VBox leftSide = new VBox(
+                bluePlayerLabel,
+                blueHumanPlayerButton,
+                blueSShapeRadioButton,
+                blueOShapeRadioButton,
+                blueComputerPlayerButton,
+                blueScoreLabel,
+                bluePlayerScore
+        );
         leftSide.setPadding(new Insets(10));
 
         // right pane ===================================
@@ -178,7 +199,14 @@ public class SosGui extends Application {
         redPlayerScore.setVisible(false);
 
         // set the right side pane
-        VBox rightSide = new VBox(redPlayerLabel, redHumanPlayerButton, redSShapeRadioButton, redOShapeRadioButton, redComputerPlayerButton, redScoreLabel, redPlayerScore);
+        VBox rightSide = new VBox(redPlayerLabel,
+                redHumanPlayerButton,
+                redSShapeRadioButton,
+                redOShapeRadioButton,
+                redComputerPlayerButton,
+                redScoreLabel,
+                redPlayerScore
+        );
         rightSide.setPadding(new Insets(10));
 
         // bottom pane ===================================
@@ -214,6 +242,7 @@ public class SosGui extends Application {
         // new game button pressed event handler
         // start our new game
         newGameButton.setOnAction(actionEvent -> {
+            // Parse the board size
             int boardSize;
             try {
                 boardSize = Integer.parseInt(getBoardSizeTextField().getText());
@@ -222,23 +251,26 @@ public class SosGui extends Application {
                 boardSize = 3;
             }
 
+            // Check if we are recording the game
+            boolean isGameRecorded = recordGameCheckBox.isSelected();
+
             // Instantiate the correct game type
             if (selectedGameType == GameType.SIMPLE) {
                 if (bluePlayerType == SosGame.PlayerType.COMPUTER || redPlayerType == SosGame.PlayerType.COMPUTER) {
-                    sosGame = new AutoSimpleSosGame(boardSize, bluePlayerType, redPlayerType);
+                    sosGame = new AutoSimpleSosGame(boardSize, isGameRecorded, bluePlayerType, redPlayerType);
                 }
                 else {
-                    sosGame = new SimpleSosGame(boardSize);
+                    sosGame = new SimpleSosGame(boardSize, isGameRecorded);
                 }
 
                 setScoreLabelVisibility(false);
             }
             else if (selectedGameType == GameType.GENERAL) {
                 if (bluePlayerType == SosGame.PlayerType.COMPUTER || redPlayerType == SosGame.PlayerType.COMPUTER) {
-                    sosGame = new AutoGeneralSosGame(boardSize, bluePlayerType, redPlayerType);
+                    sosGame = new AutoGeneralSosGame(boardSize, isGameRecorded, bluePlayerType, redPlayerType);
                 }
                 else {
-                    sosGame = new GeneralSosGame(boardSize);
+                    sosGame = new GeneralSosGame(boardSize, isGameRecorded);
                 }
 
                 setScoreLabelVisibility(true);
@@ -269,15 +301,13 @@ public class SosGui extends Application {
 
         simpleGameRb.setOnAction(actionEvent -> selectedGameType = GameType.SIMPLE);
         generalGameRb.setOnAction(actionEvent -> selectedGameType = GameType.GENERAL);
-
-
     }
 
     // SosGui class functions ========================================================================================
 
     // starts a new game with the board size in the board size text field
     // triggered by clicking the new game button
-    public GridPane setBoard(SosGame sosGame) {
+    private GridPane setBoard(SosGame sosGame) {
         centerPane = new GridPane();
         cells = new Cell[sosGame.getBoardSize()][sosGame.getBoardSize()];
         for (int i = 0; i < sosGame.getBoardSize(); i++)
@@ -289,7 +319,7 @@ public class SosGui extends Application {
     }
 
     // gets called once each time a successful move is made
-    public void drawBoard(int row, int col, SosGame.Turn currentTurn) {
+    private void drawBoard(int row, int col, SosGame.Turn currentTurn) {
         if (sosGame.getCell(row, col) == SosGame.Shape.S)
             cells[row][col].drawS(currentTurn);
         else if (sosGame.getCell(row, col) == SosGame.Shape.O)
@@ -322,7 +352,7 @@ public class SosGui extends Application {
         }
     }
 
-    public void setScoreLabelVisibility(boolean visibility) {
+    private void setScoreLabelVisibility(boolean visibility) {
         blueScoreLabel.setVisible(visibility);
         bluePlayerScore.setVisible(visibility);
         redScoreLabel.setVisible(visibility);
@@ -330,7 +360,7 @@ public class SosGui extends Application {
     }
 
     // Handles the next auto move
-    public void tryNextAutoMove() {
+    private void tryNextAutoMove() {
         // Check for an ongoing game
         if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
             // Check if it's a computer's turn
@@ -344,30 +374,6 @@ public class SosGui extends Application {
                 handleEndOfTurn();
             }
         }
-        /*if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
-            SosGame.Turn currentTurn = sosGame.getTurn();
-            if (sosGame.makeAutoMove()) {
-                drawBoard(sosGame.getLastAutoMove().Row, sosGame.getLastAutoMove().Col, currentTurn);
-            }
-
-            handleEndOfTurn();
-        }*/
-        /*// Check for an ongoing game
-        if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
-            // Check if it's a computer's turn
-            if ((sosGame.getTurn() == SosGame.Turn.BLUE && sosGame.getBluePlayerType() == SosGame.PlayerType.COMPUTER)
-                    || (sosGame.getTurn() == SosGame.Turn.RED && sosGame.getRedPlayerType() == SosGame.PlayerType.COMPUTER)) {
-                SosGame.Turn currentTurn = sosGame.getTurn();
-                SosMove sosMove = sosGame.makeAutoMove();
-
-                // If a valid move is made, add it to the board
-                if (sosGame.makeMove(sosMove.Row, sosMove.Col, sosMove.Shape)) {
-                    drawBoard(sosMove.Row, sosMove.Col, currentTurn);
-                }
-
-                handleEndOfTurn();
-            }
-        }*/
     }
 
     // Handles the processes that must be run at the end of every turn, be it human turn or computer.
@@ -380,7 +386,7 @@ public class SosGui extends Application {
     }
 
     // Loops through the array of lines to be drawn until empty
-    public void drawLines() {
+    private void drawLines() {
         if (sosGame.getLineCoordinates() != null && !sosGame.getLineCoordinates().isEmpty()) {
 
             List<SosLineCoordinate> lineCoordinates = sosGame.getLineCoordinates();
@@ -442,7 +448,7 @@ public class SosGui extends Application {
         }
     }
 
-    public TextField getBoardSizeTextField() { return boardSizeField; }
+    private TextField getBoardSizeTextField() { return boardSizeField; }
 
     // Internal Cell class ===========================================================================================
 
@@ -463,7 +469,6 @@ public class SosGui extends Application {
         }
 
         private void handleMouseClick() {
-            // Ongoing game
             if (sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
                 SosGame.Shape shape;
 
@@ -484,7 +489,7 @@ public class SosGui extends Application {
             }
         }
 
-        public void drawS(SosGame.Turn currentTurn) {
+        private void drawS(SosGame.Turn currentTurn) {
             text = new Label("S");
             String textColor = (currentTurn == SosGame.Turn.BLUE) ? "blue" : "red";
             setCellTextSize(text, textColor);
@@ -492,7 +497,7 @@ public class SosGui extends Application {
             getChildren().add(anchorPane);
         }
 
-        public void drawO(SosGame.Turn currentTurn) {
+        private void drawO(SosGame.Turn currentTurn) {
             text = new Label("O");
             String textColor = (currentTurn == SosGame.Turn.BLUE) ? "blue" : "red";
             setCellTextSize(text, textColor);
@@ -500,7 +505,7 @@ public class SosGui extends Application {
             getChildren().add(anchorPane);
         }
 
-        public void setCellTextSize(Label text, String textColor) {
+        private void setCellTextSize(Label text, String textColor) {
             // As the board size gets bigger we want the text size and padding to get smaller
             // so we set up an inverse relationship among the two.
             double fontSize = (1.0 / sosGame.getBoardSize()) * 300;

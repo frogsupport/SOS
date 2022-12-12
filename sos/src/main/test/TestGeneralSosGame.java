@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 // that this class warrants its own suite of testing
 public class TestGeneralSosGame {
     private final int SIZE = 9;
-    private GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+    private GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
     @BeforeEach
-    public void setUp() throws Exception {
-        sosGame = new GeneralSosGame(SIZE);
+    public void setUp() {
+        sosGame = new GeneralSosGame(SIZE, false);
     }
 
     @Test

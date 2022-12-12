@@ -4,13 +4,18 @@ import com.sos.providers.SosBoardScorer;
 
 public class SimpleSosGame extends SosGame {
 
-    public SimpleSosGame(int boardSize) {
-        super(boardSize);
+    public SimpleSosGame(int boardSize, boolean isGameRecorded) {
+        super(boardSize, isGameRecorded);
     }
 
     // Player wins if they score a single SOS
     @Override
     protected void updateGameStatus(int row, int column, Shape shape) {
+        // Log the move if we're recording
+        if (getIsGameRecorded()) {
+            recordMove(row, column, shape, getTurn());
+        }
+
         // Create the object to handle the scoring logic
         SosBoardScorer sosBoardScorer = new SosBoardScorer(getGrid());
         if (sosBoardScorer.hasScored(row, column, shape) != 0) {

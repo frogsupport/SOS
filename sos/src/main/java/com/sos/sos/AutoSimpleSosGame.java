@@ -4,8 +4,8 @@ import com.sos.models.SosMove;
 import com.sos.providers.AutoSosMoveMaker;
 
 public class AutoSimpleSosGame extends SimpleSosGame {
-    public AutoSimpleSosGame(int boardsize, PlayerType bluePlayerType, PlayerType redPlayerType) {
-        super(boardsize);
+    public AutoSimpleSosGame(int boardsize, boolean isGameRecorded, PlayerType bluePlayerType, PlayerType redPlayerType) {
+        super(boardsize, isGameRecorded);
         setBluePlayerType(bluePlayerType);
         setRedPlayerType(redPlayerType);
     }
@@ -36,10 +36,4 @@ public class AutoSimpleSosGame extends SimpleSosGame {
         AutoSosMoveMaker autoSosMoveMaker = new AutoSosMoveMaker(getGrid());
         return autoSosMoveMaker.makeMove();
     }
-
-    /*@Override
-    public SosMove makeAutoMove() {
-        AutoSosMoveMaker autoSosMoveMaker = new AutoSosMoveMaker(grid);
-        return autoSosMoveMaker.makeMove();
-    }*/
 }

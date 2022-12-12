@@ -14,7 +14,7 @@ public class TestAutoSimpleSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
-        SosGame sosGame = new AutoSimpleSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoSimpleSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         while(sosGame.getCurrentGameStatus() == SosGame.GameStatus.PLAYING) {
@@ -31,7 +31,7 @@ public class TestAutoSimpleSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.HUMAN;
-        SosGame sosGame = new AutoSimpleSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoSimpleSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         // Blue makes first move
@@ -67,7 +67,7 @@ public class TestAutoSimpleSosGame {
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
 
         // When
-        SosGame sosGame = new AutoSimpleSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoSimpleSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // Then
         assertEquals(SosGame.PlayerType.COMPUTER, sosGame.getBluePlayerType());
@@ -80,7 +80,7 @@ public class TestAutoSimpleSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.COMPUTER;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.HUMAN;
-        SosGame sosGame = new AutoSimpleSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoSimpleSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         // Blue makes first move
@@ -108,7 +108,7 @@ public class TestAutoSimpleSosGame {
         final int SIZE = 4;
         SosGame.PlayerType bluePlayerType = SosGame.PlayerType.HUMAN;
         SosGame.PlayerType redPlayerType = SosGame.PlayerType.COMPUTER;
-        SosGame sosGame = new AutoSimpleSosGame(SIZE, bluePlayerType, redPlayerType);
+        SosGame sosGame = new AutoSimpleSosGame(SIZE, false, bluePlayerType, redPlayerType);
 
         // When
         sosGame.makeAutoMove();
@@ -126,5 +126,4 @@ public class TestAutoSimpleSosGame {
 
         assertEquals(0, movesMade);
     }
-
 }

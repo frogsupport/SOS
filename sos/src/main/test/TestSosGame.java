@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 // and the scope of what is offered by a simple sos game are the same.
 public class TestSosGame {
     private final int SIZE = 3;
-    private SosGame sosGame = new SimpleSosGame(SIZE);
+    private SosGame sosGame = new SimpleSosGame(SIZE, false);
 
     @BeforeEach
-    public void setUp() throws Exception {
-        sosGame = new SimpleSosGame(SIZE);
+    public void setUp() {
+        sosGame = new SimpleSosGame(SIZE, false);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class TestSosGame {
 
     @Test
     public void testChooseGameMode() {
-        sosGame = new SimpleSosGame(SIZE);
+        sosGame = new SimpleSosGame(SIZE, false);
         assertTrue(sosGame instanceof SimpleSosGame);
 
-        sosGame = new GeneralSosGame(SIZE);
+        sosGame = new GeneralSosGame(SIZE, false);
         assertTrue(sosGame instanceof GeneralSosGame);
     }
 
@@ -40,11 +40,11 @@ public class TestSosGame {
     public void testChooseGameModeAndBoardSize() {
         final int BOARDSIZE = 9;
 
-        sosGame = new SimpleSosGame(BOARDSIZE);
+        sosGame = new SimpleSosGame(BOARDSIZE, false);
         assertTrue(sosGame instanceof SimpleSosGame);
         assertEquals(BOARDSIZE, sosGame.getBoardSize());
 
-        sosGame = new GeneralSosGame(BOARDSIZE);
+        sosGame = new GeneralSosGame(BOARDSIZE, false);
         assertTrue(sosGame instanceof GeneralSosGame);
         assertEquals(BOARDSIZE, sosGame.getBoardSize());
     }
@@ -52,7 +52,7 @@ public class TestSosGame {
     @Test
     public void testChooseBoardSize() {
         final int BOARDSIZE = 13;
-        sosGame = new SimpleSosGame(BOARDSIZE);
+        sosGame = new SimpleSosGame(BOARDSIZE, false);
         assertEquals(BOARDSIZE, sosGame.getBoardSize());
     }
 
@@ -60,7 +60,7 @@ public class TestSosGame {
     public void testChooseInvalidBoardSize() {
         final int BOARDSIZE = -1;
         final int MINBOARDSIZE = 3;
-        sosGame = new SimpleSosGame(BOARDSIZE);
+        sosGame = new SimpleSosGame(BOARDSIZE, false);
         assertEquals(MINBOARDSIZE, sosGame.getBoardSize());
     }
 

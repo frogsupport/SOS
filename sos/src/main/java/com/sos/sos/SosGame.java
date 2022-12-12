@@ -2,6 +2,10 @@ package com.sos.sos;
 
 import com.sos.models.SosLineCoordinate;
 import com.sos.models.SosMove;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +25,12 @@ public abstract class SosGame {
     private SosGame.PlayerType bluePlayerType;
     private SosGame.PlayerType redPlayerType;
     private SosMove lastAutoMove;
+    private boolean isGameRecorded;
+    private final String savedMovesFilePath = "lastPlayedGameSavedMoves.txt";
 
     protected abstract void updateGameStatus(int row, int col, Shape shape);
 
-    public SosGame(int boardSize) {
+    public SosGame(int boardSize, boolean isGameRecorded) {
         // Board size must be at least 3 for a valid sos game
         if (boardSize < 3) {
             BOARDSIZE = 3;
@@ -48,10 +54,14 @@ public abstract class SosGame {
         bluePlayerType = PlayerType.HUMAN;
         redPlayerType = PlayerType.HUMAN;
         lastAutoMove = null;
+        this.isGameRecorded = isGameRecorded;
+
+        // Delete the old saved moves file
+        tryDeleteSavedMovesFile();
     }
 
     public boolean makeMove(int row, int column, Shape shape) {
-        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Shape.EMPTY) {
+        if (row >= 0 && row < BOARDSIZE && column >= 0 && column < BOARDSIZE && grid[row][column] == Shape.EMPTY && currentGameStatus == GameStatus.PLAYING) {
             grid[row][column] = shape;
             updateGameStatus(row, column, shape);
             return true;
@@ -60,7 +70,35 @@ public abstract class SosGame {
         return false;
     }
 
-    public void initBoard() {
+    protected void recordMove(int row, int col, Shape shape, Turn turn) {
+        File savedMovesFile = new File(savedMovesFilePath);
+        try {
+            String moveToRecord = String.format("%s, %s, %s, %s \n", row, col, shape, turn);
+            if (savedMovesFile.isFile()) {
+                FileWriter fileWriter = new FileWriter(savedMovesFile, true);
+                fileWriter.write(moveToRecord);
+                fileWriter.close();
+            }
+            else {
+                savedMovesFile.createNewFile();
+                FileWriter fileWriter = new FileWriter(savedMovesFile);
+                fileWriter.write(moveToRecord);
+                fileWriter.close();
+            }
+        }
+        catch (IOException exception) {
+            System.out.println("An error occurred with the saved moves file");
+        }
+    }
+
+    private void tryDeleteSavedMovesFile() {
+        File savedMovesFile = new File(savedMovesFilePath);
+        if (savedMovesFile.isFile()) {
+            savedMovesFile.delete();
+        }
+    }
+
+    private void initBoard() {
         for (int row = 0; row < BOARDSIZE; row++) {
             for (int column = 0; column < BOARDSIZE; column++) {
                 grid[row][column] = Shape.EMPTY;
@@ -99,6 +137,8 @@ public abstract class SosGame {
             lineCoordinates.remove(0);
         }
     }
+
+    public boolean getIsGameRecorded() { return isGameRecorded; }
 
     public Shape[][] getGrid() { return grid; }
 

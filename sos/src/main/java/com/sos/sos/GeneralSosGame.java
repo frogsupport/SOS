@@ -4,8 +4,8 @@ import com.sos.providers.SosBoardScorer;
 
 public class GeneralSosGame extends SosGame {
 
-    public GeneralSosGame(int boardSize) {
-        super(boardSize);
+    public GeneralSosGame(int boardSize, boolean isGameRecorded) {
+        super(boardSize, isGameRecorded);
     }
 
     // Updates the score if an SOS is made
@@ -13,6 +13,11 @@ public class GeneralSosGame extends SosGame {
     // Changes the turn if no SOS is made
     @Override
     protected void updateGameStatus(int row, int column, Shape shape) {
+        // Log the move if we're recording
+        if (getIsGameRecorded()) {
+            recordMove(row, column, shape, getTurn());
+        }
+
         // The object that handles the scoring logic for the general SOS game
         SosBoardScorer sosBoardScorer = new SosBoardScorer(getGrid());
         int score = sosBoardScorer.hasScored(row, column, shape);

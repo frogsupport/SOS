@@ -4,8 +4,8 @@ import com.sos.models.SosMove;
 import com.sos.providers.AutoSosMoveMaker;
 
 public class AutoGeneralSosGame extends GeneralSosGame {
-    public AutoGeneralSosGame(int boardsize, PlayerType bluePlayerType, PlayerType redPlayerType) {
-        super(boardsize);
+    public AutoGeneralSosGame(int boardsize, boolean isGameRecorded, PlayerType bluePlayerType, PlayerType redPlayerType) {
+        super(boardsize, isGameRecorded);
         setBluePlayerType(bluePlayerType);
         setRedPlayerType(redPlayerType);
     }

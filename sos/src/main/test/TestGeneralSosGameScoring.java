@@ -12,7 +12,7 @@ public class TestGeneralSosGameScoring {
         final int SIZE = 4;
         final int RED_EXPECTED_SCORE = 2;
         final int BLUE_EXPECTED_SCORE = 1;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         // Blue goes first
@@ -51,7 +51,7 @@ public class TestGeneralSosGameScoring {
         final int SIZE = 20;
         final int BLUE_EXPECTED_SCORE = 0;
         final int RED_EXPECTED_SCORE = 2;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When (Blue goes first)
         sosGame.makeMove(SIZE / 2, SIZE / 2, SosGame.Shape.S);
@@ -76,7 +76,7 @@ public class TestGeneralSosGameScoring {
         // Given
         final int SIZE = 11;
         final int BLUE_EXPECTED_SCORE = 3;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When (Blue goes first)
         sosGame.makeMove(0, SIZE - 1, SosGame.Shape.S);
@@ -107,7 +107,7 @@ public class TestGeneralSosGameScoring {
         final int SIZE = 4;
         final int RED_EXPECTED_SCORE = 1;
         final int BLUE_EXPECTED_SCORE = 1;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         // Blue goes first
@@ -140,7 +140,7 @@ public class TestGeneralSosGameScoring {
         final int SIZE = 4;
         final int BLUE_EXPECTED_SCORE = 2;
         final int RED_EXPECTED_SCORE = 0;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         sosGame.makeMove(0,0, SosGame.Shape.S);
@@ -174,7 +174,7 @@ public class TestGeneralSosGameScoring {
         final int SIZE = 4;
         final int RED_EXPECTED_SCORE = 2;
         final int BLUE_EXPECTED_SCORE = 1;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         // Blue goes first
@@ -204,7 +204,7 @@ public class TestGeneralSosGameScoring {
         // Given
         final int SIZE = 4;
         final int EXPECTED_SCORE = 1;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         // Blue goes first
@@ -223,7 +223,7 @@ public class TestGeneralSosGameScoring {
         // Given
         final int SIZE = 4;
         final int EXPECTED_SCORE = 1;
-        GeneralSosGame sosGame = new GeneralSosGame(SIZE);
+        GeneralSosGame sosGame = new GeneralSosGame(SIZE, false);
 
         // When
         // Blue goes first
